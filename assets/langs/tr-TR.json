@@ -1,0 +1,106 @@
+{
+    "appTitle": "E-Yoklama",
+    "studentTitle": {
+        "loginTitle": "Öğrenci Girişi",
+        "registerTitle": "Öğrenci Kayıt",
+        "passwordResetTitle": "Öğrenci Şifre Sıfırlama"
+    },
+    "teacherTitle": {
+        "loginTitle": "Öğretmen Girişi",
+        "registerTitle": "Öğretmen Kayıt",
+        "passwordResetTitle": "Öğretmen Şifre Sıfırlama"
+    },
+    "login": {
+        "password": "Şifre",
+        "login": "Giriş Yap",
+        "forgotPassword": "Şifremi Unuttum?",
+        "noAccount": "Henüz Hesabın Yok Mu?",
+        "register": "Kayıt Ol",
+        "mail": "Mail Adresi",
+        "logOut": "Çıkış Yap"
+    },
+    "register": {
+        "name": "Ad",
+        "surname": "Soyad",
+        "contents": "Profilinizi Oluşturun",
+        "mail": "Okul Mail Adresi",
+        "password": "Şifre",
+        "successMessage": "Kayıt Başarılı!",
+        "register": "Kayıt Ol"
+    },
+    "passwordReset": {
+        "title": "Şifre Sıfırlama",
+        "mail": "Mail Adresi",
+        "reset": "Şifremi Sıfırla",
+        "successMessage": "Şifre sıfırlama bağlantısı mail adresinize gönderildi."
+    },
+    "validate": {
+        "noEmpty": "Bu alan boş bırakılamaz!",
+        "mail": "Lütfen @stu.omu.edu.tr uzantılı mail adresinizi girin!",
+        "mailRequired": "Sadece @stu.omu.edu.tr uzantılı e-postalar kabul edilir.",
+        "passwordRequired": "Şifre giriniz!",
+        "password": "Şifre en az 6 karakter olmalıdır."
+    },
+    "studentAccount": {
+        "title": "Hesabım",
+        "changeTheme": "Temayı Değiştir",
+        "logOut": "Çıkış Yap",
+        "language": "Dil",
+        "theme": "Tema",
+        "lightTheme": "Açık Tema",
+        "darkTheme": "Koyu Tema",
+        "editProfile": "Profilimi Düzenle",
+        "changePassword": "Şifremi Değiştir",
+        "editProfileMessage": "Öğrenci Bilgileri Güncelleme işlemi başarılı.",
+        "updateButton":"Profilimi Güncelle"
+    },
+
+    "teacherAccount": {
+        "title": "Hesabım",
+        "changeTheme": "Temayı Değiştir",
+        "logOut": "Çıkış Yap",
+        "language": "Dil",
+        "theme": "Tema",
+        "lightTheme": "Açık Tema",
+        "darkTheme": "Koyu Tema",
+        "editProfile": "Profilimi Düzenle",
+        "changePassword": "Şifremi Değiştir",
+        "editProfileMessage": "Öğretmen Bilgileri Güncelleme işlemi başarılı.",
+        "updateButton":"Profilimi Güncelle"
+    },
+
+    "studentMain": {
+        "title": "Derslerim",
+        "lessonsSearch": "Derslerimi Ara",
+        "studentEmptyLessonMessage": "Kayıtlı Dersiniz Bulunmamaktadır!!"
+    },
+    "errorCode": {
+        "login": {
+            "defaultMessage": "Bilinmeyen bir hata oluştu.",
+            "invalidEmail": "Geçersiz e-posta adresi.",
+            "wrongPassword": "Hatalı şifre girdiniz.",
+            "userNotFound": "Bu e-posta adresine ait kullanıcı bulunamadı.",
+            "userDisabled": "Bu hesap devre dışı bırakılmış.",
+            "tooManyRequests": "Çok fazla başarısız deneme yaptınız. Lütfen sonra tekrar deneyin.",
+            "operationNotAllowed": "E-posta ve şifre ile giriş yapılamıyor. Admin ile iletişime geçin.",
+            "toastMessage": "Giriş başarısız oldu. Kullanıcı bulunamadı.",
+            "toastMessage2": "Kullanıcı bilgileri bulunamadı.",
+            "errrorMessage": "Bir hata oluştu. Lütfen tekrar deneyin."
+        },
+        "register": {
+            "wrongPassword": "Hatalı şifre girdiniz.",
+            "userNotFound": "Bu e-posta adresine ait kullanıcı bulunamadı.",
+            "userDisabled": "Bu hesap devre dışı bırakılmış.",
+            "defaultMessage": "Bilinmeyen bir hata oluştu.",
+            "emailAlreadyInUse": "Bu e-posta adresi zaten kullanımda.",
+            "tooManyRequests": "Çok fazla başarısız deneme yaptınız. Lütfen sonra tekrar deneyin.",
+            "invalidEmail": "Geçersiz e-posta adresi.",
+            "weakPassword": "Şifre en az 6 karakter olmalıdır.",
+            "invalidCreadientials": "Geçersiz kimlik bilgileri.",
+            "operationNotAllowed": "E-posta ve şifre ile kayıt oluşturulamıyor. Admin ile iletişime geçin."
+        },
+        "logOut": {
+            "toastMessage": "Başarıyla çıkış yapıldı."
+        }
+    }
+}

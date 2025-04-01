@@ -1,0 +1,104 @@
+{
+    "appTitle": "E-Attendance",
+    "studentTitle": {
+        "loginTitle": "Student Login",
+        "registerTitle": "Student Register",
+        "passwordResetTitle": "Student Password Reset"
+    },
+    "teacherTitle": {
+        "loginTitle": "Teacher Login",
+        "registerTitle": "Teacher Register",
+        "passwordResetTitle": "Teacher Password Reset"
+    },
+    "login": {
+        "password": "Password",
+        "login": "Login",
+        "forgotPassword": "Forgot Password?",
+        "noAccount": "Don't have an account?",
+        "register": "Register",
+        "mail": "Email Adress",
+        "logOut": "Log Out"
+    },
+    "validate": {
+        "noEmpty": "This field cannot be left blank!",
+        "mail": "Please enter your email address with @stu.omu.edu.tr extension!",
+        "mailRequired": "Only e-mails with @stu.omu.edu.tr extension are accepted.",
+        "passwordRequired": "Enter password!",
+        "password": "Password must be at least 6 characters."
+    },
+    "register": {
+        "name": "Name",
+        "surname": "Surname",
+        "contents": "Create Your Profile",
+        "mail": "School Email Address",
+        "password": "Password",
+        "successMessage": " Registration Successful!",
+        "register": "Register"
+    },
+    "passwordReset": {
+        "mail": "Email Adress",
+        "reset": "Reset My Password",
+        "successMessage": "The password reset link has been sent to your email address."
+    },
+    "errorCode": {
+        "login": {
+            "defaultMessage": "An unknown error occurred.",
+            "invalidEmail": "Invalid email address.",
+            "wrongPassword": "You entered the wrong password.",
+            "userNotFound": "No user found with this email address.",
+            "userDisabled": "This account has been disabled.",
+            "tooManyRequests": "You have made too many unsuccessful attempts. Please try again later.",
+            "operationNotAllowed": "Login with email and password is not allowed. Contact the admin.",
+            "toastMessage": "Login failed. User not found.",
+            "toastMessage2": "User information not found.",
+            "errrorMessage": "An error occurred. Please try again."
+        },
+        "register": {
+            "wrongPassword": "You entered the wrong password.",
+            "userNotFound": "No user found with this email address.",
+            "userDisabled": "This account has been disabled.",
+            "defaultMessage": "An unknown error occurred.",
+            "emailAlreadyInUse": "This email address is already in use.",
+            "tooManyRequests": "You have made too many unsuccessful attempts. Please try again later.",
+            "invalidEmail": "Invalid email address.",
+            "invalidCredential": "Invalid credentials.",
+            "weakPassword": "Password must be at least 6 characters.",
+            "operationNotAllowed": "Registration with email and password is not allowed. Contact the admin."
+        },
+        "logOut": {
+            "toastMessage": "Logout successful."
+        }
+    },
+    "studentMain": {
+        "lessonsSearch": "Search My Lessons",
+        "title": "My Lessons",
+        "studentEmptyLessonMessage": "You have no registered courses.!!"
+    },
+    "studentAccount": {
+        "title": "My Account",
+        "changeTheme": "Change Theme",
+        "logOut": "Log Out",
+        "language": "Language",
+        "theme": "Theme",
+        "lightTheme": "Light Theme",
+        "darkTheme": "Dark Theme",
+        "editProfile": "Edit My Profile",
+        "changePassword": "Change My Password",
+        "editProfileMessage": "Student information update process successful.",
+        "updateButton":"Update My Profile"
+    },
+    "teacherAccount": {
+        "title": "My Account",
+        "changeTheme": "Change Theme",
+        "logOut": "Log Out",
+        "language": "Language",
+        "theme": "Theme",
+        "lightTheme": "Light Theme",
+        "darkTheme": "Dark Theme",
+        "editProfile": "Edit My Profile",
+        "changePassword": "Change My Password",
+        "editProfileMessage": "Teacher information update process successful.",
+        "updateButton":"Update My Profile"
+    }
+    
+}

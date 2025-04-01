@@ -5,7 +5,7 @@
 // import 'package:qr_attendance_project/custom/navigate_to_widget.dart';
 // import 'package:qr_attendance_project/custom/widget_sizes.dart';
 // import 'package:qr_attendance_project/screen/student/student_main/ogrenci_ana_ekran.dart';
-// import 'package:qr_attendance_project/screen/student/student_main/student_main_screen.dart';
+// import 'package:qr_attendance_project/screen/student/student_main/student_my__lessons_screen.dart';
 
 // class OgrenciDersKayitTalep extends StatefulWidget with NavigatorManager {
 //   const OgrenciDersKayitTalep({super.key});

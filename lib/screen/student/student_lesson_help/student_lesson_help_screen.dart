@@ -4,17 +4,16 @@ import 'package:qr_attendance_project/custom/icon_creater.dart';
 import 'package:qr_attendance_project/custom/login_button.dart';
 import 'package:qr_attendance_project/custom/navigate_to_widget.dart';
 import 'package:qr_attendance_project/custom/widget_sizes.dart';
-import 'package:qr_attendance_project/screen/student/student_main/ogrenci_ana_ekran.dart';
-import 'package:qr_attendance_project/screen/student/student_main/student_main_screen.dart';
+import 'package:qr_attendance_project/screen/student/student_my_lessons/student_my__lessons_screen.dart';
 
 class StudentLessonHelpScreen extends StatefulWidget with NavigatorManager {
-  const StudentLessonHelpScreen({super.key});
+  StudentLessonHelpScreen({super.key});
 
   @override
-  State<StudentLessonHelpScreen> createState() => _OgrenciDersKayitTalepState();
+  State<StudentLessonHelpScreen> createState() => _StudentLessonHelpScreenState();
 }
 
-class _OgrenciDersKayitTalepState extends State<StudentLessonHelpScreen>
+class _StudentLessonHelpScreenState extends State<StudentLessonHelpScreen>
     with NavigatorManager, TickerProviderStateMixin, IconCreater {
   late AnimationController _controller;
 
@@ -34,7 +33,7 @@ class _OgrenciDersKayitTalepState extends State<StudentLessonHelpScreen>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         // Animasyon tamamlandığında yönlendirme yap
-        navigateToNoBackWidget(context, StudentMainScreen());
+        navigateToNoBackWidget(context, StudentMyLessonsScreen());
       }
     });
   }
@@ -89,29 +88,27 @@ class _OgrenciDersKayitTalepState extends State<StudentLessonHelpScreen>
 
   Dialog dialogWidget(BuildContext context) {
     return Dialog(
-                      backgroundColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Container(
-                        color: Colors.transparent,
-                        width: MediaQuery.of(context)
-                            .size
-                            .width, // Genişliği ayarlayın
-                        height: 300, // Yüksekliği ayarlayın
-                        padding: WidgetSizes.normalPadding.value,
-                        child: Center(
-                          child: LottieBuilder.asset(
-                            'assets/lottie/big-send.json',
-                            controller: _controller,
-                            onLoaded: (composition) {
-                              _controller.duration = composition.duration;
-                            },
-                            fit: BoxFit.contain, // Animasyonu kapsayan alan
-                          ),
-                        ),
-                      ),
-                    );
+      backgroundColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        color: Colors.transparent,
+        width: MediaQuery.of(context).size.width, // Genişliği ayarlayın
+        height: 300, // Yüksekliği ayarlayın
+        padding: WidgetSizes.normalPadding.value,
+        child: Center(
+          child: LottieBuilder.asset(
+            'assets/lottie/big-send.json',
+            controller: _controller,
+            onLoaded: (composition) {
+              _controller.duration = composition.duration;
+            },
+            fit: BoxFit.contain, // Animasyonu kapsayan alan
+          ),
+        ),
+      ),
+    );
   }
 
   DropdownButtonFormField<String> dropDownCreater(

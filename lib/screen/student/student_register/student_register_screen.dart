@@ -1,26 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:qr_attendance_project/custom/app_bar.dart';
-import 'package:qr_attendance_project/custom/clip_oval.dart';
-import 'package:qr_attendance_project/custom/custom_loading.dart';
-import 'package:qr_attendance_project/custom/custom_text_field.dart';
-import 'package:qr_attendance_project/custom/login_button.dart';
-import 'package:qr_attendance_project/custom/navigate_to_widget.dart';
-import 'package:qr_attendance_project/custom/widget_sizes.dart';
-import 'package:qr_attendance_project/provider/theme_provider.dart';
-import 'package:qr_attendance_project/screen/student/student_sign_in.dart/student_sign_in_screen.dart';
-import 'package:qr_attendance_project/screen/student/student_register/student_register_view.dart';
-import 'package:qr_attendance_project/services/locator.dart';
-import 'package:qr_attendance_project/services/ogrenci_services.dart';
+import 'package:qr_attendance_project/export.dart';
 
-class StudentRegisterScreen extends StatefulWidget with NavigatorManager {
+
+class StudentRegisterScreen extends StatefulWidget {
   const StudentRegisterScreen({super.key});
 
   @override
   State<StudentRegisterScreen> createState() => _StudentRegisterScreenState();
 }
 
-class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
+class _StudentRegisterScreenState extends State<StudentRegisterScreen>
+    with NavigatorManager {
   late final StudentRegisterView _vm;
 
   @override
@@ -37,94 +26,114 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
     TextEditingController mail = TextEditingController();
     TextEditingController sifre = TextEditingController();
 
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
-      appBar: CustomAppBar(themeProvider, OgrenciKayitString().title),
-      body: Padding(
-        padding: WidgetSizes.normalPadding.value,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            OmuLogo(
-              height: 140,
-            ),
-            Text(
-              OgrenciKayitString().icerik,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Text(
-              OgrenciKayitString().subIcerik,
-              textAlign: TextAlign.center,
-            ),
-            ValueListenableBuilder(
-              valueListenable: _vm.studentName,
-              builder: (_, __, ___) {
-                return CustomTextField(
-                  title: 'Ad',
-                  icon: Icon(Icons.person_4_outlined),
-                  controller: name,
-                  onChanged: (value) {
-                    _vm.studentName.value = value;
+      appBar: CustomAppBar(context, title: LocaleKeys.studentTitle_registerTitle.locale),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: WidgetSizes.normalPadding.value,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                OmuLogo(),
+                emptyWidget(),
+                Text(
+                  LocaleKeys.register_contents.locale,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                emptyWidget(),
+                ValueListenableBuilder(
+                  valueListenable: _vm.studentName,
+                  builder: (_, __, ___) {
+                    return CustomTextField(
+                      title: LocaleKeys.register_name.locale,
+                      icon: Icon(Icons.person_4_outlined),
+                      validator: _vm.validateTextField,
+                      controller: name,
+                      onChanged: (value) {
+                        _vm.studentName.value = value;
+                      },
+                    );
                   },
-                );
-              },
-            ),
-            ValueListenableBuilder(
-              valueListenable: _vm.studentSurname,
-              builder: (_, __, ___) {
-                return CustomTextField(
-                  title: 'Soyad',
-                  icon: Icon(Icons.person_4_outlined),
-                  controller: surname,
-                  onChanged: (value) {
-                    _vm.studentSurname.value = value;
+                ),
+                emptyWidget(),
+                ValueListenableBuilder(
+                  valueListenable: _vm.studentSurname,
+                  builder: (_, __, ___) {
+                    return CustomTextField(
+                      title: LocaleKeys.register_surname.locale,
+                      validator: _vm.validateTextField,
+                      icon: Icon(Icons.person_4_outlined),
+                      controller: surname,
+                      onChanged: (value) {
+                        _vm.studentSurname.value = value;
+                      },
+                    );
                   },
-                );
-              },
-            ),
-            ValueListenableBuilder(
-              valueListenable: _vm.studentMail,
-              builder: (_, __, ___) {
-                return CustomTextField(
-                  title: 'Okul Mail Adresi',
-                  icon: Icon(Icons.mail_outline_outlined),
-                  controller: mail,
-                  onChanged: (value) {
-                    _vm.studentMail.value = value;
+                ),
+                emptyWidget(),
+                ValueListenableBuilder(
+                  valueListenable: _vm.studentMail,
+                  builder: (_, __, ___) {
+                    return CustomTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      title: LocaleKeys.register_mail.locale,
+                      icon: Icon(Icons.mail_outline_outlined),
+                      controller: mail,
+                      validator: _vm.validateEmail,
+                      onChanged: (value) {
+                        _vm.studentMail.value = value;
+                      },
+                    );
                   },
-                );
-              },
+                ),
+                emptyWidget(),
+                ValueListenableBuilder(
+                  valueListenable: _vm.studentPassword,
+                  builder: (_, __, ___) {
+                    return CustomTextField(
+                        title: LocaleKeys.register_password.locale,
+                        validator: _vm.validatePassword,
+                        icon: Icon(Icons.visibility_outlined),
+                        onChanged: (value) {
+                          _vm.studentPassword.value = value;
+                        },
+                        controller: sifre);
+                  },
+                ),
+                emptyWidget(),
+                LoginButton(
+                  title: LocaleKeys.register_register.locale,
+                  func: () async {
+                    await registerCheckMethod(_formKey, context);
+                  },
+                )
+              ],
             ),
-            ValueListenableBuilder(
-              valueListenable: _vm.studentPassword,
-              builder: (_, __, ___) {
-                return CustomTextField(
-                    title: 'Şifre',
-                    icon: Icon(Icons.visibility_outlined),
-                    controller: sifre);
-              },
-            ),
-            LoginButton(
-              title: 'Kayıt Ol',
-              func: () {
-                locator.get<OgrenciServices>().registerStudent(
-                    mail: mail.text,
-                    name: name.text,
-                    password: sifre.text,
-                    surname: surname.text,
-                    numara: mail.text);
-                showCustomLoadingDialog(context, StudentSignInScreen());
-              },
-            )
-          ],
+          ),
         ),
       ),
     );
   }
+
+  Future<void> registerCheckMethod(
+      GlobalKey<FormState> _formKey, BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      bool isOkey = await _vm.registerStudent();
+      if (isOkey) {
+        showCustomSnackBar(context, LocaleKeys.register_successMessage.locale, false);
+        navigateToNoBackWidget(context, StudentLoginScreen());
+      }
+    }
+  }
+
+  SizedBox emptyWidget() {
+    return SizedBox(
+      height: 10,
+    );
+  }
 }
 
-class OgrenciKayitString {
-  final String title = "'Öğrenci Kayıt'";
-  final String icerik = "Profilinizi Oluşturun";
-  final String subIcerik =
-      '"Sınıfta mısın, yoksa listede yok musun? 📢 E-Yoklama ile her an kayıttasın!" 🚀';
-}

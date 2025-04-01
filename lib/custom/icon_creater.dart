@@ -10,7 +10,7 @@ mixin IconCreater {
   Widget iconCreaterColor(String path, BuildContext context) {
     return Image.asset(
       path,
-      color: Theme.of(context).hintColor,
+      color: Theme.of(context).hintColor.withValues(alpha: 1),
     );
   }
 }

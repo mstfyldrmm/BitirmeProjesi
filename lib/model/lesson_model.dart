@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:qr_attendance_project/model/base_model.dart';
 
-class LessonModel with EquatableMixin {
+class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
   String? lessonId;
   String? lessonName;
   int? lessonCode;
@@ -50,7 +51,8 @@ class LessonModel with EquatableMixin {
     };
   }
 
-  factory LessonModel.fromJson(Map<String, dynamic> json) {
+  @override
+  LessonModel fromJson(Map<String, dynamic> json) {
     return LessonModel(
       lessonId: json['lessonId'] as String?,
       lessonName: json['lessonName'] as String?,

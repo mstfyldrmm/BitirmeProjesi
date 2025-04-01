@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
     this.radius = const BorderRadius.all(Radius.circular(10)),
     required this.controller,
     this.onChanged,
+    this.validator, this.keyboardType,
   });
   final String title;
   final Widget icon;
@@ -16,12 +17,16 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final bool sifreGizle;
   final Function? onChanged;
+  final FormFieldValidator<String>? validator;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      keyboardType: keyboardType,
       controller: controller,
       obscureText: sifreGizle,
+      validator: validator,
       onChanged: _onChanged,
       decoration: InputDecoration(
         filled: true,
@@ -37,6 +42,16 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(),
         ),
         focusedBorder: OutlineInputBorder(
+          borderRadius: radius,
+          borderSide: BorderSide(),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: radius,
+          borderSide: BorderSide(
+            color: ColorScheme.light().error,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
           borderRadius: radius,
           borderSide: BorderSide(),
         ),

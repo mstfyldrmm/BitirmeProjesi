@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:qr_attendance_project/custom/app_bar.dart';
-import 'package:qr_attendance_project/custom/icon_creater.dart';
-import 'package:qr_attendance_project/custom/widget_sizes.dart';
-import 'package:qr_attendance_project/provider/theme_provider.dart';
-import 'package:qr_attendance_project/screen/student/student_lesson_detail/components/lesson_attendance_bar.dart';
-import 'package:qr_attendance_project/screen/student/student_lesson_detail/components/student_attendance_start_button.dart';
+import 'package:qr_attendance_project/export.dart';
 
 class StudentLessonDetailScreen extends StatelessWidget with IconCreater {
   const StudentLessonDetailScreen({super.key});
@@ -15,7 +8,7 @@ class StudentLessonDetailScreen extends StatelessWidget with IconCreater {
     final themeProvider = Provider.of<ThemeProvider>(context);
     double dersDevam = 0.65;
     return Scaffold(
-      appBar: CustomAppBar(themeProvider, 'E-Yoklama'),
+      appBar: CustomAppBar(context, title: 'E-Yoklama'),
       body: Padding(
         padding: WidgetSizes.normalPadding.value,
         child: Column(

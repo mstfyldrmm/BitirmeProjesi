@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:qr_attendance_project/services/locator.dart';
+import 'package:qr_attendance_project/services/service_local_storage.dart';
 
 mixin NavigatorManager {
+  final ServiceLocalStorage serviceLocalStorage =
+      locator<ServiceLocalStorage>();
+  final logger = Logger(printer: PrettyPrinter());
+
   void navigateToWidget(BuildContext context, Widget widget) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) {
