@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "647123881294",
+    "project_id": "bitirme-projesi-887a3",
+    "storage_bucket": "bitirme-projesi-887a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647123881294:android:4354b0b856d561e100e21f",
+        "android_client_info": {
+          "package_name": "com.example.qr_attendance_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc6Q0nLtj47Zmn23YZPjpjPDgkdv68sfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

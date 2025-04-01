@@ -1,0 +1,1 @@
+//Ana ekranla alakali degiskenler ve fonksiyonlar burada olacak
