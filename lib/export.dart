@@ -17,7 +17,6 @@ export 'package:qr_attendance_project/custom/icon_creater.dart';
 export 'package:qr_attendance_project/custom/navigate_to_widget.dart';
 export 'package:qr_attendance_project/custom/widget_sizes.dart';
 export 'package:qr_attendance_project/generated/locale_keys.g.dart';
-export 'package:qr_attendance_project/model/ders.dart';
 export 'package:qr_attendance_project/screen/student/student_lesson_detail/student_lesson_detail_screen.dart';
 export 'package:qr_attendance_project/screen/welcome/splash/splash_screen.dart';
 export 'package:logger/logger.dart';
@@ -63,15 +62,15 @@ export 'package:qr_attendance_project/screen/teacher/teacher_edit_profile/teache
 export 'package:qr_attendance_project/model/teacher_model.dart';
 export 'package:qr_attendance_project/services/teacher_services/teacher_auth_service.dart';
 export 'package:qr_attendance_project/services/teacher_services/teacher_service.dart';
-export 'package:qr_attendance_project/screen/teacher/teacher_main/teacher_main_screen.dart';
+export 'package:qr_attendance_project/screen/teacher/teacher_my_lessons/teacher_my_lessons_screen.dart';
 export 'package:qr_attendance_project/screen/teacher/teacher_account/teacher_account_screen.dart';
 export 'package:qr_attendance_project/screen/teacher/teacher_drawer/teacher_drawer_content.dart';
 export 'package:qr_attendance_project/screen/teacher/teacher_edit_profile/teacher_edit_profile_view.dart';
 export 'package:qr_attendance_project/screen/teacher/teacher_login/teacher_login_view.dart';
 export 'package:qr_attendance_project/screen/teacher/teacher_register/teacher_register_screen.dart';
-export 'package:qr_attendance_project/screen/teacher/teacher_main/components/teacher_fab_widget.dart';
-export 'package:qr_attendance_project/screen/teacher/teacher_main/components/teacher_lesson_creater.dart';
-export 'package:qr_attendance_project/screen/teacher/teacher_main/teacher_main_view.dart';
+export 'package:qr_attendance_project/screen/teacher/teacher_my_lessons/components/teacher_fab_widget.dart';
+export 'package:qr_attendance_project/screen/teacher/teacher_my_lessons/components/teacher_lesson_creater.dart';
+export 'package:qr_attendance_project/screen/teacher/teacher_my_lessons/teacher_my_lessons_view.dart';
 export 'package:qr_attendance_project/screen/teacher/teacher_register/teacher_register_view.dart';
 export 'package:qr_attendance_project/custom/enums/user_type.dart';
 

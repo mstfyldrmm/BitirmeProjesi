@@ -1,4 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
+import 'package:qr_attendance_project/screen/teacher/teacher_drawer/teacher_drawer_view.dart';
 
 
 
@@ -11,26 +12,14 @@ class TeacherDrawerContent extends StatefulWidget {
 }
 
 class _TeacherDrawerContentState extends State<TeacherDrawerContent> {
-  List<ScreenHiddenDrawer> _pages = [];
+  late final TeacherDrawerView _teacherDrawerView;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pages = [
-      screenHiddenDrawerWidget(
-          title: LocaleKeys.studentMain_title.locale,
-          widget: TeacherMainScreen(
-            teacherId: widget.userId,
-          )),
-      screenHiddenDrawerWidget(
-          title: 'Öğrenci Talepleri', widget: SizedBox.shrink()),
-      screenHiddenDrawerWidget(
-          title: LocaleKeys.studentAccount_title.locale,
-          widget: TeacherAccountScreen(
-            teacherModelId: widget.userId,
-          )),
-    ];
+    _teacherDrawerView = TeacherDrawerView();
+    _teacherDrawerView.pagesCreate(widget.userId!);
   }
 
   
@@ -84,7 +73,7 @@ class _TeacherDrawerContentState extends State<TeacherDrawerContent> {
           ),
         ),
       ],
-      screens: _pages,
+      screens: _teacherDrawerView.pages.value,
     );
   }
 }

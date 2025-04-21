@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qr_attendance_project/model/ders.dart';
+import 'package:qr_attendance_project/export.dart';
+
 
 class LessonInfo extends StatelessWidget {
-  final Ders ders;
+  final LessonModel lessonModel;
 
-  const LessonInfo({super.key, required this.ders});
+  const LessonInfo({super.key, required this.lessonModel});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +30,12 @@ class LessonInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(ders.dersAdi,
+                Text(lessonModel.lessonName ?? '',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
                 Text(
-                  'Ders Kodu: ${ders.dersKodu}',
+                  'Ders Kodu: ${lessonModel.lessonCode ?? ''}',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold, color: Colors.white),
                 ),
@@ -44,7 +45,7 @@ class LessonInfo extends StatelessWidget {
                     Icon(Icons.person, color: Colors.white),
                     SizedBox(width: 8),
                     Text(
-                      ders.dersHoca,
+                      lessonModel.teacherName ?? '',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
@@ -56,7 +57,7 @@ class LessonInfo extends StatelessWidget {
                     Icon(Icons.school, color: Colors.white),
                     SizedBox(width: 8),
                     Text(
-                      ders.bolum,
+                      lessonModel.section ?? '',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
@@ -83,7 +84,7 @@ class LessonInfo extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Text("${ders.kayitliOgrenciSayisi}",
+                  Text("${lessonModel.students!.length}",
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge

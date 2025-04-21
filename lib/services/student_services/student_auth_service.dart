@@ -191,6 +191,7 @@ class StudentAuthService with ChangeNotifier {
         isError: false,
       );
       await serviceLocalStorage.logout();
+      await serviceLocalStorage.clearAll();
       _logger.i("Başarılı çıkış");
       return true;
     } catch (error) {

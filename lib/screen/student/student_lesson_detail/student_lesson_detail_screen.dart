@@ -1,4 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
+import 'package:qr_attendance_project/screen/student/student_lesson_detail/components/lesson_case_text.dart';
 
 class StudentLessonDetailScreen extends StatelessWidget with IconCreater {
   const StudentLessonDetailScreen({super.key});
@@ -17,7 +18,7 @@ class StudentLessonDetailScreen extends StatelessWidget with IconCreater {
             Expanded(flex: 3, child: StudentAttendanceStartButton(context)),
             Expanded(flex: 3, child: LessonAttendanceBar(dersDevam, context)),
             Expanded(
-              child: lessonCaseText(context),
+              child: LessonCaseText(),
             ),
             createLastAttendanceText(context),
             LastAttendanceWidget()
@@ -27,21 +28,7 @@ class StudentLessonDetailScreen extends StatelessWidget with IconCreater {
     );
   }
 
-  Padding lessonCaseText(BuildContext context) {
-    return Padding(
-      padding: WidgetSizes.smallPadding.value,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Ders Devam Durumu: Aktif',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          iconCreaterNoColor('assets/icons/accept.png', context)
-        ],
-      ),
-    );
-  }
+  
 
   Text createLastAttendanceText(BuildContext context) {
     return Text(

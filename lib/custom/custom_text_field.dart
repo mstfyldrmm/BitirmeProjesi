@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_attendance_project/custom/widget_sizes.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -9,7 +10,8 @@ class CustomTextField extends StatelessWidget {
     this.radius = const BorderRadius.all(Radius.circular(10)),
     required this.controller,
     this.onChanged,
-    this.validator, this.keyboardType,
+    this.validator,
+    this.keyboardType,
   });
   final String title;
   final Widget icon;
@@ -29,10 +31,11 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       onChanged: _onChanged,
       decoration: InputDecoration(
+        contentPadding: WidgetSizes.normalPadding.value,
         filled: true,
         prefixIcon: icon,
         labelText: title,
-        labelStyle: Theme.of(context).textTheme.titleSmall,
+        labelStyle: Theme.of(context).textTheme.titleMedium,
         disabledBorder: OutlineInputBorder(
           borderRadius: radius,
           borderSide: BorderSide(),

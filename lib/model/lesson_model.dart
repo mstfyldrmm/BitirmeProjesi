@@ -4,10 +4,10 @@ import 'package:qr_attendance_project/model/base_model.dart';
 class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
   String? lessonId;
   String? lessonName;
-  int? lessonCode;
+  String? lessonCode;
   String? section;
   String? teacherName;
-  int? totalStudent;
+  List<String>? students;
 
   LessonModel({
     this.lessonId,
@@ -15,20 +15,20 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
     this.lessonCode,
     this.section,
     this.teacherName,
-    this.totalStudent,
+    this.students,
   });
 
   @override
   List<Object?> get props =>
-      [lessonId, lessonName, lessonCode, section, teacherName, totalStudent];
+      [lessonId, lessonName, lessonCode, section, teacherName, students];
 
   LessonModel copyWith({
     String? lessonId,
     String? lessonName,
-    int? lessonCode,
+    String? lessonCode,
     String? section,
     String? teacherName,
-    int? totalStudent,
+    List<String>? students,
   }) {
     return LessonModel(
       lessonId: lessonId ?? this.lessonId,
@@ -36,7 +36,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       lessonCode: lessonCode ?? this.lessonCode,
       section: section ?? this.section,
       teacherName: teacherName ?? this.teacherName,
-      totalStudent: totalStudent ?? this.totalStudent,
+      students: students ?? this.students,
     );
   }
 
@@ -47,19 +47,22 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       'lessonCode': lessonCode,
       'section': section,
       'teacherName': teacherName,
-      'totalStudent': totalStudent,
+      'students': students,
     };
   }
 
   @override
   LessonModel fromJson(Map<String, dynamic> json) {
+    // TODO: implement fromJson
     return LessonModel(
       lessonId: json['lessonId'] as String?,
       lessonName: json['lessonName'] as String?,
-      lessonCode: json['lessonCode'] as int?,
+      lessonCode: json['lessonCode'] as String?,
       section: json['section'] as String?,
       teacherName: json['teacherName'] as String?,
-      totalStudent: json['totalStudent'] as int?,
+      students: (json['students'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
   }
 }

@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> waitAndNavigate(BuildContext context) async {
     await Future.delayed(
       const Duration(seconds: 3),
-      () {
+      () async {
         if (_vm.getUserType() == UserType.student.value) {
           _vm.isLoggedInEmailPassword()
               ? navigateToNoBackWidget(
@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen>
               ? navigateToNoBackWidget(
                   context,
                   TeacherDrawerContent(
-                    userId: '8lyQaKLxABVvbwuWRqjygj3Lr4i1',
+                    userId: await _vm.getUserIdTeacher(),
                   ))
               : navigateToNoBackWidget(
                   context,

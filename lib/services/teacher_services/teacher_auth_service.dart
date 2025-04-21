@@ -183,6 +183,7 @@ class TeacherAuthService {
         LocaleKeys.errorCode_logOut_toastMessage.locale,
         isError: false,
       );
+      await serviceLocalStorage.logout();
       await serviceLocalStorage.clearAll();
       _logger.i("Başarılı çıkış");
       return true;

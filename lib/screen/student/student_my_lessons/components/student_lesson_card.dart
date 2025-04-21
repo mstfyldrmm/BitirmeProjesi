@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:qr_attendance_project/export.dart';
 
 class StudentLessonCard extends StatelessWidget {
@@ -17,7 +18,7 @@ class StudentLessonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8),
-      elevation: 5,
+      elevation: 10,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
         contentPadding: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -27,7 +28,7 @@ class StudentLessonCard extends StatelessWidget {
         ),
         onTap: () => onTapLessonCard.call(),
         title: Text(
-          lessonModel?.lessonName ?? '',
+          lessonModel?.lessonName?.toUpperCase() ?? '',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         subtitle: Padding(
@@ -36,9 +37,9 @@ class StudentLessonCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                lessonModel?.teacherName ?? '',
+                lessonModel?.teacherName?.toUpperCase() ?? '',
               ),
-              Text(lessonModel?.section ?? ''),
+              Text(toTitleCase(lessonModel?.section ?? '')),
             ],
           ),
         ),
@@ -48,5 +49,12 @@ class StudentLessonCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String toTitleCase(String text) {
+    return text
+        .split(" ")
+        .map((word) => toBeginningOfSentenceCase(word) ?? "")
+        .join(" ");
   }
 }

@@ -23,4 +23,6 @@ class SplashView extends ChangeNotifier {
     final userId = await TeacherAuthService().getUserIdByEmail(userEmail!);
     return userId;
   }
+
+  
 }

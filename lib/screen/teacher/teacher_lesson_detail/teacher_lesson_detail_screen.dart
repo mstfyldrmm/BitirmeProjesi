@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_attendance_project/custom/app_bar.dart';
-import 'package:qr_attendance_project/custom/circularPercentWidget.dart';
+
 import 'package:qr_attendance_project/custom/icon_creater.dart';
 import 'package:qr_attendance_project/custom/navigate_to_widget.dart';
 import 'package:qr_attendance_project/custom/widget_sizes.dart';
-import 'package:qr_attendance_project/model/ders.dart';
+import 'package:qr_attendance_project/export.dart';
 import 'package:qr_attendance_project/provider/theme_provider.dart';
 import 'package:qr_attendance_project/screen/teacher/teacher_lesson_detail/components/lesson_info.dart';
 import 'package:qr_attendance_project/screen/teacher/teacher_lesson_detail/components/teacher_button.dart';
 
-
 import 'components/katilim_durumu_widget.dart';
 
 class TeacherLessonDetailScreen extends StatefulWidget {
-  const TeacherLessonDetailScreen({super.key});
+  const TeacherLessonDetailScreen({super.key, required this.lessonModel});
+  final LessonModel lessonModel;
 
   @override
   State<TeacherLessonDetailScreen> createState() => _OgretmenDersDetayState();
@@ -25,10 +25,6 @@ class _OgretmenDersDetayState extends State<TeacherLessonDetailScreen>
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String date =
-        '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
-    Ders ders = Ders('bil301', 'Mikroişlemciler', 'Erhan Ergün',
-        'Bilgisayar Mühendisliği', 120);
     bool isStarted = false;
 
     void _toggleButton() {
@@ -47,7 +43,7 @@ class _OgretmenDersDetayState extends State<TeacherLessonDetailScreen>
 
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: CustomAppBar(context,title:ders.dersAdi),
+      appBar: CustomAppBar(context, title: 'Ders Adi'),
       body: Padding(
         padding: WidgetSizes.normalPadding.value,
         child: Column(
@@ -56,10 +52,10 @@ class _OgretmenDersDetayState extends State<TeacherLessonDetailScreen>
             Expanded(
                 flex: 2,
                 child: LessonInfo(
-                  ders: ders,
+                  lessonModel: widget.lessonModel,
                 )),
             Expanded(child: TeacherButton(), flex: 2),
-            Expanded(child: katilimDurumu(date), flex: 2)
+            Expanded(child: katilimDurumu('as'), flex: 2)
           ],
         ),
       ),

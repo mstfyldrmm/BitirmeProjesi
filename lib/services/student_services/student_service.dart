@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qr_attendance_project/export.dart';
 
 class StudentService {
@@ -26,12 +27,13 @@ class StudentService {
     }
   }
 
-  Future<bool> addLesson(LessonModel? lessonModel, String userId) async {
+  Future<bool> addLessonStudent(String userId, String lessonId) async {
     try {
-      await _studentCollection.doc(userId).set({
-        'lessons': lessonModel?.lessonId,
+      await _studentCollection.doc(userId).update({
+        'lessons': FieldValue.arrayUnion([lessonId])
       });
-      _logger.i("Lesson added successfully to student: $userId");
+      _logger.i(
+          "Lesson added successfully to student: $userId lessonId: $lessonId");
       return true;
     } catch (e) {
       _logger.e("Error adding lesson: $e");

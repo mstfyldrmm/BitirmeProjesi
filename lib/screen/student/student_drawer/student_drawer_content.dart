@@ -1,5 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
-
+import 'package:qr_attendance_project/screen/student/student_drawer/student_drawer_view.dart';
 
 class StudentDrawerContent extends StatefulWidget {
   const StudentDrawerContent({super.key, required this.userId});
@@ -10,25 +10,15 @@ class StudentDrawerContent extends StatefulWidget {
 }
 
 class _StudentDrawerContentState extends State<StudentDrawerContent> {
-  List<ScreenHiddenDrawer> _pages = [];
+  late final StudentDrawerView studentDrawerView;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pages = [
-      screenHiddenDrawerWidget(
-          title: LocaleKeys.studentMain_title.locale,
-          widget: StudentMyLessonsScreen(
-            userId: widget.userId,
-          )),
-      screenHiddenDrawerWidget(title: 'Taleplerim', widget: SizedBox.shrink()),
-      screenHiddenDrawerWidget(
-          title: LocaleKeys.studentAccount_title.locale,
-          widget: StudentAccountScreen(studentModelId: widget.userId,)),
-    ];
+    studentDrawerView = StudentDrawerView();
+    studentDrawerView.pagesCreate(widget.userId!);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +70,7 @@ class _StudentDrawerContentState extends State<StudentDrawerContent> {
           ),
         ),
       ],
-      screens: _pages,
+      screens: studentDrawerView.pages.value,
     );
   }
 }
