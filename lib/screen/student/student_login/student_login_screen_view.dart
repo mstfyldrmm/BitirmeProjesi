@@ -1,30 +1,43 @@
 import 'package:qr_attendance_project/export.dart';
 
-class StudentSingInView extends ChangeNotifier with NavigatorManager {
+class StudentSingInView extends ChangeNotifier {
   ValueNotifier<String> studentMail = ValueNotifier<String>('');
   ValueNotifier<String> studentPassword = ValueNotifier<String>('');
+  final ServiceLocalStorage serviceLocalStorage =
+      locator<ServiceLocalStorage>();
+  final _logger = Logger(printer: PrettyPrinter());
 
-  Future<void> loginStudent(
-      GlobalKey<FormState> _formKey, BuildContext context) async {
-    // Login işlemi
-    if (_formKey.currentState!.validate()) {
-      try {
-        final studentModel = await StudentAuthService()
-            .signInStudent(studentMail.value, studentPassword.value);
-        if (studentModel != null) {
-          await serviceLocalStorage.saveUserData(
-              key: 'email', value: studentMail.value, type: 'student');
-          logger.i(
-              'email saved shared ${serviceLocalStorage.getString('email')} userType: ${serviceLocalStorage.getUserType()}');
-          navigateToNoBackWidget(
-            context,
-            StudentDrawerContent(
-              userId: studentMail.value.split('@').first,
-            ),
-          );
-        }
-      } catch (e) {}
+  Future<bool> loginStudent(
+    GlobalKey<FormState> formKey,
+    BuildContext context,
+  ) async {
+    if (formKey.currentState!.validate()) {
+      final studentModel = await StudentAuthService().signInStudent(
+        studentMail.value,
+        studentPassword.value,
+      );
+      if (studentModel != null) {
+        await serviceLocalStorage.setString(
+          "studentEmail",
+          studentMail.value,
+        );
+        await serviceLocalStorage.setString(
+          "userType",
+          "student",
+        );
+        _logger.i(
+          'email saved shared ${serviceLocalStorage.getString('studentEmail')}',
+        );
+        return true;
+      } else {
+        return false;
+      }
     }
+    return false;
+  }
+
+  String? getStudentId() {
+    return studentMail.value.split('@').first;
   }
 
   String? validateEmail(String? value) {
@@ -32,7 +45,6 @@ class StudentSingInView extends ChangeNotifier with NavigatorManager {
       return LocaleKeys.validate_mail.locale;
     }
 
-    // Belirtilen uzantı için regex deseni
     final RegExp emailRegex = RegExp(r"^[a-zA-Z0-9._%+-]+@stu\.omu\.edu\.tr$");
 
     if (!emailRegex.hasMatch(value)) {

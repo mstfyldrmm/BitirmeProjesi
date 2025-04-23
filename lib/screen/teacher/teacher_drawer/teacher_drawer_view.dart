@@ -1,6 +1,7 @@
 import 'package:qr_attendance_project/export.dart';
+import 'package:qr_attendance_project/screen/teacher/teacher_request/teacher_request_screen.dart';
 
-class TeacherDrawerView with ChangeNotifier {
+class TeacherDrawerView extends ChangeNotifier {
   ValueNotifier<List<ScreenHiddenDrawer>> pages = ValueNotifier([]);
 
   void pagesCreate(String userId) {
@@ -11,9 +12,12 @@ class TeacherDrawerView with ChangeNotifier {
             teacherId: userId,
           )),
       screenHiddenDrawerWidget(
-          title: 'Öğrenci Talepleri', widget: SizedBox.shrink()),
+          title: LocaleKeys.teacherTitle_studentRequests.locale,
+          widget: TeacherRequestScreen(
+            teacherId: userId,
+          )),
       screenHiddenDrawerWidget(
-          title: LocaleKeys.studentAccount_title.locale,
+          title: LocaleKeys.account_title.locale,
           widget: TeacherAccountScreen(
             teacherModelId: userId,
           )),

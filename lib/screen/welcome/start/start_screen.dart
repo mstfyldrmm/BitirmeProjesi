@@ -7,11 +7,13 @@ class StartScreen extends StatelessWidget with NavigatorManager {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                'assets/images/images.jpeg',
-              ),
-              fit: BoxFit.cover)),
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/images.jpeg',
+          ),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Padding(
         padding: WidgetSizes.normalPadding.value,
         child: Column(
@@ -21,19 +23,31 @@ class StartScreen extends StatelessWidget with NavigatorManager {
               child: Column(
                 children: [
                   Spacer(),
-                  ClipOval(child: Image.asset('assets/images/logo-3.png')),
+                  ClipOval(
+                    child: Image.asset('assets/images/logo-3.png'),
+                  ),
                   Spacer(),
                   Spacer(),
-                  LoginButton(
+                  CustomButton(
                     title: LocaleKeys.studentTitle_loginTitle.locale,
-                    func: () {
-                      navigateToNormalWidget(context, StudentLoginScreen());
+                    onPress: () {
+                      navigateToNormalWidget(
+                        context,
+                        StudentLoginScreen(
+                          userType: 'student',
+                        ),
+                      );
                     },
                   ),
-                  LoginButton(
+                  CustomButton(
                     title: LocaleKeys.teacherTitle_loginTitle.locale,
-                    func: () {
-                      navigateToNormalWidget(context, TeacherLoginScreen());
+                    onPress: () {
+                      navigateToNormalWidget(
+                        context,
+                        TeacherLoginScreen(
+                          userType: 'teacher',
+                        ),
+                      );
                     },
                   )
                 ],

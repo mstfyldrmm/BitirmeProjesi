@@ -5,6 +5,7 @@ class StudentModel extends BaseModel<StudentModel> with EquatableMixin {
   String? studentId;
   String? mailAddress;
   List<String>? lessons;
+  List<String>? requests;
   String? studentName;
   String? studentSurname;
   int? schoolNumber;
@@ -13,6 +14,7 @@ class StudentModel extends BaseModel<StudentModel> with EquatableMixin {
     this.studentId,
     this.mailAddress,
     this.lessons,
+    this.requests,
     this.studentName,
     this.studentSurname,
     this.schoolNumber,
@@ -23,6 +25,7 @@ class StudentModel extends BaseModel<StudentModel> with EquatableMixin {
         studentId,
         mailAddress,
         lessons,
+        requests,
         studentName,
         studentSurname,
         schoolNumber
@@ -32,6 +35,7 @@ class StudentModel extends BaseModel<StudentModel> with EquatableMixin {
     String? studentId,
     String? mailAddress,
     List<String>? lessons,
+    List<String>? requests,
     String? studentName,
     String? studentSurname,
     int? schoolNumber,
@@ -40,6 +44,7 @@ class StudentModel extends BaseModel<StudentModel> with EquatableMixin {
       studentId: studentId ?? this.studentId,
       mailAddress: mailAddress ?? this.mailAddress,
       lessons: lessons ?? this.lessons,
+      requests: requests ?? this.requests,
       studentName: studentName ?? this.studentName,
       studentSurname: studentSurname ?? this.studentSurname,
       schoolNumber: schoolNumber ?? this.schoolNumber,
@@ -51,6 +56,7 @@ class StudentModel extends BaseModel<StudentModel> with EquatableMixin {
       'studentId': studentId,
       'mailAddress': mailAddress,
       'lessons': lessons,
+      'requests': requests,
       'studentName': studentName,
       'studentSurname': studentSurname,
       'schoolNumber': schoolNumber,
@@ -64,6 +70,9 @@ class StudentModel extends BaseModel<StudentModel> with EquatableMixin {
       mailAddress: json['mailAddress'] as String?,
       lessons:
           (json['lessons'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      requests: (json['requests'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       studentName: json['studentName'] as String?,
       studentSurname: json['studentSurname'] as String?,
       schoolNumber: json['schoolNumber'] as int?,

@@ -1,7 +1,4 @@
 import 'package:qr_attendance_project/export.dart';
-import 'package:qr_attendance_project/screen/teacher/teacher_drawer/teacher_drawer_view.dart';
-
-
 
 class TeacherDrawerContent extends StatefulWidget {
   const TeacherDrawerContent({super.key, required this.userId});
@@ -16,20 +13,18 @@ class _TeacherDrawerContentState extends State<TeacherDrawerContent> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _teacherDrawerView = TeacherDrawerView();
     _teacherDrawerView.pagesCreate(widget.userId!);
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
       backgroundColorMenu: Theme.of(context).brightness == Brightness.dark
           ? Colors.black.withOpacity(0.8) // Dark Mode için
           : Colors.white.withOpacity(0.9), // Light Mode için
-      slidePercent: 40,
+      slidePercent: 50,
       initPositionSelected: 0,
       contentCornerRadius: 20,
       elevationAppBar: 0,

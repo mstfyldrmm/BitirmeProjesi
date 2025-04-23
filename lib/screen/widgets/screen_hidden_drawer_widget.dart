@@ -11,6 +11,7 @@ ScreenHiddenDrawer screenHiddenDrawerWidget(
       widget);
 }
 
-TextStyle textStyle() => TextStyle(fontWeight: FontWeight.w800, fontSize: 20);
+TextStyle textStyle() => TextStyle(
+    fontWeight: FontWeight.w800, fontSize: 20, );
 TextStyle textStyleUnselected() =>
     TextStyle(fontWeight: FontWeight.w600, fontSize: 14);

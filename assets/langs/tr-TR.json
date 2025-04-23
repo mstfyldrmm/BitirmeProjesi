@@ -3,12 +3,14 @@
     "studentTitle": {
         "loginTitle": "Öğrenci Girişi",
         "registerTitle": "Öğrenci Kayıt",
-        "passwordResetTitle": "Öğrenci Şifre Sıfırlama"
+        "passwordResetTitle": "Öğrenci Şifre Sıfırlama",
+        "request" : "Taleplerim"
     },
     "teacherTitle": {
         "loginTitle": "Öğretmen Girişi",
         "registerTitle": "Öğretmen Kayıt",
-        "passwordResetTitle": "Öğretmen Şifre Sıfırlama"
+        "passwordResetTitle": "Öğretmen Şifre Sıfırlama",
+        "studentRequests": "Öğrenci Talepleri"
     },
     "login": {
         "password": "Şifre",
@@ -41,7 +43,7 @@
         "passwordRequired": "Şifre giriniz!",
         "password": "Şifre en az 6 karakter olmalıdır."
     },
-    "studentAccount": {
+    "account": {
         "title": "Hesabım",
         "changeTheme": "Temayı Değiştir",
         "logOut": "Çıkış Yap",
@@ -51,28 +53,63 @@
         "darkTheme": "Koyu Tema",
         "editProfile": "Profilimi Düzenle",
         "changePassword": "Şifremi Değiştir",
-        "editProfileMessage": "Öğrenci Bilgileri Güncelleme işlemi başarılı.",
-        "updateButton":"Profilimi Güncelle"
+        "studentEditProfileMessage": "Öğrenci Bilgileri Güncelleme işlemi başarılı.",
+        "teacherEditProfileMessage": "Öğretmen Bilgileri Güncelleme işlemi başarılı.",
+        "updateButton": "Profilimi Güncelle"
     },
-
-    "teacherAccount": {
-        "title": "Hesabım",
-        "changeTheme": "Temayı Değiştir",
-        "logOut": "Çıkış Yap",
-        "language": "Dil",
-        "theme": "Tema",
-        "lightTheme": "Açık Tema",
-        "darkTheme": "Koyu Tema",
-        "editProfile": "Profilimi Düzenle",
-        "changePassword": "Şifremi Değiştir",
-        "editProfileMessage": "Öğretmen Bilgileri Güncelleme işlemi başarılı.",
-        "updateButton":"Profilimi Güncelle"
-    },
-
     "studentMain": {
         "title": "Derslerim",
         "lessonsSearch": "Derslerimi Ara",
         "studentEmptyLessonMessage": "Kayıtlı Dersiniz Bulunmamaktadır!!"
+    },
+    "studentLessonDetail": {
+        "title": "Ders Detay Sayfası",
+        "lessonStateActive": "Ders Devam Durumu: Devamlı",
+        "lessonStateInActive": "Ders Devam Durumu: Devamsız",
+        "noAttendance": "Derse Ait Aktif Yoklama Bulunmuyor",
+        "pastAttendance": "Geçmiş Yoklamalar",
+        "joinAttendance": "Yoklama Katılmak İçin Tıkla"
+    },
+    "studentRequest": {
+        "stateOne": "Beklemede",
+        "stateTwo": "Tamamlandı",
+        "dontHaveRequest": "Henüz Talep Oluşturmadınız !!",
+        "requestTitle": "'Yeni Talep Oluştur'",
+        "teacherdontHaveRequest" : "Öğrenciler tarafından şuanlık talep yok!!!!",
+        "requestAddFirebaseSuccessMessage": "Talep Oluşturma İşlemi Başarılı",
+        "requestAddStudentSuccessMessage": "Öğrencinin talebi başarıyla oluşturuldu.",
+        "requestAddTeacherSuccessMessage": "Öğrencinin talebi başarıyla öğretmene iletildi.",
+        "selectLesson": "Ders Seçiniz",
+        "selectTeacher": "Öğretmen Seçiniz",
+        "selectRequestType": "Talep Türü Seçiniz",
+        "requestTypeOne": "Ders Kayıt Talebi",
+        "requestTypeTwo": "Yoklama Talebi",
+        "requestDescription": "Talep Açıklaması",
+        "createRequest": "Talep Oluştur"
+    },
+    "teacherMain": {
+        "title": "Derslerim",
+        "lessonsSearch": "Derslerimi Ara",
+        "teacherEmptyLessonMessage": "Kayıtlı Dersiniz Bulunmamaktadır!!"
+    },
+    "teacherAddLesson": {
+        "title": "Ders Ekle",
+        "lessonName": "Dersin Adı",
+        "lessonCode": "Dersin Kodu",
+        "lessonSection": "Dersin Bölümü",
+        "checkExelFileData": "Excel dosyasındaki verileri al",
+        "deleteFileData": "Ders verilerini sil",
+        "uploadExcelFile": "Derse Ait Excel Dosyası Yükle",
+        "addLessonButton": "Ders Kaydını Tamamla",
+        "addLessonSuccessMessage": "Ders başarıyla eklendi.",
+        "complete": "Ders kayıt işleminin tüm adımları başarılı bir şekilde tamamlandı",
+        "addLessonErrorMessage": "Bir hata oluştu. Lütfen tekrar deneyin.",
+        "successMessage": {
+            "addLessonFirebaseMessage": "Ders Oluşturma İşlemi Başarılı",
+            "addLessonTeacher": "Ders kaydı öğretmene başarıyla oluşturuldu.",
+            "lessonDelete": "Ders başarıyla silindi.",
+            "studentSaveLesson": "Tüm öğrencilere ders kayıtlanma işlemi başarılı."
+        }
     },
     "errorCode": {
         "login": {
@@ -98,6 +135,21 @@
             "weakPassword": "Şifre en az 6 karakter olmalıdır.",
             "invalidCreadientials": "Geçersiz kimlik bilgileri.",
             "operationNotAllowed": "E-posta ve şifre ile kayıt oluşturulamıyor. Admin ile iletişime geçin."
+        },
+        "request": {
+            "requestAddStudentErrorMessage": "Öğrencinin talebi oluşturulurken hatayla karşılaşıldı.",
+            "requestAddFirebaseErrorMessage": "Talep Oluşturma İşlemi sırasında hatayla karşılaşıldı.",
+            "requestAddTeacherErrorMessage": "Öğrencinin talebi öğretmene iletilirken hatayla karşılaşıldı."
+
+        },
+        "teacherAddLesson": {
+            "readExcel": "Excel dosyası okunurken hata oluştu. Lütfen dosya yapısını kontrol edin",
+            "lessonCode": "Aynı ders koduna sahip başka bir ders var. Lütfen farklı bir ders kodu girin.",
+            "addLessonFirebaseMessage": "Ders Oluşturma İşlemi sırasında hata meydana geldi. Lütfen tekrar deneyin",
+            "lessonCodeCheck": "Ders kodu kontrol edilirken hata meydana geldi. Lütfen tekrar deneyin.",
+            "addLessonTeacher": "Ders kaydı öğretmene oluşturulurken hatayla karşılaşıldı.",
+            "lessonDelete": "Ders silinirken hata oluştu. Lütfen tekrar deneyin.",
+            "studentSaveLesson": "Bazı öğrencilere ders kayıtlanma işlemi sırasında hata meydana geldi. Lütfen tekrar deneyin."
         },
         "logOut": {
             "toastMessage": "Başarıyla çıkış yapıldı."

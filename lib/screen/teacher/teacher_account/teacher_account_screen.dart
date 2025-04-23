@@ -59,7 +59,7 @@ class _TeacherAccountScreenState extends State<TeacherAccountScreen>
                   children: [
                     ListTileWidget(
                       imagePath: 'assets/icons/user-edit.png',
-                      title: LocaleKeys.teacherAccount_editProfile.locale,
+                      title: LocaleKeys.account_editProfile.locale,
                       trailingWidget: IconButton(
                         onPressed: () => navigateToWidget(
                           context,
@@ -72,7 +72,7 @@ class _TeacherAccountScreenState extends State<TeacherAccountScreen>
                     ),
                     ListTileWidget(
                       imagePath: 'assets/icons/reset-password.png',
-                      title: LocaleKeys.teacherAccount_changePassword.locale,
+                      title: LocaleKeys.account_changePassword.locale,
                       trailingWidget: IconButton(
                         onPressed: () => navigateToWidget(
                           context,
@@ -95,7 +95,7 @@ class _TeacherAccountScreenState extends State<TeacherAccountScreen>
                         builder: (_, __, ___) {
                           return ListTileWidget(
                             imagePath: 'assets/icons/translation.png',
-                            title: LocaleKeys.teacherAccount_language.locale,
+                            title: LocaleKeys.account_language.locale,
                             trailingWidget: TextButton(
                               onPressed: () {},
                               child: Text(
@@ -110,7 +110,7 @@ class _TeacherAccountScreenState extends State<TeacherAccountScreen>
                       builder: (_, __, ___) {
                         return ListTileWidget(
                           imagePath: 'assets/icons/morning.png',
-                          title: LocaleKeys.teacherAccount_theme.locale,
+                          title: LocaleKeys.account_theme.locale,
                           trailingWidget: TextButton(
                             onPressed: () {
                               themeProvider.toggleTheme();
@@ -126,7 +126,7 @@ class _TeacherAccountScreenState extends State<TeacherAccountScreen>
                     ),
                     ListTileWidget(
                       imagePath: 'assets/icons/logout.png',
-                      title: LocaleKeys.teacherAccount_logOut.locale,
+                      title: LocaleKeys.account_logOut.locale,
                       trailingWidget: IconButton(
                           onPressed: () async {
                             await _vm.logOutStudent()

@@ -11,7 +11,7 @@ class ContainerWidget extends StatelessWidget {
         'assets/icons/user.png',
         alignment: Alignment(0.0, 1.5),
       ),
-      height: size.height / 3.1,
+      height: size.height / 4,
       width: size.width,
       decoration: ShapeDecoration(
         color: Theme.of(context).colorScheme.primary.withValues(alpha: 1),

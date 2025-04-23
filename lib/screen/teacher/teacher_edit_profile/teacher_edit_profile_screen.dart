@@ -1,6 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class TeacherEditProfileScreen extends StatefulWidget {
   TeacherEditProfileScreen({super.key, this.teacherId});
   String? teacherId;
@@ -28,7 +27,7 @@ class _TeacherEditProfileScreenState extends State<TeacherEditProfileScreen>
 
     return Scaffold(
       appBar:
-          CustomAppBar(context, title: LocaleKeys.teacherAccount_title.locale),
+          CustomAppBar(context, title: LocaleKeys.account_title.locale),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -74,9 +73,9 @@ class _TeacherEditProfileScreenState extends State<TeacherEditProfileScreen>
                   },
                 ),
                 emptyWidget(),
-                LoginButton(
-                  title: LocaleKeys.teacherAccount_updateButton.locale,
-                  func: () {
+                CustomButton(
+                  title: LocaleKeys.account_updateButton.locale,
+                  onPress: () {
                     updateCheckMethod(formKey, context);
                   },
                 )

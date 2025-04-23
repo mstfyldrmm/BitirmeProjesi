@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:qr_attendance_project/custom/icon_creater.dart';
-import 'package:qr_attendance_project/custom/navigate_to_widget.dart';
-import 'package:qr_attendance_project/screen/teacher/teacher_add_lesson/teacher_add_lesson_screen.dart';
+import 'package:qr_attendance_project/export.dart';
 
 class TeacherFabWidget extends StatelessWidget
     with IconCreater, NavigatorManager {

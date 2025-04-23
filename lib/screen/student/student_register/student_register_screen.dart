@@ -1,6 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class StudentRegisterScreen extends StatefulWidget {
   const StudentRegisterScreen({super.key});
 
@@ -29,7 +28,8 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen>
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: CustomAppBar(context, title: LocaleKeys.studentTitle_registerTitle.locale),
+      appBar: CustomAppBar(context,
+          title: LocaleKeys.studentTitle_registerTitle.locale),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -105,9 +105,9 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen>
                   },
                 ),
                 emptyWidget(),
-                LoginButton(
+                CustomButton(
                   title: LocaleKeys.register_register.locale,
-                  func: () async {
+                  onPress: () async {
                     await registerCheckMethod(_formKey, context);
                   },
                 )
@@ -124,8 +124,13 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen>
     if (_formKey.currentState!.validate()) {
       bool isOkey = await _vm.registerStudent();
       if (isOkey) {
-        showCustomSnackBar(context, LocaleKeys.register_successMessage.locale, false);
-        navigateToNoBackWidget(context, StudentLoginScreen());
+        showCustomSnackBar(
+            context, LocaleKeys.register_successMessage.locale, false);
+        navigateToNoBackWidget(
+            context,
+            StudentLoginScreen(
+              userType: 'student',
+            ));
       }
     }
   }
@@ -136,4 +141,3 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen>
     );
   }
 }
-

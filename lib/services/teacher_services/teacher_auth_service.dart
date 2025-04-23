@@ -7,17 +7,13 @@ class TeacherAuthService {
       locator<ServiceLocalStorage>();
   final _logger = Logger(printer: PrettyPrinter());
 
-  Future<String?> getUserIdByEmail(String email) async {
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-
-      if (user != null && user.email == email) {
-        return user.uid; // Kullanıcının UID'sini döndür
-      }
-    } catch (e) {
-      print("Error getting user UID: $e");
+  String? getTeacherId() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      _logger.e("There is no user logged in yet!");
+      return null;
     }
-    return null;
+    return user.uid;
   }
 
   Future<TeacherModel?> signUpTeacher(
@@ -152,7 +148,7 @@ class TeacherAuthService {
         'teacherSurname': newSurname,
       });
 
-      showToast(LocaleKeys.studentAccount_editProfileMessage.locale,
+      showToast(LocaleKeys.account_studentEditProfileMessage.locale,
           isError: false);
     } on FirebaseAuthException catch (error) {
       // Firebase Auth hataları
@@ -184,7 +180,6 @@ class TeacherAuthService {
         isError: false,
       );
       await serviceLocalStorage.logout();
-      await serviceLocalStorage.clearAll();
       _logger.i("Başarılı çıkış");
       return true;
     } catch (error) {

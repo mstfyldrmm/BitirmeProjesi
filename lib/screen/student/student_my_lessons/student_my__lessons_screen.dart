@@ -11,6 +11,7 @@ class StudentMyLessonsScreen extends StatefulWidget {
 class _StudentMyLessonsScreenState extends State<StudentMyLessonsScreen>
     with NavigatorManager, IconCreater {
   late final StudentMyLessonsView _vm;
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -20,8 +21,13 @@ class _StudentMyLessonsScreenState extends State<StudentMyLessonsScreen>
   }
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController searchController = TextEditingController();
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () => _vm.getLessons(widget.userId!),
@@ -32,26 +38,34 @@ class _StudentMyLessonsScreenState extends State<StudentMyLessonsScreen>
               CustomTextField(
                 title: LocaleKeys.studentMain_lessonsSearch.locale,
                 icon: Icon(Icons.search),
-                controller: searchController,
+                controller: _searchController,
+                onChanged: (String text) {
+                  _vm.filterLessons(text);
+                },
               ),
               SizedBox(height: 20),
               ValueListenableBuilder(
-                valueListenable: _vm.studentLessonsNotifier,
+                valueListenable: _vm.studentFilteredLessonsNotifier,
                 builder: (_, __, ___) {
-                  return (_vm.studentLessonsNotifier.value.isNotEmpty)
+                  return (_vm.studentFilteredLessonsNotifier.value.isNotEmpty)
                       ? Expanded(
                           child: ListView.separated(
-                            itemCount: _vm.studentLessonsNotifier.value.length,
+                            itemCount:
+                                _vm.studentFilteredLessonsNotifier.value.length,
                             itemBuilder: (BuildContext context, int index) {
                               return StudentLessonCard(
                                 context: context,
                                 iconAddress: 'assets/icons/chalkboard.png',
-                                lessonModel:
-                                    _vm.studentLessonsNotifier.value[index],
+                                lessonModel: _vm.studentFilteredLessonsNotifier
+                                    .value[index],
                                 onTapLessonCard: () {
                                   navigateToWidget(
                                     context,
-                                    StudentLessonDetailScreen(),
+                                    StudentLessonDetailScreen(
+                                      lessonModel: _vm
+                                          .studentFilteredLessonsNotifier
+                                          .value[index]!,
+                                    ),
                                   );
                                 },
                               );

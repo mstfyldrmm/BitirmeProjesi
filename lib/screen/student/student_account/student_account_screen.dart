@@ -1,6 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class StudentAccountScreen extends StatefulWidget {
   StudentAccountScreen({super.key, this.studentModelId});
   String? studentModelId;
@@ -59,7 +58,7 @@ class _StudentAccountScreenState extends State<StudentAccountScreen>
                   children: [
                     ListTileWidget(
                       imagePath: 'assets/icons/user-edit.png',
-                      title: LocaleKeys.studentAccount_editProfile.locale,
+                      title: LocaleKeys.account_editProfile.locale,
                       trailingWidget: IconButton(
                         onPressed: () => navigateToWidget(
                           context,
@@ -72,7 +71,7 @@ class _StudentAccountScreenState extends State<StudentAccountScreen>
                     ),
                     ListTileWidget(
                       imagePath: 'assets/icons/reset-password.png',
-                      title: LocaleKeys.studentAccount_changePassword.locale,
+                      title: LocaleKeys.account_changePassword.locale,
                       trailingWidget: IconButton(
                         onPressed: () => navigateToWidget(
                           context,
@@ -97,7 +96,7 @@ class _StudentAccountScreenState extends State<StudentAccountScreen>
                         builder: (_, __, ___) {
                           return ListTileWidget(
                             imagePath: 'assets/icons/translation.png',
-                            title: LocaleKeys.studentAccount_language.locale,
+                            title: LocaleKeys.account_language.locale,
                             trailingWidget: TextButton(
                               onPressed: () {},
                               child: Text(
@@ -112,7 +111,7 @@ class _StudentAccountScreenState extends State<StudentAccountScreen>
                       builder: (_, __, ___) {
                         return ListTileWidget(
                           imagePath: 'assets/icons/morning.png',
-                          title: LocaleKeys.studentAccount_theme.locale,
+                          title: LocaleKeys.account_theme.locale,
                           trailingWidget: TextButton(
                             onPressed: () {
                               themeProvider.toggleTheme();
@@ -128,22 +127,23 @@ class _StudentAccountScreenState extends State<StudentAccountScreen>
                     ),
                     ListTileWidget(
                       imagePath: 'assets/icons/logout.png',
-                      title: LocaleKeys.studentAccount_logOut.locale,
+                      title: LocaleKeys.account_logOut.locale,
                       trailingWidget: IconButton(
-                          onPressed: () async {
-                            await _vm.logOutStudent()
-                                ? navigateToNoBackWidget(
-                                    context,
-                                    StartScreen(),
-                                  )
-                                : showToast(
-                                    LocaleKeys
-                                        .errorCode_login_defaultMessage.locale,
-                                    isError: true,
-                                  );
-                          },
-                          icon: CustomIconCreator(
-                              iconPath: 'assets/icons/shutdown.png')),
+                        onPressed: () async {
+                          await _vm.logOutStudent()
+                              ? navigateToNoBackWidget(
+                                  context,
+                                  StartScreen(),
+                                )
+                              : showToast(
+                                  LocaleKeys
+                                      .errorCode_login_defaultMessage.locale,
+                                  isError: true,
+                                );
+                        },
+                        icon: CustomIconCreator(
+                            iconPath: 'assets/icons/shutdown.png'),
+                      ),
                     ),
                   ],
                 ),

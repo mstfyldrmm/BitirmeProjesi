@@ -16,15 +16,17 @@ class StudentEditProfileView extends ChangeNotifier with NavigatorManager {
   }
 
   Future<void> sendPasswordResetLink(String email, BuildContext context) async {
-    bool isOkey =
-          await StudentAuthService().sendPasswordResetLink(email);
+    bool isOkey = await StudentAuthService().sendPasswordResetLink(email);
 
-      if (isOkey) {
-        showCustomSnackBar(
-            context, LocaleKeys.passwordReset_successMessage.locale, false);
-        serviceLocalStorage.clearAll();
-        navigateToNoBackWidget(context, StartScreen());
-      }
+    if (isOkey) {
+      showCustomSnackBar(
+        context,
+        LocaleKeys.passwordReset_successMessage.locale,
+        false,
+      );
+      serviceLocalStorage.logout();
+      navigateToNoBackWidget(context, StartScreen());
+    }
   }
 
   String? validateEmail(String? value) {
@@ -48,8 +50,6 @@ class StudentEditProfileView extends ChangeNotifier with NavigatorManager {
     return null;
   }
 }
-
-
 
 //notifier bak
 //

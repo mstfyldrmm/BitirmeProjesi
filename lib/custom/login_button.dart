@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginButton extends StatelessWidget {
-  LoginButton({super.key, this.func, required this.title});
-  void Function()? func;
+class CustomButton extends StatelessWidget {
+  final VoidCallback onPress;
   final String title;
+  const CustomButton({
+    super.key,
+    required this.onPress,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class LoginButton extends StatelessWidget {
       child: Card(
         elevation: 1,
         child: ElevatedButton(
-          onPressed: func,
+          onPressed: () => onPress.call(),
           style: ButtonStyle(
             backgroundColor: WidgetStatePropertyAll(ColorScheme.light().error),
             padding: WidgetStateProperty.all<EdgeInsets>(

@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:qr_attendance_project/export.dart';
+
 
 class ContainerWidget extends StatelessWidget {
   const ContainerWidget({super.key});
@@ -11,7 +12,7 @@ class ContainerWidget extends StatelessWidget {
         'assets/icons/tutorr.png',
         alignment: Alignment(0.0, 1.7),
       ),
-      height: size.height / 3.1,
+      height: size.height / 4,
       width: size.width,
       decoration: ShapeDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,

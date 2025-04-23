@@ -1,8 +1,11 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class TeacherLoginScreen extends StatefulWidget {
-  const TeacherLoginScreen({super.key});
+  final String userType;
+  const TeacherLoginScreen({
+    super.key,
+    required this.userType,
+  });
 
   @override
   State<TeacherLoginScreen> createState() => _TeacherLoginScreenState();
@@ -22,13 +25,15 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen>
   Widget build(BuildContext context) {
     TextEditingController mailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: CustomAppBar(context,
-          title: LocaleKeys.teacherTitle_loginTitle.locale),
+      appBar: CustomAppBar(
+        context,
+        title: LocaleKeys.teacherTitle_loginTitle.locale,
+      ),
       body: Form(
-        key: _formKey,
+        key: formKey,
         child: Padding(
           padding: WidgetSizes.normalPadding.value,
           child: SingleChildScrollView(
@@ -36,20 +41,36 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen>
               children: [
                 Center(child: OmuLogo()),
                 spacerMethod(height: 60),
-                mailAndPasswordTextField(mailController, passwordController),
+                mailAndPasswordTextField(
+                  mailController,
+                  passwordController,
+                ),
                 spacerMethod(height: 10),
-                LoginButton(
+                CustomButton(
                   title: LocaleKeys.login_login.locale,
-                  func: () {
-                    _vm.loginTeacher(_formKey, context);
+                  onPress: () async {
+                    await _vm.loginTeacher(formKey, context)
+                        ? navigateToNoBackWidget(
+                            context,
+                            TeacherDrawerContent(
+                              userId: _vm.getTeacherId(),
+                            ),
+                          )
+                        : showToast(
+                            "Bir hata oluştu",
+                            isError: true,
+                          );
                   },
                 ),
                 TextButton(
-                    onPressed: () {
-                      navigateToNormalWidget(
-                          context, StudentPasswordResetScreen());
-                    },
-                    child: Text(LocaleKeys.login_forgotPassword.locale)),
+                  onPressed: () {
+                    navigateToNormalWidget(
+                      context,
+                      StudentPasswordResetScreen(),
+                    );
+                  },
+                  child: Text(LocaleKeys.login_forgotPassword.locale),
+                ),
                 textButtonsRow(context),
               ],
             ),

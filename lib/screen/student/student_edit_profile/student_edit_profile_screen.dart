@@ -28,7 +28,7 @@ class _StudentEditProfileScreenState extends State<StudentEditProfileScreen>
 
     return Scaffold(
       appBar: CustomAppBar(context,
-          title: LocaleKeys.studentAccount_editProfile.locale),
+          title: LocaleKeys.account_editProfile.locale),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -74,9 +74,9 @@ class _StudentEditProfileScreenState extends State<StudentEditProfileScreen>
                   },
                 ),
                 emptyWidget(),
-                LoginButton(
-                  title: LocaleKeys.studentAccount_updateButton.locale,
-                  func: () {
+                CustomButton(
+                  title: LocaleKeys.account_updateButton.locale,
+                  onPress: () {
                     updateCheckMethod(formKey, context);
                   },
                 )

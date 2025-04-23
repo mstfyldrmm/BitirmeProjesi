@@ -1,6 +1,6 @@
 import 'package:qr_attendance_project/export.dart';
 
-class StudentAccountView with ChangeNotifier {
+class StudentAccountView extends ChangeNotifier {
   ValueNotifier<StudentModel?> studentModel =
       ValueNotifier<StudentModel?>(null);
 

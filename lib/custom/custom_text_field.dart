@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.keyboardType,
+    this.maxLines = 1,
   });
   final String title;
   final Widget icon;
@@ -21,12 +22,14 @@ class CustomTextField extends StatelessWidget {
   final Function? onChanged;
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardType,
       controller: controller,
+      maxLines: maxLines,
       obscureText: sifreGizle,
       validator: validator,
       onChanged: _onChanged,

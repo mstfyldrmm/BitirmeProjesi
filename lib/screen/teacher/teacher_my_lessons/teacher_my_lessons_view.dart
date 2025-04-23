@@ -1,16 +1,32 @@
 import 'package:qr_attendance_project/export.dart';
 
-class TeacherMyLessonsView with ChangeNotifier {
-  ValueNotifier<List<LessonModel?>> teacherLesson = ValueNotifier([]);
+class TeacherMyLessonsView extends ChangeNotifier {
+  ValueNotifier<List<LessonModel?>> teacherLessons = ValueNotifier([]);
+  ValueNotifier<List<LessonModel?>> teacherFilteredLessons = ValueNotifier([]);
 
   Future<List<LessonModel?>> getTeacherLessons(String teacherId) async {
-    teacherLesson.value = await TeacherService().fetchTeacherLessons(teacherId);
-    return teacherLesson.value;
+    teacherLessons.value = await TeacherService().fetchTeacherLessons(teacherId);
+    teacherFilteredLessons.value = teacherLessons.value;
+    return teacherLessons.value;
+  }
+
+  void filterLessons(String query) {
+    if (query.isEmpty) {
+      teacherFilteredLessons.value = teacherLessons.value;
+    } else {
+      teacherFilteredLessons.value = teacherLessons.value
+          .where(
+            (lesson) => (lesson?.lessonName ?? '')
+            .toLowerCase()
+            .contains(query.toLowerCase()),
+      )
+          .toList();
+    }
   }
 
   Future<void> deleteTeacherLesson(String lessonId) async {
     await TeacherService().deleteLessonFirebase(lessonId);
-    teacherLesson.value.removeWhere((lesson) => lesson!.lessonId == lessonId);
-    teacherLesson.notifyListeners();
+    teacherLessons.value.removeWhere((lesson) => lesson!.lessonId == lessonId);
+    teacherLessons.notifyListeners();
   }
 }

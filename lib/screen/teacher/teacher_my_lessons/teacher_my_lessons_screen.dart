@@ -11,9 +11,9 @@ class TeacherMyLessons extends StatefulWidget {
 class _TeacherMyLessonsState extends State<TeacherMyLessons>
     with NavigatorManager, IconCreater {
   late final TeacherMyLessonsView _vm;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _vm = TeacherMyLessonsView();
     _vm.getTeacherLessons(widget.teacherId!);
@@ -28,22 +28,40 @@ class _TeacherMyLessonsState extends State<TeacherMyLessons>
         onRefresh: () => _vm.getTeacherLessons(widget.teacherId!),
         child: Padding(
           padding: WidgetSizes.normalPadding.value,
-          child: Column(
-            children: [
-              CustomTextField(
-                title: LocaleKeys.studentMain_lessonsSearch.locale,
-                icon: Icon(Icons.search),
-                controller: searchController,
-              ),
-              ValueListenableBuilder(
-                  valueListenable: _vm.teacherLesson,
-                  builder: (_, __, ___) {
-                    return TeacherLessonCreater(
-                        vm: _vm,
-                        dersler: _vm.teacherLesson.value);
-                  }),
-            ],
-          ),
+          child: ValueListenableBuilder(
+              valueListenable: _vm.teacherLessons,
+              builder: (_, __, ___) {
+                return _vm.teacherLessons.value.isNotEmpty
+                    ? Column(
+                        children: [
+                          CustomTextField(
+                            title: LocaleKeys.studentMain_lessonsSearch.locale,
+                            icon: Icon(Icons.search),
+                            controller: searchController,
+                            onChanged: (String text) {
+                              _vm.filterLessons(text);
+                            },
+                          ),
+                          ValueListenableBuilder(
+                            valueListenable: _vm.teacherFilteredLessons,
+                            builder: (_, __, ___) {
+                              return TeacherLessonItem(
+                                lesson: _vm.teacherFilteredLessons.value,
+                                onPressAction: (lesson) =>
+                                    _vm.deleteTeacherLesson(lesson),
+                                onPressDismissed: (lesson) =>
+                                    _vm.deleteTeacherLesson(lesson),
+                              );
+                            },
+                          ),
+                        ],
+                      )
+                    : CustomEmptyDataWidget(
+                        imagePath: 'assets/icons/sleep.png',
+                        title: LocaleKeys
+                            .studentMain_studentEmptyLessonMessage.locale,
+                      );
+              }),
         ),
       ),
       floatingActionButton: TeacherFabWidget(

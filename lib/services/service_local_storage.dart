@@ -28,23 +28,6 @@ final class ServiceLocalStorage {
     await _preferences?.setString(key, value);
   }
 
-  Future<void> saveUserData({
-    required String type, // "teacher" veya "student"
-    required String key,
-    required String value,
-  }) async {
-    await _preferences?.setString('user', type);
-    await _preferences?.setString(key, value);
-  }
-
-  String? getUserType() {
-    return _preferences?.getString('user');
-  }
-
-  Future<void> clearAll() async {
-    await _preferences?.clear();
-  }
-
   /// Removes a value from local storage for the given [key], effectively logging out the user.
   /// Returns a `Future` that completes when the operation is finished.
   Future<void> logout() async {

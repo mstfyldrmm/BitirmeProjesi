@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:qr_attendance_project/custom/app_bar.dart';
 import 'package:qr_attendance_project/custom/widget_sizes.dart';
 import 'package:qr_attendance_project/model/yoklama.dart';
-import 'package:qr_attendance_project/provider/theme_provider.dart';
 import 'package:qr_attendance_project/screen/teacher/teacher_attendance/components/attendance_widget.dart';
-
 
 class TeacherAttendanceScreen extends StatelessWidget {
   const TeacherAttendanceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         elevation: 0,
@@ -20,7 +16,7 @@ class TeacherAttendanceScreen extends StatelessWidget {
         onPressed: () {},
         child: Image.asset(YoklamaDetayString().iconPath),
       ),
-      appBar: CustomAppBar(context,title:YoklamaDetayString().title),
+      appBar: CustomAppBar(context, title: YoklamaDetayString().title),
       body: Padding(
         padding: WidgetSizes.normalPadding.value,
         child: PageView.builder(

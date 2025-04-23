@@ -52,8 +52,7 @@ export 'package:qr_attendance_project/screen/student/student_my_lessons/student_
 export 'package:qr_attendance_project/screen/widgets/screen_hidden_drawer_widget.dart';
 export 'package:qr_attendance_project/screen/student/student_drawer/student_drawer_content.dart';
 export 'package:qr_attendance_project/screen/student/student_edit_profile/student_edit_profile_view.dart';
-export 'package:qr_attendance_project/screen/student/student_lesson_detail/components/lesson_attendance_bar.dart';
-export 'package:qr_attendance_project/screen/student/student_lesson_detail/components/student_attendance_start_button.dart';
+export 'package:qr_attendance_project/screen/student/student_lesson_detail/components/join_attendance_button_widget.dart';
 export 'package:qr_attendance_project/screen/student/student_my_lessons/components/student_lesson_card.dart';
 export 'package:qr_attendance_project/screen/student/student_my_lessons/student_my_lessons_view.dart';
 export 'package:qr_attendance_project/screen/student/student_my_lessons/components/lessons_empty_widget.dart';
@@ -73,4 +72,32 @@ export 'package:qr_attendance_project/screen/teacher/teacher_my_lessons/componen
 export 'package:qr_attendance_project/screen/teacher/teacher_my_lessons/teacher_my_lessons_view.dart';
 export 'package:qr_attendance_project/screen/teacher/teacher_register/teacher_register_view.dart';
 export 'package:qr_attendance_project/custom/enums/user_type.dart';
+export 'package:qr_attendance_project/custom/custom_loading.dart';
+export 'package:qr_attendance_project/screen/teacher/teacher_add_lesson/teacher_add_lesson_view.dart';
+export 'package:qr_attendance_project/screen/widgets/empty_widget.dart';
+export 'dart:io';
+export 'package:file_picker/file_picker.dart';
+export 'package:glass_kit/glass_kit.dart';
+export 'package:qr_attendance_project/screen/teacher/teacher_drawer/teacher_drawer_view.dart';
+export 'package:qr_attendance_project/screen/teacher/teacher_add_lesson/teacher_add_lesson_screen.dart';
 
+export 'package:qr_attendance_project/screen/teacher/teacher_lesson_detail/teacher_lesson_detail_screen.dart';
+export 'package:percent_indicator/circular_percent_indicator.dart';
+export 'package:qr_attendance_project/model/request_model.dart';
+export 'package:qr_attendance_project/screen/student/student_create_request/companent/dropdown_widget.dart';
+export 'package:qr_attendance_project/screen/student/student_create_request/companent/lesson_select_widget.dart';
+export 'package:qr_attendance_project/screen/student/student_create_request/student_create_request_view.dart';
+export 'package:qr_attendance_project/screen/widgets/custom_appBar_widget.dart';
+export 'package:qr_attendance_project/screen/student/student_create_request/student_create_request_screen.dart';
+export 'package:qr_attendance_project/screen/student/student_request/companents/request_card_widget.dart';
+
+export 'package:qr_attendance_project/screen/student/student_request/student_request_view.dart';
+export 'package:qr_attendance_project/screen/widgets/custom_empty_data_widget.dart';
+export 'package:dropdown_button2/dropdown_button2.dart';
+export 'package:qr_attendance_project/screen/student/student_drawer/student_drawer_view.dart';
+export 'package:qr_attendance_project/screen/student/student_request/student_request_screen.dart';
+export 'package:qr_attendance_project/model/student_attendance_model.dart';
+export 'package:shimmer/shimmer.dart';
+export 'package:qr_attendance_project/screen/student/student_lesson_detail/components/history_attendance_widget.dart';
+export 'package:qr_attendance_project/screen/student/student_lesson_detail/components/attendance_info_widget.dart';
+export 'package:qr_attendance_project/screen/widgets/lesson_info.dart';

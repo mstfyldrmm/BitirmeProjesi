@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-void showCustomLoadingDialog(BuildContext context, Widget navigateWidget) {
+void showCustomLoadingDialog(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
-      Future.delayed(const Duration(seconds: 3), () {
-        Navigator.of(context).pop();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => navigateWidget),
-        );
-      });
-
       return Dialog(
         shadowColor: Colors.transparent,
         elevation: 0,
@@ -24,7 +16,7 @@ void showCustomLoadingDialog(BuildContext context, Widget navigateWidget) {
             color: Colors.transparent,
             child: Center(
               child: LoadingAnimationWidget.twoRotatingArc(
-                color: Theme.of(context).hintColor,
+                color: Theme.of(context).hintColor..withAlpha(1),
                 size: 60,
               ),
             ),

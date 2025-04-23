@@ -1,7 +1,11 @@
 import 'package:qr_attendance_project/export.dart';
 
 class StudentLoginScreen extends StatefulWidget {
-  const StudentLoginScreen({super.key});
+  final String userType;
+  const StudentLoginScreen({
+    super.key,
+    required this.userType,
+  });
 
   @override
   State<StudentLoginScreen> createState() => _StudentLoginScreenState();
@@ -21,34 +25,54 @@ class _StudentLoginScreenState extends State<StudentLoginScreen>
   Widget build(BuildContext context) {
     TextEditingController mailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: CustomAppBar(context,
-          title: LocaleKeys.studentTitle_loginTitle.locale),
+      appBar: CustomAppBar(
+        context,
+        title: LocaleKeys.studentTitle_loginTitle.locale,
+      ),
       body: Form(
-        key: _formKey,
+        key: formKey,
         child: Padding(
           padding: WidgetSizes.normalPadding.value,
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Center(child: OmuLogo()),
+                Center(
+                  child: OmuLogo(),
+                ),
                 spacerMethod(height: 60),
-                mailAndPasswordTextField(mailController, passwordController),
+                mailAndPasswordTextField(
+                  mailController,
+                  passwordController,
+                ),
                 spacerMethod(height: 10),
-                LoginButton(
+                CustomButton(
                   title: LocaleKeys.login_login.locale,
-                  func: () {
-                    _vm.loginStudent(_formKey, context);
+                  onPress: () async {
+                    await _vm.loginStudent(formKey, context)
+                        ? navigateToNoBackWidget(
+                            context,
+                            StudentDrawerContent(
+                              userId: _vm.getStudentId(),
+                            ),
+                          )
+                        : showToast(
+                            "Bir hata oluştu",
+                            isError: true,
+                          );
                   },
                 ),
                 TextButton(
-                    onPressed: () {
-                      navigateToNormalWidget(
-                          context, StudentPasswordResetScreen());
-                    },
-                    child: Text(LocaleKeys.login_forgotPassword.locale)),
+                  onPressed: () {
+                    navigateToNormalWidget(
+                      context,
+                      StudentPasswordResetScreen(),
+                    );
+                  },
+                  child: Text(LocaleKeys.login_forgotPassword.locale),
+                ),
                 textButtonsRow(context),
               ],
             ),
@@ -66,16 +90,22 @@ class _StudentLoginScreenState extends State<StudentLoginScreen>
       children: [
         Text(LocaleKeys.login_noAccount.locale),
         TextButton(
-            onPressed: () {
-              navigateToNormalWidget(context, StudentRegisterScreen());
-            },
-            child: Text(LocaleKeys.login_register.locale)),
+          onPressed: () {
+            navigateToNormalWidget(
+              context,
+              StudentRegisterScreen(),
+            );
+          },
+          child: Text(LocaleKeys.login_register.locale),
+        ),
       ],
     );
   }
 
-  Column mailAndPasswordTextField(TextEditingController mailController,
-      TextEditingController passwordController) {
+  Column mailAndPasswordTextField(
+    TextEditingController mailController,
+    TextEditingController passwordController,
+  ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [

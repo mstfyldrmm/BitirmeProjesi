@@ -1,6 +1,6 @@
 import 'package:qr_attendance_project/export.dart';
 
-class TeacherRegisterView with ChangeNotifier {
+class TeacherRegisterView extends ChangeNotifier {
   ValueNotifier<String> teacherName = ValueNotifier<String>('');
   ValueNotifier<String> teacherSurname = ValueNotifier<String>('');
   ValueNotifier<String> teacherMail = ValueNotifier<String>('');

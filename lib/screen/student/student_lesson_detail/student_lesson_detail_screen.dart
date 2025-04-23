@@ -1,89 +1,45 @@
 import 'package:qr_attendance_project/export.dart';
-import 'package:qr_attendance_project/screen/student/student_lesson_detail/components/lesson_case_text.dart';
 
-class StudentLessonDetailScreen extends StatelessWidget with IconCreater {
-  const StudentLessonDetailScreen({super.key});
+class StudentLessonDetailScreen extends StatefulWidget with IconCreater {
+  const StudentLessonDetailScreen({super.key, required this.lessonModel});
+  final LessonModel lessonModel;
 
   @override
-  Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    double dersDevam = 0.65;
-    return Scaffold(
-      appBar: CustomAppBar(context, title: 'E-Yoklama'),
-      body: Padding(
-        padding: WidgetSizes.normalPadding.value,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(flex: 3, child: StudentAttendanceStartButton(context)),
-            Expanded(flex: 3, child: LessonAttendanceBar(dersDevam, context)),
-            Expanded(
-              child: LessonCaseText(),
-            ),
-            createLastAttendanceText(context),
-            LastAttendanceWidget()
-          ],
-        ),
-      ),
-    );
-  }
-
-  
-
-  Text createLastAttendanceText(BuildContext context) {
-    return Text(
-      'Geçmiş Yoklamalar',
-      textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-    );
-  }
+  State<StudentLessonDetailScreen> createState() =>
+      _StudentLessonDetailScreenState();
 }
 
-class LastAttendanceWidget extends StatelessWidget {
-  const LastAttendanceWidget({
-    super.key,
-  });
-
-  //Veriler elle olusturuldu. Daha sonra page view builder ile düzeltilecek ve components eklenecek.
+class _StudentLessonDetailScreenState extends State<StudentLessonDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Card.filled(
-        shadowColor: Theme.of(context).primaryColor,
-        child: PageView(
+    bool isAttendanceAvailable = false;
+
+    return Scaffold(
+      appBar: CustomAppBar(context,
+          title: LocaleKeys.studentLessonDetail_title.locale),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              child: ListTile(
-                  title: Text(
-                    '4 Mart 2025',
-                  ),
-                  subtitle: Text('Mikroişlemciler'),
-                  trailing: Image.asset('assets/icons/cancel.png')),
-            ),
-            Card(
-              child: ListTile(
-                  title: Text(
-                    '4 Mart 2025',
-                  ),
-                  trailing: Image.asset('assets/icons/accept.png')),
-            ),
-            Card(
-              child: ListTile(
-                  title: Text(
-                    '4 Mart 2025',
-                  ),
-                  trailing: Image.asset('assets/icons/accept.png')),
-            ),
-            Card(
-              child: ListTile(
-                title: Text(
-                  '4 Mart 2025',
-                ),
-                trailing: Image.asset('assets/icons/cancel.png'),
-              ),
+            Expanded(
+                flex: 1,
+                child: LessonInfo(
+                  lessonModel: widget.lessonModel,
+                )),
+            EmptyWidget(),
+            Expanded(
+              flex: 2,
+              child: isAttendanceAvailable
+                  ? JoinAttendanceButtonWidget(context)
+                  : PageView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        AttendanceInfoWidget(),
+                        AttendanceHistoryWidget(),
+                      ],
+                    ),
             ),
           ],
         ),

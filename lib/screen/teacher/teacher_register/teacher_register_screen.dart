@@ -104,9 +104,9 @@ class _TeacherRegisterScreenState extends State<TeacherRegisterScreen>
                   },
                 ),
                 emptyWidget(),
-                LoginButton(
+                CustomButton(
                   title: LocaleKeys.register_register.locale,
-                  func: () async {
+                  onPress: () async {
                     await registerCheckMethod(_formKey, context);
                   },
                 )
@@ -125,7 +125,12 @@ class _TeacherRegisterScreenState extends State<TeacherRegisterScreen>
       if (isOkey) {
         showCustomSnackBar(
             context, LocaleKeys.register_successMessage.locale, false);
-        navigateToNoBackWidget(context, TeacherLoginScreen());
+        navigateToNoBackWidget(
+          context,
+          TeacherLoginScreen(
+            userType: 'teacher',
+          ),
+        );
       }
     }
   }

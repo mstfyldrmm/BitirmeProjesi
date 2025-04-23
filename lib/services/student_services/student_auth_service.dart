@@ -7,16 +7,13 @@ class StudentAuthService with ChangeNotifier {
       locator<ServiceLocalStorage>();
   final _logger = Logger(printer: PrettyPrinter());
 
-  ///TODO: 1
   Future<StudentModel?> signInStudent(String email, String password) async {
     try {
-      // Firebase Authentication ile giriş yap
       final userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // Kullanıcıyı al
       final User? firebaseUser = userCredential.user;
       if (firebaseUser == null) {
         showToast(LocaleKeys.errorCode_login_toastMessage.locale,
@@ -43,7 +40,6 @@ class StudentAuthService with ChangeNotifier {
 
       return studentData.data();
     } on FirebaseAuthException catch (error) {
-      // Firebase Auth hatalarını yönet
       String errorMessage;
 
       switch (error.code) {
@@ -72,7 +68,6 @@ class StudentAuthService with ChangeNotifier {
       showToast(errorMessage, isError: true);
       return null;
     } catch (e) {
-      // Firestore veya diğer hataları yönet
       showToast(
         "${LocaleKeys.errorCode_login_defaultMessage.locale} : ${e.toString()}",
         isError: true,
@@ -98,7 +93,6 @@ class StudentAuthService with ChangeNotifier {
     }
   }
 
-  ///TODO: 2
   Future<StudentModel?> signUpStudent(
     String mailAddress,
     String password,
@@ -152,17 +146,14 @@ class StudentAuthService with ChangeNotifier {
   Future<void> updateStudentInfo(
       String studentId, String newName, String newSurname) async {
     try {
-      // Firestore'da öğrencinin adını ve soyadını güncelle
       await studentCollection.doc(studentId).update({
         'studentName': newName,
         'studentSurname': newSurname,
       });
 
-      // Öğrencinin bilgileri başarıyla güncellendi
-      showToast(LocaleKeys.studentAccount_editProfileMessage.locale,
+      showToast(LocaleKeys.account_studentEditProfileMessage.locale,
           isError: false);
     } on FirebaseAuthException catch (error) {
-      // Firebase Auth hataları
       String errorMessage;
       switch (error.code) {
         case "weak-password":
@@ -176,7 +167,6 @@ class StudentAuthService with ChangeNotifier {
       }
       showToast(errorMessage, isError: true);
     } catch (e) {
-      // Diğer hatalar
       showToast(
           "${LocaleKeys.errorCode_login_defaultMessage.locale}: ${e.toString()}",
           isError: true);
@@ -191,7 +181,6 @@ class StudentAuthService with ChangeNotifier {
         isError: false,
       );
       await serviceLocalStorage.logout();
-      await serviceLocalStorage.clearAll();
       _logger.i("Başarılı çıkış");
       return true;
     } catch (error) {
@@ -200,7 +189,6 @@ class StudentAuthService with ChangeNotifier {
     }
   }
 
-  //Genelde fonksiyonlara parametre olarak model ver.
   Future<void> registerStudent(StudentModel studentModel) async {
     final studentId = studentModel.mailAddress?.split('@').first;
     studentModel.schoolNumber = int.parse(studentId!);
@@ -210,15 +198,4 @@ class StudentAuthService with ChangeNotifier {
           studentModel.toJson(),
         );
   }
-
-  ///TODO:  1 ismi signInStudent olucak
-  ///TODO:  2 ismi signUpStudent olucak
-
-  ///TODO:  TEACHER İÇİN
-  ///TODO:  signUpTeacher isteği oluştur
-  ///TODO:  signUpTeacher isteği oluştur
-  ///TODO:  student ders çekme isteği gibi teacher derslerinide çek ve ekranda göster
-  /// TODO: screen student içindeki gibi olsun componment durumu isteği oluştur
-  ///TODO:  drawer sil ve student da gibi yeni şeyi koy
-  ///TODO:  drawer ekranlarını da oluştur
 }

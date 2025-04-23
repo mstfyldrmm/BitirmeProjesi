@@ -13,8 +13,11 @@ class StudentPasswordManagementView extends ChangeNotifier
 
       if (isOkey) {
         showCustomSnackBar(
-            context, LocaleKeys.passwordReset_successMessage.locale, false);
-        serviceLocalStorage.clearAll();
+          context,
+          LocaleKeys.passwordReset_successMessage.locale,
+          false,
+        );
+        await serviceLocalStorage.logout();
         navigateToNoBackWidget(context, StartScreen());
       }
     }
@@ -25,7 +28,6 @@ class StudentPasswordManagementView extends ChangeNotifier
       return LocaleKeys.validate_mail.locale;
     }
 
-    // Belirtilen uzantı için regex deseni
     final RegExp emailRegex = RegExp(r"^[a-zA-Z0-9._%+-]+@stu\.omu\.edu\.tr$");
 
     if (!emailRegex.hasMatch(value)) {

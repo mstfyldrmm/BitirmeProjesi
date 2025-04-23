@@ -3,12 +3,14 @@
     "studentTitle": {
         "loginTitle": "Student Login",
         "registerTitle": "Student Register",
-        "passwordResetTitle": "Student Password Reset"
+        "passwordResetTitle": "Student Password Reset",
+        "request" : "My Requests"
     },
     "teacherTitle": {
         "loginTitle": "Teacher Login",
         "registerTitle": "Teacher Register",
-        "passwordResetTitle": "Teacher Password Reset"
+        "passwordResetTitle": "Teacher Password Reset",
+        "studentRequests": "Students Requests"
     },
     "login": {
         "password": "Password",
@@ -65,6 +67,21 @@
             "weakPassword": "Password must be at least 6 characters.",
             "operationNotAllowed": "Registration with email and password is not allowed. Contact the admin."
         },
+        "request": {
+            "requestAddFirebaseErrorMessage": "An error occurred while creating the request.",
+            "requestAddStudentErrorMessage": "An error occurred while creating the request for the student.",
+            "requestAddTeacherErrorMessage": "The student's request encountered an error while being conveyed to the teacher."
+        },
+        "teacherAddLesson": {
+            "readExcel": "An error occurred while reading the Excel file.",
+            "addLessonErrorMessage": "An error occurred. Please try again.",
+            "lessonCode": "There is another course with the same course code. Please enter a different course code.",
+            "addLessonFirebaseMessage": "An error occurred while creating the course. Please try again.",
+            "lessonCodeCheck": "An error occurred while checking the course code. Please try again.",
+            "addLessonTeacher": "An error occurred while creating the course registration for the instructor.",
+            "lessonDelete": "An error occurred while deleting the course.",
+            "studentSaveLesson": "An error occurred while registering some students for the course. Please try again."
+        },
         "logOut": {
             "toastMessage": "Logout successful."
         }
@@ -74,20 +91,31 @@
         "title": "My Lessons",
         "studentEmptyLessonMessage": "You have no registered courses.!!"
     },
-    "studentAccount": {
-        "title": "My Account",
-        "changeTheme": "Change Theme",
-        "logOut": "Log Out",
-        "language": "Language",
-        "theme": "Theme",
-        "lightTheme": "Light Theme",
-        "darkTheme": "Dark Theme",
-        "editProfile": "Edit My Profile",
-        "changePassword": "Change My Password",
-        "editProfileMessage": "Student information update process successful.",
-        "updateButton":"Update My Profile"
+    "studentLessonDetail": {
+        "title": "Lesson Detail Page",
+        "lessonStateActive": "Course attendance status: regular",
+        "lessonStateInActive": "Course attendance status: irregular",
+        "noAttendance": "No active attendance session is available for this course.",
+        "pastAttendance": "Past Attendances",
+        "joinAttendance": "Click to Join Attendance"
     },
-    "teacherAccount": {
+    "studentRequest": {
+        "stateOne": "Waiting",
+        "stateTwo": "Completed",
+        "dontHaveRequest": "You have not created a request yet. !!",
+        "requestTitle": "Create Request",
+        "requestAddFirebaseSuccessMessage": "Request creation process successful.",
+        "teacherdontHaveRequest": "There are currently no requests from students!!!!",
+        "requestAddTeacherSuccessMessage": "The student's request was successfully conveyed to the teacher.",
+        "selectLesson": "Select Lesson",
+        "selectTeacher": "Select Teacher",
+        "requestTypeOne": "Course Registration Request",
+        "requestTypeTwo": "Attendance Request",
+        "selectRequestType": "Select Request Type",
+        "requestDescription": "Request Description",
+        "createRequest": "Create Request"
+    },
+    "account": {
         "title": "My Account",
         "changeTheme": "Change Theme",
         "logOut": "Log Out",
@@ -97,8 +125,25 @@
         "darkTheme": "Dark Theme",
         "editProfile": "Edit My Profile",
         "changePassword": "Change My Password",
-        "editProfileMessage": "Teacher information update process successful.",
-        "updateButton":"Update My Profile"
+        "studentEditProfileMessage": "Student information update process successful.",
+        "teacherEditProfileMessage": "Teacher information update process successful.",
+        "updateButton": "Update My Profile"
+    },
+    "teacherAddLesson": {
+        "title": "Add Lesson",
+        "lessonName": "Lesson Name",
+        "lessonCode": "Lesson Code",
+        "lessonSection": "Lesson Section",
+        "complete": "The lesson registration process has been successfully completed.",
+        "checkExelFileData": "Get data from Excel file",
+        "deleteFileData": "Delete lesson data",
+        "uploadExcelFile": "Upload Excel File for Lesson",
+        "addLessonButton": "Complete Lesson Registration",
+        "successMessage": {
+            "addLessonFirebaseMessage": "Lesson Creation Process Successful",
+            "addLessonTeacher": "Lesson registration successfully created.",
+            "lessonDelete": "Lesson successfully deleted.",
+            "studentSaveLesson": "The lesson registration process for all students was successful."
+        }
     }
-    
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:qr_attendance_project/custom/icon_creater.dart';
 import 'package:qr_attendance_project/custom/navigate_to_widget.dart';
-import 'package:qr_attendance_project/screen/student/student_lesson_help/student_lesson_help_screen.dart';
+
 
 class FabMenu extends StatefulWidget {
   FabMenu({super.key, required this.isExpanded});
@@ -31,7 +31,7 @@ class _FabMenuState extends State<FabMenu> with NavigatorManager, IconCreater {
                 children: [
                   _buildOptionButton(Icons.add, "Ders Kayıt Talebi Oluştur",
                       Theme.of(context).primaryColor, () {
-                    navigateToWidget(context, StudentLessonHelpScreen());
+                    navigateToWidget(context, SizedBox());
                   }),
                   SizedBox(height: 10),
                   _buildOptionButton(Icons.message, "Danışmana Mesaj",

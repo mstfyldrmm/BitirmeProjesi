@@ -43,9 +43,9 @@ class _StudentAccountPasswordResetState
                   ),
                 ),
                 spaceWidget(height: 50),
-                LoginButton(
+                CustomButton(
                   title: LocaleKeys.passwordReset_reset.locale,
-                  func: () {
+                  onPress: () {
                     _vm.sendPasswordResetLink(widget.mailAdress!, context);
                   },
                 ),
