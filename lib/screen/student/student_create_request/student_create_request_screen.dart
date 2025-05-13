@@ -16,10 +16,9 @@ class _StudentRequestScreenState extends State<StudentCreateRequestScreen>
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     vm = StudentCreateRequestView();
     vm.getAllTeacher();
+    super.initState();
   }
 
   @override

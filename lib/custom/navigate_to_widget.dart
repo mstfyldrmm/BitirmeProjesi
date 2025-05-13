@@ -34,4 +34,20 @@ mixin NavigatorManager {
         fullscreenDialog: true,
         settings: RouteSettings()));
   }
+
+  void customShowBottomSheet({
+    required BuildContext context,
+    required Widget child,
+  }) {
+    showModalBottomSheet<void>(
+      context: context,
+      isDismissible: false,
+      useSafeArea: true,
+      enableDrag: false,
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      builder: (context) {
+        return child;
+      },
+    );
+  }
 }

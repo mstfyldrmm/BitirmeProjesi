@@ -1,8 +1,8 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class StudentPasswordResetScreen extends StatefulWidget {
-  const StudentPasswordResetScreen({super.key});
+  const StudentPasswordResetScreen({super.key, required this.title});
+  final String title;
 
   @override
   State<StudentPasswordResetScreen> createState() =>
@@ -24,7 +24,10 @@ class _StudentPasswordResetScreenState
     TextEditingController controller = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Scaffold(
-      appBar: CustomAppBar(context, title: LocaleKeys.studentTitle_passwordResetTitle.locale),
+      appBar: CustomAppBar(
+        context,
+        title: widget.title,
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,

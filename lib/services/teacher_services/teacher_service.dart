@@ -68,8 +68,7 @@ class TeacherService {
     } catch (e) {
       _logger.e('Ders eklenmedi, hata kodu: ${e}');
       showToast(
-          LocaleKeys
-              .errorCode_teacherAddLesson_addLessonFirebaseMessage.locale,
+          LocaleKeys.errorCode_teacherAddLesson_addLessonFirebaseMessage.locale,
           isError: true);
       return null;
     }
@@ -93,6 +92,26 @@ class TeacherService {
     }
   }
 
+  Future<LessonModel?> fetchLessonInfo(String lessonId) async {
+    try {
+      final responseLesson = await _lessonsCollection
+          .doc(lessonId)
+          .withConverter(
+            fromFirestore: (snapshot, _) {
+              return LessonModel().fromFirebase(snapshot);
+            },
+            toFirestore: (value, _) => {},
+          )
+          .get();
+
+      final lessonData = responseLesson.data();
+      return lessonData;
+    } catch (e) {
+      _logger.e('error: $e');
+      return null;
+    }
+  }
+
   Future<bool> addLessonTeacher(String userId, String lessonId) async {
     try {
       await _teacherCollection.doc(userId).update({
@@ -106,8 +125,7 @@ class TeacherService {
       return true;
     } catch (e) {
       _logger.e("Error adding lesson: $e");
-      showToast(
-          LocaleKeys.errorCode_teacherAddLesson_addLessonTeacher.locale,
+      showToast(LocaleKeys.errorCode_teacherAddLesson_addLessonTeacher.locale,
           isError: true);
       return false;
     }
@@ -209,7 +227,9 @@ class TeacherService {
       for (var i = 0; i < requestsIds.length; i += chunkSize) {
         final chunk = requestsIds.sublist(
           i,
-          i + chunkSize > requestsIds.length ? requestsIds.length : i + chunkSize,
+          i + chunkSize > requestsIds.length
+              ? requestsIds.length
+              : i + chunkSize,
         );
 
         final requestsQuery = await FirebaseFirestore.instance
@@ -236,11 +256,8 @@ class TeacherService {
 
   Future<bool> updateRequestState(String requestId) async {
     try {
-      await _requestsCollection.doc(requestId).update({
-        'requestState': true
-      });
-      _logger.i(
-          "Request state successfully to true requestId: $requestId");
+      await _requestsCollection.doc(requestId).update({'requestState': true});
+      _logger.i("Request state successfully to true requestId: $requestId");
       showToast(
           '${LocaleKeys.studentRequest_requestAddTeacherSuccessMessage.locale}',
           isError: false);

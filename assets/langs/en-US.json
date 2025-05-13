@@ -4,13 +4,15 @@
         "loginTitle": "Student Login",
         "registerTitle": "Student Register",
         "passwordResetTitle": "Student Password Reset",
-        "request" : "My Requests"
+        "request": "My Requests"
     },
     "teacherTitle": {
         "loginTitle": "Teacher Login",
         "registerTitle": "Teacher Register",
         "passwordResetTitle": "Teacher Password Reset",
-        "studentRequests": "Students Requests"
+        "studentRequests": "Students Requests",
+        "qrGenerator": "Qr Code Generator Screen",
+        "attendanceDetail": "Attendance Details"
     },
     "login": {
         "password": "Password",
@@ -86,6 +88,26 @@
             "toastMessage": "Logout successful."
         }
     },
+    "teacherLessonDetail": {
+        "attendance": "Attendance",
+        "title": "Go To Lesson Detail Page",
+        "timeLimit": "Enter the QR code duration",
+        "endQrCode": "Stop QR code attendance",
+        "second": "Second",
+        "minute": "Minute",
+        "hour": "Hour",
+        "pastAttendance": "Past Attendances",
+        "createAttendance": "Start QR Code Attendance",
+        "attendanceSuccessMessage": "Attendance Started Successfully",
+        "attendanceErrorMessage": "Please enter a minimum of 30 seconds, and a minimum value of 1 for both minutes and hours.",
+        "schoolNumber": "Number",
+        "studentName": "Name",
+        "studentSurname": "Surname",
+        "studentState": "Attendance Status",
+        "noAttendance": "no past attendance was found for the specified date.",
+        "searchStudent": "Search Student",
+        "selectDate": "Select Attendance Date"
+    },
     "studentMain": {
         "lessonsSearch": "Search My Lessons",
         "title": "My Lessons",
@@ -93,11 +115,18 @@
     },
     "studentLessonDetail": {
         "title": "Lesson Detail Page",
+        "studentRegistered": "Registered Student",
         "lessonStateActive": "Course attendance status: regular",
         "lessonStateInActive": "Course attendance status: irregular",
         "noAttendance": "No active attendance session is available for this course.",
         "pastAttendance": "Past Attendances",
-        "joinAttendance": "Click to Join Attendance"
+        "joinAttendance": "Click to Join Attendance",
+        "cameraPermission": "Camera permission is required to use the QR code attendance feature.",
+        "grandPermission": "Allow Camera Access",
+        "scanAgain": "Scan Again",
+        "backToLessons": "Back to Lessons",
+        "joinAttendanceSuccess": "Attendance Participation Successful!!!",
+        "attendanceDetail": "Details of the Session You Attended"
     },
     "studentRequest": {
         "stateOne": "Waiting",
@@ -106,6 +135,7 @@
         "requestTitle": "Create Request",
         "requestAddFirebaseSuccessMessage": "Request creation process successful.",
         "teacherdontHaveRequest": "There are currently no requests from students!!!!",
+        "requestAddStudentSuccessMessage": "The student's request was successfully created.",
         "requestAddTeacherSuccessMessage": "The student's request was successfully conveyed to the teacher.",
         "selectLesson": "Select Lesson",
         "selectTeacher": "Select Teacher",

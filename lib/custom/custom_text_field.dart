@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_attendance_project/custom/widget_sizes.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -12,7 +13,8 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.keyboardType,
-    this.maxLines = 1,
+    this.textInputFormatter,
+    this.maxLines = 1, this.readOnly,
   });
   final String title;
   final Widget icon;
@@ -22,14 +24,18 @@ class CustomTextField extends StatelessWidget {
   final Function? onChanged;
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? textInputFormatter;
   final int maxLines;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardType,
+      inputFormatters: textInputFormatter,
       controller: controller,
       maxLines: maxLines,
+      readOnly: readOnly ?? false,
       obscureText: sifreGizle,
       validator: validator,
       onChanged: _onChanged,

@@ -4,13 +4,15 @@
         "loginTitle": "Öğrenci Girişi",
         "registerTitle": "Öğrenci Kayıt",
         "passwordResetTitle": "Öğrenci Şifre Sıfırlama",
-        "request" : "Taleplerim"
+        "request": "Taleplerim"
     },
     "teacherTitle": {
         "loginTitle": "Öğretmen Girişi",
         "registerTitle": "Öğretmen Kayıt",
         "passwordResetTitle": "Öğretmen Şifre Sıfırlama",
-        "studentRequests": "Öğrenci Talepleri"
+        "studentRequests": "Öğrenci Talepleri",
+        "qrGenerator": "Qr Kod Yoklama Oluşturma Ekranı",
+        "attendanceDetail": "Yoklama Detayları"
     },
     "login": {
         "password": "Şifre",
@@ -64,18 +66,25 @@
     },
     "studentLessonDetail": {
         "title": "Ders Detay Sayfası",
+        "studentRegistered": "Kayıtlı Öğrenci",
         "lessonStateActive": "Ders Devam Durumu: Devamlı",
         "lessonStateInActive": "Ders Devam Durumu: Devamsız",
         "noAttendance": "Derse Ait Aktif Yoklama Bulunmuyor",
         "pastAttendance": "Geçmiş Yoklamalar",
-        "joinAttendance": "Yoklama Katılmak İçin Tıkla"
+        "joinAttendance": "Yoklama Katılmak İçin Tıkla",
+        "cameraPermission": "Kamera İzni Gerekli",
+        "grandPermission": "Kameraya izin ver.",
+        "scanAgain": "Tekrar Tara",
+        "backToLessons": "Derslerime Geri Dön",
+        "joinAttendanceSuccess": "Yoklama Katılım Başarılı!!!",
+        "attendanceDetail": "Katıldığınız Yoklama Detayları"
     },
     "studentRequest": {
         "stateOne": "Beklemede",
         "stateTwo": "Tamamlandı",
         "dontHaveRequest": "Henüz Talep Oluşturmadınız !!",
         "requestTitle": "'Yeni Talep Oluştur'",
-        "teacherdontHaveRequest" : "Öğrenciler tarafından şuanlık talep yok!!!!",
+        "teacherdontHaveRequest": "Öğrenciler tarafından şuanlık talep yok!!!!",
         "requestAddFirebaseSuccessMessage": "Talep Oluşturma İşlemi Başarılı",
         "requestAddStudentSuccessMessage": "Öğrencinin talebi başarıyla oluşturuldu.",
         "requestAddTeacherSuccessMessage": "Öğrencinin talebi başarıyla öğretmene iletildi.",
@@ -111,6 +120,26 @@
             "studentSaveLesson": "Tüm öğrencilere ders kayıtlanma işlemi başarılı."
         }
     },
+    "teacherLessonDetail": {
+        "attendance": "Yoklama",
+        "title": "Ders Detay Sayfası",
+        "timeLimit": "Qr kod süresini girin",
+        "endQrCode": "Qr kod yoklamayı durdur",
+        "pastAttendance": "Geçmiş Yoklamalar",
+        "second": "Saniye",
+        "minute": "Dakika",
+        "hour": "Saat",
+        "createAttendance": "Qr Kod Yoklamayı Başlat",
+        "attendanceSuccessMessage": "Yoklama Başarıyla Başlatıldı",
+        "attendanceErrorMessage": "Lütfen saniye cinsinden en az 30, dakika ve saat cinsinden ise en az 1 değerini giriniz.",
+        "schoolNumber": "Numarası",
+        "studentName": "Adı",
+        "studentSurname": "Soyadı",
+        "studentState": "Katılım Durumu",
+        "noAttendance": "tarihine ait geçmiş yoklama bulunamadı!!!",
+        "searchStudent": "Öğrenci Ara",
+        "selectDate": "Yoklama Tarihini Seçin"
+    },
     "errorCode": {
         "login": {
             "defaultMessage": "Bilinmeyen bir hata oluştu.",
@@ -140,7 +169,6 @@
             "requestAddStudentErrorMessage": "Öğrencinin talebi oluşturulurken hatayla karşılaşıldı.",
             "requestAddFirebaseErrorMessage": "Talep Oluşturma İşlemi sırasında hatayla karşılaşıldı.",
             "requestAddTeacherErrorMessage": "Öğrencinin talebi öğretmene iletilirken hatayla karşılaşıldı."
-
         },
         "teacherAddLesson": {
             "readExcel": "Excel dosyası okunurken hata oluştu. Lütfen dosya yapısını kontrol edin",

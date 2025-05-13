@@ -19,7 +19,6 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen>
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     TextEditingController name = TextEditingController();
     TextEditingController surname = TextEditingController();
     TextEditingController mail = TextEditingController();

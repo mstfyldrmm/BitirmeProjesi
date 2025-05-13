@@ -1,6 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class TeacherAccountScreen extends StatefulWidget {
   TeacherAccountScreen({super.key, this.teacherModelId});
   String? teacherModelId;
@@ -76,7 +75,10 @@ class _TeacherAccountScreenState extends State<TeacherAccountScreen>
                       trailingWidget: IconButton(
                         onPressed: () => navigateToWidget(
                           context,
-                          StudentPasswordResetScreen(),
+                          StudentPasswordResetScreen(
+                            title: LocaleKeys
+                                .teacherTitle_passwordResetTitle.locale,
+                          ),
                         ),
                         icon: Icon(Icons.arrow_forward_ios),
                       ),

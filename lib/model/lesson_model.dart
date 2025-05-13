@@ -7,6 +7,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
   String? lessonCode;
   String? section;
   String? teacherName;
+  String? classLevel;
   List<String>? students;
 
   LessonModel({
@@ -14,19 +15,28 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
     this.lessonName,
     this.lessonCode,
     this.section,
+    this.classLevel,
     this.teacherName,
     this.students,
   });
 
   @override
-  List<Object?> get props =>
-      [lessonId, lessonName, lessonCode, section, teacherName, students];
+  List<Object?> get props => [
+        lessonId,
+        lessonName,
+        lessonCode,
+        section,
+        classLevel,
+        teacherName,
+        students
+      ];
 
   LessonModel copyWith({
     String? lessonId,
     String? lessonName,
     String? lessonCode,
     String? section,
+    String? classLevel,
     String? teacherName,
     List<String>? students,
   }) {
@@ -35,6 +45,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       lessonName: lessonName ?? this.lessonName,
       lessonCode: lessonCode ?? this.lessonCode,
       section: section ?? this.section,
+      classLevel: classLevel ?? this.classLevel,
       teacherName: teacherName ?? this.teacherName,
       students: students ?? this.students,
     );
@@ -46,6 +57,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       'lessonName': lessonName,
       'lessonCode': lessonCode,
       'section': section,
+      'classLevel': classLevel,
       'teacherName': teacherName,
       'students': students,
     };
@@ -59,6 +71,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       lessonName: json['lessonName'] as String?,
       lessonCode: json['lessonCode'] as String?,
       section: json['section'] as String?,
+      classLevel: json['classLevel'] as String?,
       teacherName: json['teacherName'] as String?,
       students: (json['students'] as List<dynamic>?)
           ?.map((e) => e as String)

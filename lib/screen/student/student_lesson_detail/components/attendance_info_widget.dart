@@ -1,10 +1,15 @@
 import 'package:qr_attendance_project/export.dart';
 
 class AttendanceInfoWidget extends StatelessWidget with IconCreater {
-  const AttendanceInfoWidget({super.key});
+  final VoidCallback onTapQrScanner;
+  const AttendanceInfoWidget({
+    super.key,
+    required this.onTapQrScanner,
+  });
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height / 4.8;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -17,63 +22,90 @@ class AttendanceInfoWidget extends StatelessWidget with IconCreater {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Column(
         children: [
-          Expanded(flex: 5, child: AttendanceNotAvailable(context)),
           Expanded(
-              child: Divider(
+            child: joinAttendanceButton(context, height),
+          ),
+          Divider(
             color: Theme.of(context).colorScheme.outline,
             thickness: 2,
-          )),
-          Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  LocaleKeys.studentLessonDetail_lessonStateActive.locale,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                CustomIconCreator(iconPath: 'assets/icons/accept.png')
-              ],
-            ),
           ),
-          Expanded(flex: 5, child: LessonAttendanceBar(0.75, context)),
+          Expanded(
+            child: attendanceStatus(context),
+          ),
         ],
       ),
     );
   }
 
-  Widget LessonAttendanceBar(double dersDevam, BuildContext context) {
-    return CircularPercentIndicator(
-      radius: 70,
-      lineWidth: 8.0,
-      animation: true,
-      animationDuration: 1000,
-      progressColor: Colors.green,
-      percent: dersDevam, // %75
-      center: Text(
-        textAlign: TextAlign.center,
-        "%${(dersDevam * 100).toInt()}\nKatılım",
-        style: Theme.of(context)
-            .textTheme
-            .titleLarge
-            ?.copyWith(fontWeight: FontWeight.bold),
-      ),
-
-      circularStrokeCap: CircularStrokeCap.round,
+  Widget attendanceStatus(
+    BuildContext context,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              LocaleKeys.studentLessonDetail_lessonStateActive.locale,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            CustomIconCreator(iconPath: 'assets/icons/accept.png')
+          ],
+        ),
+        CircularPercentIndicator(
+          radius: 70,
+          lineWidth: 8.0,
+          animation: true,
+          animationDuration: 1000,
+          progressColor: Colors.green,
+          percent: 0.75,
+          center: Text(
+            textAlign: TextAlign.center,
+            "%${(0.75 * 100).toInt()}\nKatılım",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          circularStrokeCap: CircularStrokeCap.round,
+        ),
+      ],
     );
   }
 
-  Widget AttendanceNotAvailable(BuildContext context) {
-    return Column(children: [
-      EmptyWidget(),
-      CustomIconCreator(
-        iconPath: 'assets/icons/clockk.png',
-        iconColor: Theme.of(context).hintColor.withValues(alpha: 1),
-      ),
-      EmptyWidget(
-        height: 10,
-      ),
-      Text(LocaleKeys.studentLessonDetail_noAttendance.locale)
-    ]);
+  Widget joinAttendanceButton(BuildContext context, double iconSize) {
+    return Column(
+      children: [
+        IconButton(
+          style: ButtonStyle(elevation: WidgetStatePropertyAll(10)),
+          onPressed: () => onTapQrScanner.call(),
+          icon: Shimmer.fromColors(
+            baseColor: Theme.of(context).hintColor.withAlpha(200),
+            highlightColor: Theme.of(context).hintColor.withAlpha(60),
+            child: CustomIconCreator(
+              iconColor: Theme.of(context).hintColor.withAlpha(255),
+              iconPath: 'assets/images/qr-scan-student.png',
+              iconSize: iconSize,
+            ),
+          ),
+        ),
+        Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Theme.of(context).hintColor.withAlpha(200),
+              highlightColor: Theme.of(context).hintColor.withAlpha(60),
+              child: Text(
+                LocaleKeys.studentLessonDetail_joinAttendance.locale,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

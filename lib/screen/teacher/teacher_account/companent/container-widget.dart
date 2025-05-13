@@ -8,7 +8,10 @@ class ContainerWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       child: Image.asset(
-        'assets/icons/user.png',
+        'assets/icons/teacher.png',
+        color: Theme.of(context).hintColor.withValues(
+              alpha: 1,
+            ),
         alignment: Alignment(0.0, 1.5),
       ),
       height: size.height / 4,

@@ -5,11 +5,9 @@ class RequestCardWidget extends StatelessWidget with IconCreater {
   final RequestModel requestModel;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
+    return CustomCardWidget(
+      paddingValue: 5,
+      childWidget: Padding(
         padding: WidgetSizes.normalPadding.value,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,21 +18,15 @@ class RequestCardWidget extends StatelessWidget with IconCreater {
                 Text(
                   requestModel.requestType ?? '',
                   style: Theme.of(context).textTheme.titleMedium,
+                  softWrap: true,
+                  maxLines: 2,
                 ),
-                Container(
-                  padding: WidgetSizes.smallPadding.value,
-                  decoration: BoxDecoration(
-                    color:
-                        requestModel.requestState! ? Colors.green : Colors.red,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    requestModel.requestState!
-                        ? LocaleKeys.studentRequest_stateTwo.locale
-                        : LocaleKeys.studentRequest_stateOne.locale,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                )
+                CustomIconCreator(
+                  iconPath: requestModel.requestState!
+                      ? 'assets/icons/deadline.png'
+                      : 'assets/icons/approved.png',
+                  iconSize: 50,
+                ),
               ],
             ),
             EmptyWidget(
@@ -53,7 +45,7 @@ class RequestCardWidget extends StatelessWidget with IconCreater {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 iconCreaterColor('assets/icons/date.png', context),
-                Text(requestModel.requestDate!.toDate().toString(),
+                Text(formatDateTime(requestModel.requestDate!.toDate()),
                     style: Theme.of(context).textTheme.titleMedium),
               ],
             )
@@ -61,5 +53,10 @@ class RequestCardWidget extends StatelessWidget with IconCreater {
         ),
       ),
     );
+  }
+
+  String formatDateTime(DateTime dateTime) {
+    return "${dateTime.day.toString().padLeft(2, '0')}-${dateTime.month.toString().padLeft(2, '0')} -${dateTime.year}"
+        " ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
   }
 }

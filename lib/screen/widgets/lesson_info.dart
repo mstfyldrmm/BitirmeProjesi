@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:qr_attendance_project/export.dart';
 
 class LessonInfo extends StatelessWidget {
@@ -20,7 +19,7 @@ class LessonInfo extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Stack(
         children: [
@@ -34,7 +33,7 @@ class LessonInfo extends StatelessWidget {
                         color: Colors.white, fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
                 Text(
-                  'Ders Kodu: ${lessonModel.lessonCode ?? ''}',
+                  "${LocaleKeys.teacherAddLesson_lessonCode.locale} : ${lessonModel.lessonCode ?? ''}",
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold, color: Colors.white),
                 ),
@@ -90,8 +89,8 @@ class LessonInfo extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 35,
-            right: 10,
+            top: 20,
+            right: 8,
             child: Container(
               padding: EdgeInsets.all(10),
               child: Column(
@@ -102,7 +101,7 @@ class LessonInfo extends StatelessWidget {
                           .bodyLarge
                           ?.copyWith(color: Colors.white)),
                   Text(
-                    "Öğrenci",
+                    LocaleKeys.studentLessonDetail_studentRegistered.locale,
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium

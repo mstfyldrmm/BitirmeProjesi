@@ -68,7 +68,10 @@ class _StudentLoginScreenState extends State<StudentLoginScreen>
                   onPressed: () {
                     navigateToNormalWidget(
                       context,
-                      StudentPasswordResetScreen(),
+                      StudentPasswordResetScreen(
+                        title:
+                            LocaleKeys.studentTitle_passwordResetTitle.locale,
+                      ),
                     );
                   },
                   child: Text(LocaleKeys.login_forgotPassword.locale),

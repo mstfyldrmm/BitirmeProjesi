@@ -13,6 +13,7 @@ class TeacherRequestCardWidget extends StatelessWidget with IconCreater {
   final VoidCallback solveProblemFunction;
   @override
   Widget build(BuildContext context) {
+    final Color iconColor = Theme.of(context).hintColor.withValues(alpha: 1);
     return CustomCardWidget(
       paddingValue: 5,
       childWidget: Padding(
@@ -27,20 +28,12 @@ class TeacherRequestCardWidget extends StatelessWidget with IconCreater {
                   requestModel.requestType ?? '',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Container(
-                  padding: WidgetSizes.smallPadding.value,
-                  decoration: BoxDecoration(
-                    color:
-                        requestModel.requestState! ? Colors.green : Colors.red,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    requestModel.requestState!
-                        ? LocaleKeys.studentRequest_stateTwo.locale
-                        : LocaleKeys.studentRequest_stateOne.locale,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                )
+                CustomIconCreator(
+                  iconPath: requestModel.requestState!
+                      ? 'assets/icons/approved.png'
+                      : 'assets/icons/deadline.png',
+                  iconSize: 50,
+                ),
               ],
             ),
             EmptyWidget(
@@ -62,8 +55,13 @@ class TeacherRequestCardWidget extends StatelessWidget with IconCreater {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    iconCreaterColor('assets/icons/calender.png', context),
+                    CustomIconCreator(
+                      iconPath: 'assets/icons/calender.png',
+                      iconColor: iconColor,
+                      iconSize: 50,
+                    ),
                     SizedBox(
                       width: 10,
                     ),
@@ -78,10 +76,8 @@ class TeacherRequestCardWidget extends StatelessWidget with IconCreater {
                     : IconButton(
                         onPressed: () => solveProblemFunction.call(),
                         icon: CustomIconCreator(
-                          iconPath: 'assets/icons/maintenance.png',
-                          iconColor:
-                              Theme.of(context).hintColor.withValues(alpha: 1),
-                        ),
+                            iconPath: 'assets/icons/maintenance.png',
+                            iconColor: iconColor),
                       ),
               ],
             )

@@ -4,7 +4,12 @@ enum FirebaseCollections {
   students,
   lessons,
   requests,
-  teachers;
+  teachers,
+  firstGradeAttendance,
+  secondGradeAttendance,
+  thirdGradeAttendance,
+  fourthGradeAttendance,
+  attendances;
 
   CollectionReference get reference =>
       FirebaseFirestore.instance.collection(name);

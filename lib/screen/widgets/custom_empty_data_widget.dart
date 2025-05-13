@@ -2,7 +2,10 @@ import 'package:qr_attendance_project/export.dart';
 
 class CustomEmptyDataWidget extends StatelessWidget {
   const CustomEmptyDataWidget(
-      {super.key, required this.title, required this.imagePath, this.emptySize});
+      {super.key,
+      required this.title,
+      required this.imagePath,
+      this.emptySize});
   final String title;
   final String imagePath;
   final double? emptySize;
@@ -23,7 +26,11 @@ class CustomEmptyDataWidget extends StatelessWidget {
           EmptyWidget(
             height: 30,
           ),
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

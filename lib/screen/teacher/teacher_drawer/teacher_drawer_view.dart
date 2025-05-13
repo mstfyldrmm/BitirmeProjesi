@@ -1,5 +1,4 @@
 import 'package:qr_attendance_project/export.dart';
-import 'package:qr_attendance_project/screen/teacher/teacher_request/teacher_request_screen.dart';
 
 class TeacherDrawerView extends ChangeNotifier {
   ValueNotifier<List<ScreenHiddenDrawer>> pages = ValueNotifier([]);

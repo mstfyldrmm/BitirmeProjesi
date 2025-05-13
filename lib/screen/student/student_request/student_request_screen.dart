@@ -1,6 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class StudentRequestScreen extends StatefulWidget {
   const StudentRequestScreen({super.key, this.userId});
   final String? userId;
@@ -23,7 +22,6 @@ class _StudentRequestScreenState extends State<StudentRequestScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           navigateToWidget(
@@ -47,6 +45,7 @@ class _StudentRequestScreenState extends State<StudentRequestScreen>
                       ? [
                           Center(
                             child: CustomEmptyDataWidget(
+                              emptySize: 80,
                               title: LocaleKeys
                                   .studentRequest_dontHaveRequest.locale,
                               imagePath: 'assets/icons/sleepp.png',
@@ -57,7 +56,9 @@ class _StudentRequestScreenState extends State<StudentRequestScreen>
                           Expanded(
                             child: ListView.separated(
                               separatorBuilder: (context, index) {
-                                return EmptyWidget();
+                                return EmptyWidget(
+                                  height: 20,
+                                );
                               },
                               itemCount: vm.requestList.value.length,
                               itemBuilder: (context, index) {

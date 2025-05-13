@@ -95,6 +95,7 @@ class StudentService {
           .get();
 
       final studentData = responseStudent.data();
+      _logger.i("Fetch student successfully: $studentId");
       return studentData;
     } catch (e) {
       _logger.e('error: $e');
@@ -135,8 +136,6 @@ class StudentService {
       return false;
     }
   }
-
-  
 
   Future<String?> addRequestFirebase(RequestModel request) async {
     try {

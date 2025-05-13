@@ -19,6 +19,7 @@ class _TeacherAddLessonScreenState extends State<TeacherAddLessonScreen>
     _vm = TeacherAddLessonView();
   }
 
+  final List<String> items = ['1', '2', '3', '4'];
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
@@ -34,12 +35,9 @@ class _TeacherAddLessonScreenState extends State<TeacherAddLessonScreen>
             padding: WidgetSizes.normalPadding.value,
             child: Column(
               children: [
-                SizedBox(
-                  width: 150,
-                  child: iconCreaterColor(
-                    'assets/icons/education.png',
-                    context,
-                  ),
+                CustomIconCreator(
+                  iconPath: 'assets/icons/lesson_register.png',
+                  iconSize: 250,
                 ),
                 EmptyWidget(
                   height: 20,
@@ -84,6 +82,44 @@ class _TeacherAddLessonScreenState extends State<TeacherAddLessonScreen>
                         ),
                       );
                     }),
+                EmptyWidget(),
+                ValueListenableBuilder(
+                    valueListenable: _vm.lessonClass,
+                    builder: (_, __, ___) {
+                      return DropdownButtonFormField2<String>(
+                        value: "1",
+                        decoration: InputDecoration(
+                          labelText: 'Sınıf Seçiniz',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Theme.of(context).hintColor.withValues(
+                                    alpha: 1,
+                                  ),
+                            ),
+                          ),
+                          contentPadding: WidgetSizes.normalPadding.value,
+                        ),
+                        dropdownStyleData: DropdownStyleData(
+                          padding: WidgetSizes.smallPadding.value,
+                          elevation: 10,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        validator: (value) => _vm.validateTextField(value),
+                        items: items.map((String item) {
+                          return DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(item),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          _vm.lessonClass.value = newValue!;
+                        },
+                      );
+                    }),
                 EmptyWidget(
                   height: 15,
                 ),
@@ -102,8 +138,9 @@ class _TeacherAddLessonScreenState extends State<TeacherAddLessonScreen>
                   },
                 ),
                 CustomButton(
-                    title: LocaleKeys.teacherAddLesson_addLessonButton.locale,
-                    onPress: () async {
+                  title: LocaleKeys.teacherAddLesson_addLessonButton.locale,
+                  onPress: () async {
+                    if (formKey.currentState!.validate()) {
                       bool registerState = await _vm
                           .completeLessonRegistration(widget.teacherId);
                       registerState
@@ -115,9 +152,13 @@ class _TeacherAddLessonScreenState extends State<TeacherAddLessonScreen>
                             )
                           : showCustomSnackBar(
                               context,
-                              'Ders kayıt işlemlerinde hata meydana geldi',
+                              LocaleKeys
+                                  .errorCode_teacherAddLesson_addLessonErrorMessage
+                                  .locale,
                               true);
-                    }),
+                    }
+                  },
+                ),
               ],
             ),
           ),

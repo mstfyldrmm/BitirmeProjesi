@@ -1,19 +1,25 @@
 import 'package:qr_attendance_project/export.dart';
+import 'package:qr_attendance_project/screen/qr/qr_scanner/qr_scanner_screen.dart';
 
 class StudentLessonDetailScreen extends StatefulWidget with IconCreater {
-  const StudentLessonDetailScreen({super.key, required this.lessonModel});
   final LessonModel lessonModel;
+  final StudentModel studentModel;
+
+  const StudentLessonDetailScreen({
+    super.key,
+    required this.lessonModel,
+    required this.studentModel,
+  });
 
   @override
   State<StudentLessonDetailScreen> createState() =>
       _StudentLessonDetailScreenState();
 }
 
-class _StudentLessonDetailScreenState extends State<StudentLessonDetailScreen> {
+class _StudentLessonDetailScreenState extends State<StudentLessonDetailScreen>
+    with NavigatorManager {
   @override
   Widget build(BuildContext context) {
-    bool isAttendanceAvailable = false;
-
     return Scaffold(
       appBar: CustomAppBar(context,
           title: LocaleKeys.studentLessonDetail_title.locale),
@@ -31,15 +37,23 @@ class _StudentLessonDetailScreenState extends State<StudentLessonDetailScreen> {
             EmptyWidget(),
             Expanded(
               flex: 2,
-              child: isAttendanceAvailable
-                  ? JoinAttendanceButtonWidget(context)
-                  : PageView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        AttendanceInfoWidget(),
-                        AttendanceHistoryWidget(),
-                      ],
-                    ),
+              child: PageView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  AttendanceInfoWidget(
+                    onTapQrScanner: () {
+                      navigateToNormalWidget(
+                        context,
+                        QrScannerScreen(
+                          lessonModel: widget.lessonModel,
+                          studentModel: widget.studentModel,
+                        ),
+                      );
+                    },
+                  ),
+                  AttendanceHistoryWidget(),
+                ],
+              ),
             ),
           ],
         ),

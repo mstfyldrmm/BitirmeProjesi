@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomCardWidget extends StatelessWidget {
-  const CustomCardWidget(
-      {super.key, required this.paddingValue, required this.childWidget});
+  const CustomCardWidget({
+    super.key,
+    required this.paddingValue,
+    required this.childWidget,
+  });
   final double paddingValue;
   final Widget childWidget;
 

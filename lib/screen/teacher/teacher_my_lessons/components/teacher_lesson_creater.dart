@@ -57,11 +57,11 @@ class TeacherLessonItem extends StatelessWidget
                     toTitleCase(lesson[index]?.section ?? ''),
                   ),
                 ),
-                leading: Text(
+                trailing: Text(
                   "${lesson[index]?.lessonCode}",
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                trailing: iconCreaterColor('assets/icons/teacher.png', context),
+                leading: iconCreaterColor('assets/icons/teacher.png', context),
                 onTap: () {
                   navigateToNormalWidget(
                     context,

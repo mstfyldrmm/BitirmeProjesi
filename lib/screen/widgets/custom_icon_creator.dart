@@ -7,14 +7,17 @@ class CustomIconCreator extends StatelessWidget {
   const CustomIconCreator({
     super.key,
     required this.iconPath,
-    this.iconColor, this.iconSize,
+    this.iconColor,
+    this.iconSize,
   });
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
+      fit: BoxFit.cover,
       iconPath,
       color: iconColor,
+      height: iconSize,
     );
   }
 }

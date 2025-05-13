@@ -1,5 +1,4 @@
 import 'package:qr_attendance_project/export.dart';
-import 'package:qr_attendance_project/screen/widgets/custom_card_widget.dart';
 
 class ExelFile extends StatelessWidget with IconCreater {
   final VoidCallback onPressReadData;
@@ -40,43 +39,49 @@ class ExelFile extends StatelessWidget with IconCreater {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomCardWidget(
-              paddingValue: 20,
-              childWidget: Column(
-                children: [
-                  IconButton(
-                    onPressed: () => onPressReadData.call(),
-                    icon: iconCreaterNoColor(
-                      'assets/icons/server.png',
-                      context,
+            Expanded(
+              child: CustomCardWidget(
+                paddingValue: 20,
+                childWidget: Column(
+                  children: [
+                    IconButton(
+                      onPressed: () => onPressReadData.call(),
+                      icon: iconCreaterNoColor(
+                        'assets/icons/server.png',
+                        context,
+                      ),
                     ),
-                  ),
-                  Text(
-                    LocaleKeys.teacherAddLesson_checkExelFileData.locale,
-                    style: Theme.of(context).textTheme.labelMedium,
-                  )
-                ],
+                    Text(
+                      LocaleKeys.teacherAddLesson_checkExelFileData.locale,
+                      style: Theme.of(context).textTheme.labelMedium,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(
-              width: 20,
+              width: 10,
             ),
-            CustomCardWidget(
-              paddingValue: 20,
-              childWidget: Column(
-                children: [
-                  IconButton(
-                    onPressed: () => onPressDeleteData.call(),
-                    icon: iconCreaterNoColor(
-                      'assets/icons/cancell.png',
-                      context,
+            Expanded(
+              child: CustomCardWidget(
+                paddingValue: 20,
+                childWidget: Column(
+                  children: [
+                    IconButton(
+                      onPressed: () => onPressDeleteData.call(),
+                      icon: iconCreaterNoColor(
+                        'assets/icons/cancell.png',
+                        context,
+                      ),
                     ),
-                  ),
-                  Text(
-                    LocaleKeys.teacherAddLesson_deleteFileData.locale,
-                    style: Theme.of(context).textTheme.labelMedium,
-                  )
-                ],
+                    Text(
+                      LocaleKeys.teacherAddLesson_deleteFileData.locale,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    )
+                  ],
+                ),
               ),
             )
           ],

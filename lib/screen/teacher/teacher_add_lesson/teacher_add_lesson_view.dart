@@ -8,6 +8,7 @@ class TeacherAddLessonView extends ChangeNotifier {
   ValueNotifier<String> lessonName = ValueNotifier('');
   ValueNotifier<String> lessonCode = ValueNotifier('');
   ValueNotifier<String> lessonSection = ValueNotifier('');
+  ValueNotifier<String> lessonClass = ValueNotifier('1');
   ValueNotifier<bool> fileSelected = ValueNotifier(false);
   ValueNotifier<bool> studentsFetch = ValueNotifier(false);
 
@@ -62,6 +63,7 @@ class TeacherAddLessonView extends ChangeNotifier {
     if (studentExelReadState) {
       var idState = await TeacherService().addLessonFirebase(
         LessonModel(
+          classLevel: lessonClass.value,
           lessonCode: lessonCode.value,
           lessonName: lessonName.value,
           section: lessonSection.value,
@@ -204,5 +206,12 @@ class TeacherAddLessonView extends ChangeNotifier {
       }
     }
     return false;
+  }
+
+  String? validateTextField(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.validate_noEmpty.locale;
+    }
+    return null;
   }
 }

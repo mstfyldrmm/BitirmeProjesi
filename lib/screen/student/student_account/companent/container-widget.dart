@@ -1,6 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class ContainerWidget extends StatelessWidget {
   const ContainerWidget({super.key});
 
@@ -9,8 +8,11 @@ class ContainerWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       child: Image.asset(
-        'assets/icons/tutorr.png',
-        alignment: Alignment(0.0, 1.7),
+        'assets/icons/reading.png',
+        color: Theme.of(context).hintColor.withValues(
+              alpha: 1,
+            ),
+        alignment: Alignment(0.0, 1.5),
       ),
       height: size.height / 4,
       width: size.width,
@@ -18,8 +20,8 @@ class ContainerWidget extends StatelessWidget {
         color: Theme.of(context).colorScheme.surfaceContainerHighest,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.elliptical(270, 50),
-            bottomRight: Radius.elliptical(270, 50),
+            bottomLeft: Radius.elliptical(270, 60),
+            bottomRight: Radius.elliptical(270, 60),
           ),
         ),
       ),

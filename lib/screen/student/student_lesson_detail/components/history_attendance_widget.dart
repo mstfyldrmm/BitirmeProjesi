@@ -1,6 +1,5 @@
 import 'package:qr_attendance_project/export.dart';
 
-
 class AttendanceHistoryWidget extends StatelessWidget {
   const AttendanceHistoryWidget({
     super.key,
@@ -29,7 +28,7 @@ class AttendanceHistoryWidget extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: CustomIconCreator(
-                      iconPath: 'assets/icons/approved.png',
+                      iconPath: 'assets/icons/copy-writing.png',
                       iconColor:
                           Theme.of(context).hintColor.withValues(alpha: 1)),
                   title: Text(
