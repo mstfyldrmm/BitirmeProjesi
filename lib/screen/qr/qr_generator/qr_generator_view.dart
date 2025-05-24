@@ -29,7 +29,7 @@ class QrGeneratorView extends ChangeNotifier {
 
   bool isTimerLimitValid(String limitType, int limitValue) {
     return switch (limitType) {
-      'Second' => limitValue >= 30,
+      'Second' => limitValue >= 5,
       'Minute' || 'Hour' => limitValue >= 1,
       _ => false
     };
@@ -65,7 +65,7 @@ class QrGeneratorView extends ChangeNotifier {
         qrAttendanceModel: QrAttendanceModel(
           attendanceLessonId: lessonModel.lessonId,
           createdDate: Timestamp.fromDate(now),
-          qrAttendanceClass: 1,
+          qrAttendanceClass: int.parse(lessonModel.classLevel ?? '1'),
           qrAttendanceId: qrData,
           qrCodeData: qrData,
           qrCodeTimeLimit: timerLimit.value,
@@ -78,11 +78,14 @@ class QrGeneratorView extends ChangeNotifier {
     }
   }
 
-  Future<void> deleteAttendance({required String attendanceId}) async {
+  Future<void> deleteAttendance({
+    required LessonModel lessonModel,
+    required String attendanceId,
+  }) async {
     isCreatedQr.value = false;
     stopTimer();
     await AttendanceService().attendanceFinished(
-      lessonClass: '1',
+      lessonClass: lessonModel.classLevel ?? '1',
       attendanceId: attendanceId,
     );
   }
@@ -125,7 +128,10 @@ class QrGeneratorView extends ChangeNotifier {
         remainingTime.value--;
       } else {
         Future.wait([
-          deleteAttendance(attendanceId: qrData.value),
+          deleteAttendance(
+            lessonModel: lessonModel,
+            attendanceId: qrData.value,
+          ),
           startAttendance(lessonModel: lessonModel),
         ]);
         remainingTime.value = _calculateTotalSeconds();

@@ -23,6 +23,18 @@ class _TeacherRequestScreenState extends State<TeacherRequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: CustomIconCreator(
+          iconPath: 'assets/icons/filter.png',
+          iconSize: 40,
+          iconColor: Theme.of(context).hintColor.withValues(
+                alpha: 1,
+              ),
+        ),
+      ),
       body: Padding(
         padding: WidgetSizes.normalPadding.value,
         child: ValueListenableBuilder(

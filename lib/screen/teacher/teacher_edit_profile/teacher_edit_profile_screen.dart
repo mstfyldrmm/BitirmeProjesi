@@ -27,7 +27,7 @@ class _TeacherEditProfileScreenState extends State<TeacherEditProfileScreen>
 
     return Scaffold(
       appBar:
-          CustomAppBar(context, title: LocaleKeys.account_title.locale),
+          CustomAppBar(context, title: LocaleKeys.account_updateButton.locale),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -39,7 +39,7 @@ class _TeacherEditProfileScreenState extends State<TeacherEditProfileScreen>
                 OmuLogo(),
                 emptyWidget(),
                 Text(
-                  LocaleKeys.register_contents.locale,
+                  LocaleKeys.account_editProfile.locale,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 emptyWidget(),

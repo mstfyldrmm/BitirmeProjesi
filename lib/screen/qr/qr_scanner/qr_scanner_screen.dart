@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'components/qr_scanner_animation_overlay.dart';
 import '../../../export.dart';
 
@@ -59,37 +58,54 @@ class _QrScannerScreenState extends State<QrScannerScreen>
                             final barcode = barcodeCapture.barcodes.first;
                             if (barcode.rawValue != null) {
                               final String code = barcode.rawValue!;
-                              final String? codeContent =
-                                  await _vm.addScannedDataToFireStore(
-                                data: code,
-                                mobileScannerController: _scannerController,
-                              );
-                              final isSuccess = await _vm.takeAttendance(
-                                lessonClass: '1',
-                                attendanceModel: AttendanceModel(
-                                  studentId: widget.studentModel.studentId,
-                                  schoolNumber:
-                                      widget.studentModel.schoolNumber,
-                                  studentName: widget.studentModel.studentName,
-                                  studentSurname:
-                                      widget.studentModel.studentSurname,
-                                  attendanceLessonId:
-                                      widget.lessonModel.lessonId,
-                                  qrAttendanceClass: 1,
-                                  qrAttendanceId: codeContent,
-                                  qrCodeData: codeContent,
-                                  createdDate: Timestamp.fromDate(now),
-                                ),
-                              );
-                              navigateToWidget(
-                                context,
-                                SuccessfulScanScreen(
-                                  qrCodeData: codeContent,
-                                  lessonModel: widget.lessonModel,
-                                  studentModel: widget.studentModel,
-                                  isSuccess: isSuccess,
-                                ),
-                              );
+                              final bool isMatch = _vm.isLessonCodeMatch(
+                                  code.toString(),
+                                  widget.lessonModel.lessonCode!);
+                              if (isMatch) {
+                                final String? codeContent =
+                                    await _vm.addScannedDataToFireStore(
+                                  data: code,
+                                  mobileScannerController: _scannerController,
+                                );
+                                final isSuccess = await _vm.takeAttendance(
+                                  lessonClass: widget.lessonModel.classLevel!,
+                                  attendanceModel: AttendanceModel(
+                                    studentId: widget.studentModel.studentId,
+                                    schoolNumber:
+                                        widget.studentModel.schoolNumber,
+                                    studentName:
+                                        widget.studentModel.studentName,
+                                    studentSurname:
+                                        widget.studentModel.studentSurname,
+                                    attendanceLessonId:
+                                        widget.lessonModel.lessonId,
+                                    qrAttendanceClass: int.parse(
+                                        widget.lessonModel.classLevel!),
+                                    qrAttendanceId: codeContent,
+                                    qrCodeData: codeContent,
+                                    createdDate: Timestamp.fromDate(now),
+                                  ),
+                                );
+                                navigateToWidget(
+                                  context,
+                                  SuccessfulScanScreen(
+                                    qrCodeData: codeContent,
+                                    lessonModel: widget.lessonModel,
+                                    studentModel: widget.studentModel,
+                                    isSuccess: isSuccess,
+                                  ),
+                                );
+                              } else {
+                                navigateToWidget(
+                                  context,
+                                  SuccessfulScanScreen(
+                                    qrCodeData: 'Başarısız',
+                                    lessonModel: widget.lessonModel,
+                                    studentModel: widget.studentModel,
+                                    isSuccess: isMatch,
+                                  ),
+                                );
+                              }
                             }
                           },
                         ),

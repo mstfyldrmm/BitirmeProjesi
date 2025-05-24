@@ -162,7 +162,10 @@ class _QrGeneratorScreenState extends State<QrGeneratorScreen>
           ),
           IconButton(
             onPressed: () {
-              _vm.deleteAttendance(attendanceId: _vm.qrData.value);
+              _vm.deleteAttendance(
+                lessonModel: widget.lessonModel,
+                attendanceId: _vm.qrData.value,
+              );
             },
             icon: Column(
               children: [

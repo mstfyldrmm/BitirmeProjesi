@@ -1,5 +1,4 @@
 import 'package:permission_handler/permission_handler.dart';
-import 'package:qr_attendance_project/services/attendance_service/attendance_service.dart';
 import '../../../export.dart';
 
 class QrScannerView extends ChangeNotifier {
@@ -35,8 +34,13 @@ class QrScannerView extends ChangeNotifier {
     required String lessonClass,
   }) async {
     return await AttendanceService().takeClassAttendance(
-      lessonClass: '1',
+      lessonClass: lessonClass,
       attendanceModel: attendanceModel,
     );
+  }
+
+  bool isLessonCodeMatch(String input, String lessonCode) {
+    final prefix = input.split('-').first;
+    return prefix == lessonCode;
   }
 }

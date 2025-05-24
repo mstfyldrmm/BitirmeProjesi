@@ -12,6 +12,7 @@ class AttendanceService {
   final _fourthGradeReference =
       FirebaseCollections.fourthGradeAttendance.reference;
   final _attendancesReference = FirebaseCollections.attendances.reference;
+  final _studentsReference = FirebaseCollections.students.reference;
 
   final _logger = Logger(printer: PrettyPrinter());
 
@@ -88,6 +89,19 @@ class AttendanceService {
           }, SetOptions(merge: true));
 
           await studentDocRef.set(attendanceModel.toJson());
+
+          final pastDateRef = _studentsReference
+              .doc(studentId)
+              .collection('pastPolls')
+              .doc(dateId);
+
+          await pastDateRef.set({
+            'createdAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+
+          final pastLessonRef = pastDateRef.collection(lessonId).doc(lessonId);
+
+          await pastLessonRef.set(attendanceModel.toJson());
 
           _logger.i(
             'Attendance data added under date $dateId and student $studentId.',

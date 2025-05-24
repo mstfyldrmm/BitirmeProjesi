@@ -54,18 +54,52 @@ class _StudentRequestScreenState extends State<StudentRequestScreen>
                         ]
                       : [
                           Expanded(
-                            child: ListView.separated(
-                              separatorBuilder: (context, index) {
-                                return EmptyWidget(
-                                  height: 20,
-                                );
-                              },
-                              itemCount: vm.requestList.value.length,
-                              itemBuilder: (context, index) {
-                                return RequestCardWidget(
-                                  requestModel: vm.requestList.value[index]!,
-                                );
-                              },
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 50),
+                                      child: Text(
+                                        'Tüm istekler Gösteriliyor',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 80),
+                                      child: CustomIconCreator(
+                                        iconPath: 'assets/icons/filter.png',
+                                        iconSize: 40,
+                                        iconColor: Theme.of(context)
+                                            .hintColor
+                                            .withValues(
+                                              alpha: 1,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                EmptyWidget(),
+                                Expanded(
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return EmptyWidget(
+                                        height: 20,
+                                      );
+                                    },
+                                    itemCount: vm.requestList.value.length,
+                                    itemBuilder: (context, index) {
+                                      return RequestCardWidget(
+                                        requestModel:
+                                            vm.requestList.value[index]!,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           )
                         ],
