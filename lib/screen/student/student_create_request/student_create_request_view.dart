@@ -32,7 +32,10 @@ class StudentCreateRequestView extends ChangeNotifier {
         requestStudentId: studentId,
         requestLesson: requestLesson.value,
         requestState: false,
-        requestType: requestType.value,
+        requestType:
+            requestType.value == LocaleKeys.studentRequest_requestTypeOne.locale
+                ? 1
+                : 2, // 1 for registration, 2 for attendance
       ),
     );
     await StudentService().addRequestsStudent(studentId, requestId.value!);

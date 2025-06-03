@@ -8,6 +8,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
   String? section;
   String? teacherName;
   String? classLevel;
+  int? totalAttendanceCount;
   List<String>? students;
 
   LessonModel({
@@ -17,6 +18,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
     this.section,
     this.classLevel,
     this.teacherName,
+    this.totalAttendanceCount,
     this.students,
   });
 
@@ -28,6 +30,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
         section,
         classLevel,
         teacherName,
+        totalAttendanceCount,
         students
       ];
 
@@ -38,6 +41,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
     String? section,
     String? classLevel,
     String? teacherName,
+    int? totalAttendanceCount,
     List<String>? students,
   }) {
     return LessonModel(
@@ -47,6 +51,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       section: section ?? this.section,
       classLevel: classLevel ?? this.classLevel,
       teacherName: teacherName ?? this.teacherName,
+      totalAttendanceCount: totalAttendanceCount ?? this.totalAttendanceCount,
       students: students ?? this.students,
     );
   }
@@ -59,6 +64,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       'section': section,
       'classLevel': classLevel,
       'teacherName': teacherName,
+      'totalAttendanceCount': totalAttendanceCount,
       'students': students,
     };
   }
@@ -73,6 +79,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       section: json['section'] as String?,
       classLevel: json['classLevel'] as String?,
       teacherName: json['teacherName'] as String?,
+      totalAttendanceCount: json['totalAttendanceCount'] as int?,
       students: (json['students'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),

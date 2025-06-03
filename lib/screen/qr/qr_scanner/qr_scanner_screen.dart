@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:qr_attendance_project/screen/qr/qr_scanner/components/un_successfull_scan_screen.dart';
 import 'components/qr_scanner_animation_overlay.dart';
 import '../../../export.dart';
 
@@ -16,27 +17,45 @@ class QrScannerScreen extends StatefulWidget {
 }
 
 class _QrScannerScreenState extends State<QrScannerScreen>
-    with NavigatorManager {
+    with NavigatorManager, WidgetsBindingObserver {
   late final QrScannerView _vm;
   late final MobileScannerController _scannerController;
   final DateTime now = DateTime.now();
+  StreamSubscription<BarcodeCapture>? _subscription;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!_scannerController.value.isInitialized) return;
+
+    if (state == AppLifecycleState.resumed) {
+      debugPrint("App resumed → trying to start camera");
+      _scannerController.start();
+    } else if (state == AppLifecycleState.paused) {
+      debugPrint("App paused → stopping camera");
+      _scannerController.stop();
+    }
+  }
 
   @override
   void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _vm = QrScannerView();
     _scannerController = MobileScannerController(
       detectionSpeed: DetectionSpeed.normal,
       detectionTimeoutMs: 1500,
     );
-    _vm.checkPermission();
-    _scannerController.start();
-    super.initState();
+    _vm.checkAndStartCamera(_scannerController);
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
+    // Lifecycle observer'ı kaldır
+    WidgetsBinding.instance.removeObserver(this);
+    // Scanner controller'ı senkron biçimde dispose et
+    _scannerController.stop();
+    _scannerController.dispose();
     super.dispose();
-    await _scannerController.dispose();
   }
 
   @override
@@ -98,11 +117,13 @@ class _QrScannerScreenState extends State<QrScannerScreen>
                               } else {
                                 navigateToWidget(
                                   context,
-                                  SuccessfulScanScreen(
-                                    qrCodeData: 'Başarısız',
+                                  UnSuccessfullScanScreen(
+                                    errorMessage: LocaleKeys
+                                        .studentLessonDetail_unsuccessfulAttendance
+                                        .locale,
                                     lessonModel: widget.lessonModel,
                                     studentModel: widget.studentModel,
-                                    isSuccess: isMatch,
+                                    lessonName: widget.lessonModel.lessonName!,
                                   ),
                                 );
                               }

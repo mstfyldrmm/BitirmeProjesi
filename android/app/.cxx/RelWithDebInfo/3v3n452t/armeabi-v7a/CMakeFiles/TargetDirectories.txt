@@ -1,0 +1,2 @@
+C:/Users/darga/OneDrive/Belgeler/development_repo/Proje/android/app/.cxx/RelWithDebInfo/3v3n452t/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/darga/OneDrive/Belgeler/development_repo/Proje/android/app/.cxx/RelWithDebInfo/3v3n452t/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -2,9 +2,13 @@ import 'package:qr_attendance_project/export.dart';
 
 class AttendanceInfoWidget extends StatelessWidget with IconCreater {
   final VoidCallback onTapQrScanner;
+  final double attendancePercentage;
+  final int totalAttendanceCount;
   const AttendanceInfoWidget({
     super.key,
     required this.onTapQrScanner,
+    required this.attendancePercentage,
+    required this.totalAttendanceCount,
   });
 
   @override
@@ -21,19 +25,47 @@ class AttendanceInfoWidget extends StatelessWidget with IconCreater {
       ),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Column(
-        children: [
-          Expanded(
-            child: joinAttendanceButton(context, height),
-          ),
-          Divider(
-            color: Theme.of(context).colorScheme.outline,
-            thickness: 2,
-          ),
-          Expanded(
-            child: attendanceStatus(context),
-          ),
-        ],
-      ),
+          children: totalAttendanceCount > 0
+              ? [
+                  Expanded(
+                    child: joinAttendanceButton(context, height),
+                  ),
+                  Divider(
+                    color: Theme.of(context).colorScheme.outline,
+                    thickness: 2,
+                  ),
+                  Expanded(
+                    child: attendanceStatus(context),
+                  ),
+                ]
+              : [
+                  joinAttendanceButton(context, height),
+                  EmptyWidget(),
+                  Divider(
+                    color: Theme.of(context).colorScheme.outline,
+                    thickness: 2,
+                  ),
+                  EmptyWidget(),
+                  Row(
+                    children: [
+                      CustomIconCreator(
+                        iconPath: 'assets/icons/no_start_attendance.png',
+                        iconSize: height * 0.9,
+                        iconColor: Theme.of(context).hintColor.withValues(
+                              alpha: 1,
+                            ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          LocaleKeys.studentLessonDetail_noAttendanceYet.locale,
+                          style: Theme.of(context).textTheme.titleMedium,
+                          softWrap: true,
+                          maxLines: null,
+                        ),
+                      )
+                    ],
+                  )
+                ]),
     );
   }
 
@@ -47,22 +79,29 @@ class AttendanceInfoWidget extends StatelessWidget with IconCreater {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              LocaleKeys.studentLessonDetail_lessonStateActive.locale,
+              attendancePercentage >= 0.6
+                  ? LocaleKeys.studentLessonDetail_lessonStateActive.locale
+                  : LocaleKeys.studentLessonDetail_lessonStateInActive.locale,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            CustomIconCreator(iconPath: 'assets/icons/accept.png')
+            CustomIconCreator(
+              iconPath: attendancePercentage >= 0.6
+                  ? 'assets/icons/accept.png'
+                  : 'assets/icons/cancel.png',
+            ),
           ],
         ),
         CircularPercentIndicator(
-          radius: 70,
+          radius: 75,
           lineWidth: 8.0,
           animation: true,
           animationDuration: 1000,
-          progressColor: Colors.green,
-          percent: 0.75,
+          progressColor:
+              attendancePercentage >= 0.6 ? Colors.green : Colors.red,
+          percent: attendancePercentage,
           center: Text(
             textAlign: TextAlign.center,
-            "%${(0.75 * 100).toInt()}\nKatılım",
+            "%${(attendancePercentage * 100).toInt()}\n${LocaleKeys.teacherLessonDetail_attendance.locale}",
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
@@ -76,34 +115,45 @@ class AttendanceInfoWidget extends StatelessWidget with IconCreater {
 
   Widget joinAttendanceButton(BuildContext context, double iconSize) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        IconButton(
-          style: ButtonStyle(elevation: WidgetStatePropertyAll(10)),
-          onPressed: () => onTapQrScanner.call(),
-          icon: Shimmer.fromColors(
-            baseColor: Theme.of(context).hintColor.withAlpha(200),
-            highlightColor: Theme.of(context).hintColor.withAlpha(60),
-            child: CustomIconCreator(
-              iconColor: Theme.of(context).hintColor.withAlpha(255),
-              iconPath: 'assets/images/qr-scan-student.png',
-              iconSize: iconSize,
-            ),
-          ),
-        ),
-        Column(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Shimmer.fromColors(
-              baseColor: Theme.of(context).hintColor.withAlpha(200),
-              highlightColor: Theme.of(context).hintColor.withAlpha(60),
-              child: Text(
-                LocaleKeys.studentLessonDetail_joinAttendance.locale,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+            SizedBox(),
+            IconButton(
+              style: ButtonStyle(elevation: WidgetStatePropertyAll(10)),
+              onPressed: () => onTapQrScanner.call(),
+              icon: Shimmer.fromColors(
+                baseColor: Theme.of(context).hintColor.withAlpha(200),
+                highlightColor: Theme.of(context).hintColor.withAlpha(60),
+                child: CustomIconCreator(
+                  iconColor: Theme.of(context).hintColor.withAlpha(255),
+                  iconPath: 'assets/images/qr-scan-student.png',
+                  iconSize: iconSize,
+                ),
               ),
             ),
+            CustomIconCreator(
+              iconPath: 'assets/icons/right-arrow.png',
+              iconSize: 40,
+              iconColor: Theme.of(context).hintColor.withValues(
+                    alpha: 1,
+                  ),
+            ),
           ],
+        ),
+        Shimmer.fromColors(
+          baseColor: Theme.of(context).hintColor.withAlpha(200),
+          highlightColor: Theme.of(context).hintColor.withAlpha(60),
+          child: Text(
+            LocaleKeys.studentLessonDetail_joinAttendance.locale,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
         ),
       ],
     );

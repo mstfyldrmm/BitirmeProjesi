@@ -5,7 +5,7 @@ import 'package:qr_attendance_project/model/base_model.dart';
 class RequestModel extends BaseModel<RequestModel> with EquatableMixin {
   Timestamp? requestDate;
   String? requestDescription;
-  String? requestType;
+  int? requestType;
   String? requestId;
   String? requestStudentId;
   String? requestLesson;
@@ -35,7 +35,7 @@ class RequestModel extends BaseModel<RequestModel> with EquatableMixin {
     Timestamp? requestDate,
     String? requestDescription,
     String? requestId,
-    String? requestType,
+    int? requestType,
     String? requestStudentId,
     String? requestLesson,
     bool? requestState,
@@ -70,7 +70,7 @@ class RequestModel extends BaseModel<RequestModel> with EquatableMixin {
       requestDescription: json['requestDescription'] as String?,
       requestId: json['requestId'] as String?,
       requestStudentId: json['requestStudentId'] as String?,
-      requestType: json['requestType'] as String?,
+      requestType: json['requestType'] as int?,
       requestState: json['requestState'] as bool?,
       requestLesson: json['requestLesson'] as String?,
     );

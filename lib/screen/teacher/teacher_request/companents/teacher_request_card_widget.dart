@@ -1,5 +1,4 @@
 import 'package:qr_attendance_project/export.dart';
-import 'package:qr_attendance_project/screen/widgets/custom_card_widget.dart';
 
 class TeacherRequestCardWidget extends StatelessWidget with IconCreater {
   const TeacherRequestCardWidget({
@@ -25,7 +24,9 @@ class TeacherRequestCardWidget extends StatelessWidget with IconCreater {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  requestModel.requestType ?? '',
+                  requestModel.requestType == 1
+                      ? LocaleKeys.studentRequest_requestTypeOne.locale
+                      : LocaleKeys.studentRequest_requestTypeTwo.locale,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 CustomIconCreator(

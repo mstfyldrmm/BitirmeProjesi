@@ -42,7 +42,9 @@ class _TeacherLessonDetailScreenState extends State<TeacherLessonDetailScreen>
             ),
             EmptyWidget(),
             Expanded(
-              child: katilimDurumu('2025-05-19'),
+              child: katilimDurumu('2025-05-19',
+                  lessonName: widget.lessonModel.lessonName!,
+                  lessonId: widget.lessonModel.lessonId!),
             )
           ],
         ),

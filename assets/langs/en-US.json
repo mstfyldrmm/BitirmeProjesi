@@ -126,7 +126,13 @@
         "scanAgain": "Scan Again",
         "backToLessons": "Back to Lessons",
         "joinAttendanceSuccess": "Attendance Participation Successful!!!",
-        "attendanceDetail": "Details of the Session You Attended"
+        "noHaveAttendance": "You have not participated in any attendance yet!!.",
+        "startDate" : "Start Date",
+        "endDate" : "Attendance Date",
+        "attendanceDetail": "Details of the Session You Attended",
+        "unsuccessfulAttendance": "class attendance failed. You scanned a QR code that does not belong to the valid class!",
+        "unsuccessfulAttendanceTwo" : "Attendance could not be recorded. The scanned QR code corresponds to a previous class session.",
+        "noAttendanceYet" : "The instructor has not created any attendance record for this course yet!!"
     },
     "studentRequest": {
         "stateOne": "Waiting",

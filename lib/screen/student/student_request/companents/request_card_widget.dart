@@ -16,15 +16,17 @@ class RequestCardWidget extends StatelessWidget with IconCreater {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  requestModel.requestType ?? '',
+                  requestModel.requestType == 1
+                      ? LocaleKeys.studentRequest_requestTypeOne.locale
+                      : LocaleKeys.studentRequest_requestTypeTwo.locale,
                   style: Theme.of(context).textTheme.titleMedium,
                   softWrap: true,
                   maxLines: 2,
                 ),
                 CustomIconCreator(
                   iconPath: requestModel.requestState!
-                      ? 'assets/icons/deadline.png'
-                      : 'assets/icons/approved.png',
+                      ? 'assets/icons/approved.png'
+                      : 'assets/icons/deadline.png',
                   iconSize: 50,
                 ),
               ],

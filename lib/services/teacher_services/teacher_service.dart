@@ -232,8 +232,7 @@ class TeacherService {
               : i + chunkSize,
         );
 
-        final requestsQuery = await FirebaseFirestore.instance
-            .collection('requests')
+        final requestsQuery = await _requestsCollection
             .where(FieldPath.documentId, whereIn: chunk)
             .withConverter(
               fromFirestore: (snapshot, _) =>

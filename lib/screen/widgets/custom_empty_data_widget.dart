@@ -5,13 +5,16 @@ class CustomEmptyDataWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.imagePath,
-      this.emptySize});
+      this.emptySize,
+      this.iconSize});
   final String title;
   final String imagePath;
+  final double? iconSize;
   final double? emptySize;
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -21,6 +24,7 @@ class CustomEmptyDataWidget extends StatelessWidget {
           ),
           CustomIconCreator(
             iconPath: imagePath,
+            iconSize: iconSize ?? screenHeight * 0.5,
             iconColor: Theme.of(context).hintColor.withValues(alpha: 1),
           ),
           EmptyWidget(

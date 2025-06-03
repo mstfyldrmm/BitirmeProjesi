@@ -76,7 +76,7 @@ class LessonInfo extends StatelessWidget {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      '2.sınıf',
+                      "${lessonModel.classLevel ?? ''} Sınıf",
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),

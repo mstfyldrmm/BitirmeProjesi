@@ -115,7 +115,13 @@ abstract class  LocaleKeys {
   static const studentLessonDetail_scanAgain = 'studentLessonDetail.scanAgain';
   static const studentLessonDetail_backToLessons = 'studentLessonDetail.backToLessons';
   static const studentLessonDetail_joinAttendanceSuccess = 'studentLessonDetail.joinAttendanceSuccess';
+  static const studentLessonDetail_noHaveAttendance = 'studentLessonDetail.noHaveAttendance';
+  static const studentLessonDetail_startDate = 'studentLessonDetail.startDate';
+  static const studentLessonDetail_endDate = 'studentLessonDetail.endDate';
   static const studentLessonDetail_attendanceDetail = 'studentLessonDetail.attendanceDetail';
+  static const studentLessonDetail_unsuccessfulAttendance = 'studentLessonDetail.unsuccessfulAttendance';
+  static const studentLessonDetail_unsuccessfulAttendanceTwo = 'studentLessonDetail.unsuccessfulAttendanceTwo';
+  static const studentLessonDetail_noAttendanceYet = 'studentLessonDetail.noAttendanceYet';
   static const studentLessonDetail = 'studentLessonDetail';
   static const studentRequest_stateOne = 'studentRequest.stateOne';
   static const studentRequest_stateTwo = 'studentRequest.stateTwo';

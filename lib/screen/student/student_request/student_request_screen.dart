@@ -1,4 +1,6 @@
 import 'package:qr_attendance_project/export.dart';
+import 'package:qr_attendance_project/screen/widgets/filter_bottom_sheet_widget.dart';
+import 'package:qr_attendance_project/screen/widgets/shimmer_request_widget.dart';
 
 class StudentRequestScreen extends StatefulWidget {
   const StudentRequestScreen({super.key, this.userId});
@@ -11,6 +13,7 @@ class StudentRequestScreen extends StatefulWidget {
 class _StudentRequestScreenState extends State<StudentRequestScreen>
     with IconCreater, NavigatorManager {
   late final StudentRequestView vm;
+  TextEditingController searchController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
@@ -21,6 +24,7 @@ class _StudentRequestScreenState extends State<StudentRequestScreen>
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -40,72 +44,108 @@ class _StudentRequestScreenState extends State<StudentRequestScreen>
           onRefresh: () => vm.getRequestList(widget.userId!),
           child: ValueListenableBuilder(
               builder: (context, value, child) {
-                return Column(
-                  children: vm.requestList.value.isEmpty
-                      ? [
-                          Center(
-                            child: CustomEmptyDataWidget(
-                              emptySize: 80,
-                              title: LocaleKeys
-                                  .studentRequest_dontHaveRequest.locale,
-                              imagePath: 'assets/icons/sleepp.png',
-                            ),
-                          )
-                        ]
-                      : [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 50),
-                                      child: Text(
-                                        'Tüm istekler Gösteriliyor',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 80),
-                                      child: CustomIconCreator(
-                                        iconPath: 'assets/icons/filter.png',
-                                        iconSize: 40,
-                                        iconColor: Theme.of(context)
-                                            .hintColor
-                                            .withValues(
-                                              alpha: 1,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                EmptyWidget(),
-                                Expanded(
-                                  child: ListView.separated(
-                                    separatorBuilder: (context, index) {
-                                      return EmptyWidget(
-                                        height: 20,
-                                      );
-                                    },
-                                    itemCount: vm.requestList.value.length,
-                                    itemBuilder: (context, index) {
-                                      return RequestCardWidget(
-                                        requestModel:
-                                            vm.requestList.value[index]!,
-                                      );
-                                    },
+                return vm.requestList.value.isNotEmpty
+                    ? Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: width * 0.75,
+                                child: CustomTextField(
+                                  controller: searchController,
+                                  icon: Icon(
+                                    Icons.search_outlined,
                                   ),
+                                  title: 'Search Request',
+                                  onChanged: (value) {},
                                 ),
-                              ],
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    vm.showModalBottomSheetFunction(
+                                        context,
+                                        ValueListenableBuilder(
+                                            valueListenable: vm.requestState,
+                                            builder: (_, __, ___) {
+                                              return ValueListenableBuilder(
+                                                valueListenable:
+                                                    vm.requestState,
+                                                builder:
+                                                    (_, requestStateValue, __) {
+                                                  return ValueListenableBuilder(
+                                                    valueListenable:
+                                                        vm.requestType,
+                                                    builder: (_,
+                                                        requestTypeValue, __) {
+                                                      return FilterBottomSheetWidget(
+                                                        requestType: requestTypeValue ==
+                                                                0
+                                                            ? ""
+                                                            : requestTypeValue ==
+                                                                    1
+                                                                ? LocaleKeys
+                                                                    .studentRequest_requestTypeOne
+                                                                    .locale
+                                                                : LocaleKeys
+                                                                    .studentRequest_requestTypeTwo
+                                                                    .locale,
+                                                        requestState:
+                                                            requestStateValue
+                                                                ? "true"
+                                                                : "false",
+                                                        stateChange: vm
+                                                            .changeRadioButtonValue,
+                                                        onPressed: () {
+                                                          vm.filterRequest();
+                                                          Navigator.pop(
+                                                              _); // veya context kullanabilirsin
+                                                        },
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              );
+                                            }));
+                                  },
+                                  icon: Icon(Icons.filter_1_outlined))
+                            ],
+                          ),
+                          EmptyWidget(),
+                          Expanded(
+                            child: ListView.separated(
+                              separatorBuilder: (context, index) {
+                                return EmptyWidget(
+                                  height: 20,
+                                );
+                              },
+                              itemCount: vm.requestFilteredList.value.length,
+                              itemBuilder: (context, index) {
+                                return RequestCardWidget(
+                                  requestModel:
+                                      vm.requestFilteredList.value[index]!,
+                                );
+                              },
                             ),
                           )
                         ],
-                );
+                      )
+                    : ValueListenableBuilder(
+                        valueListenable: vm.dataLoading,
+                        builder: (_, __, ___) {
+                          return vm.dataLoading.value
+                              ? const ShimmerRequestWidget()
+                              : Center(
+                                  child: CustomEmptyDataWidget(
+                                    emptySize: 80,
+                                    title: LocaleKeys
+                                        .studentRequest_dontHaveRequest.locale,
+                                    imagePath: 'assets/icons/sleepp.png',
+                                  ),
+                                );
+                        });
               },
-              valueListenable: vm.requestList),
+              valueListenable: vm.requestFilteredList),
         ),
       ),
     );

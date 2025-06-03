@@ -13,7 +13,7 @@ class TeacherAttendanceView extends ChangeNotifier {
   ValueNotifier<File?> pdfFile = ValueNotifier(null);
 
   Future<List<AttendanceModel?>> getRegisteredStudents(String lessonId) async {
-    final data = await AttendanceService().getStudentAttendances(
+    final data = await AttendanceService().getLessonPastAttendances(
       lessonId: lessonId,
       date: selectedDate.value,
     );

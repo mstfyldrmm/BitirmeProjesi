@@ -8,10 +8,26 @@ class QrScannerView extends ChangeNotifier {
 
   final _logger = Logger(printer: PrettyPrinter());
 
-  Future<void> checkPermission() async {
+  Future<bool> checkPermission() async {
     final status = await Permission.camera.request();
     hasPermission.value = status.isGranted;
+    return hasPermission.value;
   }
+
+
+  Future<void> checkAndStartCamera(MobileScannerController controller) async {
+    final status = await Permission.camera.request();
+    hasPermission.value = status.isGranted;
+
+    if (hasPermission.value) {
+      await controller.start();
+      _logger.i("Kamera izni verildi ve baslatildi");
+    } else {
+      debugPrint("Kamera izni verilmedi.");
+      // Gerekirse kullanıcıyı uyar veya ayar sayfasına yönlendir
+    }
+  }
+
 
   Future<String?> addScannedDataToFireStore({
     required String? data,

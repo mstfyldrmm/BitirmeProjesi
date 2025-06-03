@@ -77,7 +77,13 @@
         "scanAgain": "Tekrar Tara",
         "backToLessons": "Derslerime Geri Dön",
         "joinAttendanceSuccess": "Yoklama Katılım Başarılı!!!",
-        "attendanceDetail": "Katıldığınız Yoklama Detayları"
+        "attendanceDetail": "Katıldığınız Yoklama Detayları",
+        "noHaveAttendance": "Katıldığınız Yoklama Bulunmamaktadır!!",
+        "startDate" : "Başlatılma Tarihi",
+        "endDate" : "Katılım Tarihi",
+        "unsuccessfulAttendance": "dersinin yoklamasına katılım başarısız.Geçerli derse ait olmayan bir QR kodu taradınız!!!!",
+        "unsuccessfulAttendanceTwo" : "Yoklamaya katılım başarısız oldu. Geçmiş tarihli derse ait QR kod okutuldu.",
+        "noAttendanceYet" : "Bu ders için dersin öğretmeni tarafından daha önce herhangi bir yoklama oluşturulmamıştır!!."
     },
     "studentRequest": {
         "stateOne": "Beklemede",
