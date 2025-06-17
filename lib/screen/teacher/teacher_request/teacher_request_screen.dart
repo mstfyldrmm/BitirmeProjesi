@@ -57,16 +57,23 @@ class _TeacherRequestScreenState extends State<TeacherRequestScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              width: width * 0.75,
-                              child: CustomTextField(
-                                controller: searchController,
-                                icon: Icon(
-                                  Icons.search_outlined,
-                                ),
-                                title: 'Search Request',
-                                onChanged: (value) {},
-                              ),
+                            ValueListenableBuilder(
+                              valueListenable: vm.requestStateText,
+                              builder: (_, requestStateTextValue, __) {
+                                return SizedBox(
+                                    width: width * 0.75,
+                                    height: width * 0.2,
+                                    child: CustomCardWidget(
+                                        paddingValue: 5,
+                                        childWidget: Center(
+                                          child: Text(
+                                            "${vm.requestStateText.value} ${LocaleKeys.studentRequest_showing.locale}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                          ),
+                                        )));
+                              },
                             ),
                             IconButton(
                                 onPressed: () {
@@ -123,18 +130,21 @@ class _TeacherRequestScreenState extends State<TeacherRequestScreen> {
                         Expanded(
                             child: ListView.separated(
                                 itemBuilder: (BuildContext context, int index) {
-                                  return TeacherRequestCardWidget(
-                                    solveProblemFunction: () {
-                                      vm.solveProblem(
-                                        vm.teacherRequestsNotifierFiltered
-                                            .value[index]!,
-                                      );
-                                    },
-                                    studentInfo: vm.studentsName.value,
-                                    requestModel: vm
-                                        .teacherRequestsNotifierFiltered
-                                        .value[index]!,
-                                  );
+                                  return ValueListenableBuilder(
+                                      valueListenable: vm.studentModel,
+                                      builder: (_, __, ___) {
+                                        return TeacherRequestCardWidget(
+                                          solveProblemFunction: () {
+                                            vm.solveProblem(
+                                              vm.teacherRequestsNotifierFiltered
+                                                  .value[index]!,
+                                            );
+                                          },
+                                          requestModel: vm
+                                              .teacherRequestsNotifierFiltered
+                                              .value[index]!,
+                                        );
+                                      });
                                 },
                                 separatorBuilder:
                                     (BuildContext context, int index) {

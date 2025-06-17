@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_attendance_project/services/attendance_service/attendance_service.dart';
 import '../../../export.dart';
@@ -8,11 +9,30 @@ class QrGeneratorView extends ChangeNotifier {
   ValueNotifier<int> timerLimit = ValueNotifier(0);
   ValueNotifier<bool> isCreatedQr = ValueNotifier(false);
   ValueNotifier<String> qrData = ValueNotifier('');
+  ValueNotifier<String> locationData = ValueNotifier('');
   ValueNotifier<int> remainingTime = ValueNotifier(0);
   ValueNotifier<bool> isSelect = ValueNotifier(false);
 
   void selectText() {
     isSelect.value = !isSelect.value;
+  }
+
+  Future<String> getTeacherLocationData() async {
+    try {
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+          distanceFilter: 0,
+        ),
+      );
+      final editLocation =
+          '${position.latitude.toStringAsFixed(6)}-${position.longitude.toStringAsFixed(6)}';
+      locationData.value = editLocation;
+      return locationData.value;
+    } catch (e) {
+      debugPrint('Konum alınamadı: $e');
+      return locationData.value;
+    }
   }
 
   void selectTabItem(int index) {
@@ -44,6 +64,7 @@ class QrGeneratorView extends ChangeNotifier {
     };
   }
 
+  //
   Future<bool> startAttendance({required LessonModel lessonModel}) async {
     final limitType = timerLimitType();
 
@@ -69,6 +90,7 @@ class QrGeneratorView extends ChangeNotifier {
           qrAttendanceId: qrData,
           qrCodeData: qrData,
           qrCodeTimeLimit: timerLimit.value,
+          qrCodeLocation: locationData.value,
           qrCodeTimeLimitType: timerLimitType(),
         ),
       );
@@ -98,7 +120,8 @@ class QrGeneratorView extends ChangeNotifier {
     final String createdTime = DateFormat('HH:mm:ss').format(createDateTime);
     final String microsecondData =
         createDateTime.microsecondsSinceEpoch.toString();
-    final String data = "$lessonCode-$createdDay-$createdTime-$microsecondData";
+    final String data =
+        "$lessonCode-$createdDay-$createdTime-$microsecondData-${locationData.value}";
     qrData.value = data;
     return data;
   }

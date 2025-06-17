@@ -10,6 +10,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with NavigatorManager, IconCreater {
   late final SplashView _vm;
+
   @override
   void initState() {
     _vm = SplashView();
@@ -46,6 +47,13 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> waitAndNavigate(BuildContext context) async {
+    final hasPermission = await _vm.checkLocationPermissions();
+    if (!hasPermission) {
+      // Konum izni yoksa doğrudan StartScreen'e git
+      navigateToNoBackWidget(context, StartScreen());
+      return;
+    }
+
     await Future.delayed(
       const Duration(seconds: 3),
       () {

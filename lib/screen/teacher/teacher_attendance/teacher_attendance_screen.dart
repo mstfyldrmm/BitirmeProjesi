@@ -1,5 +1,6 @@
 import 'package:qr_attendance_project/export.dart';
 import 'package:qr_attendance_project/screen/teacher/teacher_attendance/companents/attendance_list_view_widget.dart';
+import 'package:qr_attendance_project/screen/teacher/teacher_attendance_analysis/teacher_attendance_analysis_screen.dart';
 
 class TeacherAttendanceScreen extends StatefulWidget {
   TeacherAttendanceScreen({super.key, this.lessonId, required this.lessonName});
@@ -28,10 +29,27 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: CustomAppBar(
-        context,
-        title: LocaleKeys.teacherTitle_attendanceDetail.locale,
-      ),
+      appBar: CustomAppBar(context,
+          title: LocaleKeys.teacherTitle_attendanceDetail.locale,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => TeacherAttendanceAnalysisScreen(
+                      lessonId: widget.lessonId!,
+                      lessonName: widget.lessonName,
+                    ),
+                  ));
+                },
+                icon: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: CustomIconCreator(
+                    iconPath: 'assets/icons/report.png',
+                  ),
+                )),
+          ]),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         backgroundColor: Colors.transparent,

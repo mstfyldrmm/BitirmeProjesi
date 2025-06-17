@@ -12,7 +12,8 @@
         "passwordResetTitle": "Teacher Password Reset",
         "studentRequests": "Students Requests",
         "qrGenerator": "Qr Code Generator Screen",
-        "attendanceDetail": "Attendance Details"
+        "attendanceDetail": "Attendance Details",
+        "reportTitle": "Attendance Reporting Screen"
     },
     "login": {
         "password": "Password",
@@ -72,7 +73,8 @@
         "request": {
             "requestAddFirebaseErrorMessage": "An error occurred while creating the request.",
             "requestAddStudentErrorMessage": "An error occurred while creating the request for the student.",
-            "requestAddTeacherErrorMessage": "The student's request encountered an error while being conveyed to the teacher."
+            "requestAddTeacherErrorMessage": "The student's request encountered an error while being conveyed to the teacher.",
+            "attendanceRequestFailed" : "An error occurred while resolving the attendance request."
         },
         "teacherAddLesson": {
             "readExcel": "An error occurred while reading the Excel file.",
@@ -97,16 +99,22 @@
         "minute": "Minute",
         "hour": "Hour",
         "pastAttendance": "Past Attendances",
+        "bug" : "Exception",
         "createAttendance": "Start QR Code Attendance",
+        "localionWaiting": "Fetching Location Information",
         "attendanceSuccessMessage": "Attendance Started Successfully",
-        "attendanceErrorMessage": "Please enter a minimum of 30 seconds, and a minimum value of 1 for both minutes and hours.",
+        "attendanceErrorMessage": "Please enter a minimum of 5 seconds, and a minimum value of 1 for both minutes and hours.",
         "schoolNumber": "Number",
         "studentName": "Name",
         "studentSurname": "Surname",
         "studentState": "Attendance Status",
         "noAttendance": "no past attendance was found for the specified date.",
         "searchStudent": "Search Student",
-        "selectDate": "Select Attendance Date"
+        "selectDate": "Select Attendance Date",
+        "exportAllAttendances" : "Export All Attendances",
+        "createAttendanceReport" : "Create Attendance Report",
+        "exportAllAttendancesLoading" : "Exporting All Attendances",
+        "createAttendanceReportLoading" : "Creating Attendance Report"
     },
     "studentMain": {
         "lessonsSearch": "Search My Lessons",
@@ -127,12 +135,12 @@
         "backToLessons": "Back to Lessons",
         "joinAttendanceSuccess": "Attendance Participation Successful!!!",
         "noHaveAttendance": "You have not participated in any attendance yet!!.",
-        "startDate" : "Start Date",
-        "endDate" : "Attendance Date",
+        "startDate": "Start Date",
+        "endDate": "Attendance Date",
         "attendanceDetail": "Details of the Session You Attended",
-        "unsuccessfulAttendance": "class attendance failed. You scanned a QR code that does not belong to the valid class!",
-        "unsuccessfulAttendanceTwo" : "Attendance could not be recorded. The scanned QR code corresponds to a previous class session.",
-        "noAttendanceYet" : "The instructor has not created any attendance record for this course yet!!"
+        "unsuccessfulAttendance": "Invalid QR code and/or location! Please make sure you are in the correct classroom and have scanned a valid QR code.",
+        "unsuccessfulAttendanceTwo": "Attendance failed. This QR code may belong to a past session or attendance for this class may have already been recorded. Please make sure you are scanning the current QR code for the correct class.",
+        "noAttendanceYet": "The instructor has not created any attendance record for this course yet!!"
     },
     "studentRequest": {
         "stateOne": "Waiting",
@@ -149,7 +157,14 @@
         "requestTypeTwo": "Attendance Request",
         "selectRequestType": "Select Request Type",
         "requestDescription": "Request Description",
-        "createRequest": "Create Request"
+        "createRequest": "Create Request",
+        "showing": "Showing",
+        "allRequests": "All Requests",
+        "lessonRegisterSolved" : "The student's course registration request has been successfully created.",
+        "attendanceSolved" : "The student's attendance request has been successfully created.",
+        "requestyType" : "Request Type",
+        "requestState" : "Request State",
+        "requestFilter" : "Filter Requests"
     },
     "account": {
         "title": "My Account",
@@ -175,6 +190,8 @@
         "deleteFileData": "Delete lesson data",
         "uploadExcelFile": "Upload Excel File for Lesson",
         "addLessonButton": "Complete Lesson Registration",
+        "selectClassLevel" : "Select Lesson Level",
+        "lessonAttendancePercent" : "Enter Course Attendance Percentage",
         "successMessage": {
             "addLessonFirebaseMessage": "Lesson Creation Process Successful",
             "addLessonTeacher": "Lesson registration successfully created.",

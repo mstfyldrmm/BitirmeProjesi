@@ -32,111 +32,131 @@ class _SuccessfulScanScreenState extends State<SuccessfulScanScreen>
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
           padding: WidgetSizes.normalPadding.value,
           child: widget.isSuccess
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CustomIconCreator(
-                      iconPath: 'assets/gifs/successAttendancee.gif',
-                      iconSize: 300,
-                      iconColor: Theme.of(context).hintColor.withValues(
-                            alpha: 1,
-                          ),
-                    ),
-                    EmptyWidget(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomIconCreator(
-                          iconSize: 40,
-                          iconPath: 'assets/icons/accept.png',
-                        ),
-                        Text(
-                            LocaleKeys.studentLessonDetail_joinAttendanceSuccess
-                                .locale,
-                            style: Theme.of(context).textTheme.titleLarge),
-                      ],
-                    ),
-                    EmptyWidget(),
-                    CustomCardWidget(
-                      paddingValue: 20,
-                      childWidget: Column(
+              ? PopScope(
+                  canPop: false,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CustomIconCreator(
+                        iconPath: 'assets/gifs/successAttendancee.gif',
+                        iconSize: height * 0.4,
+                        iconColor: Theme.of(context).hintColor.withValues(
+                              alpha: 1,
+                            ),
+                      ),
+                      EmptyWidget(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            LocaleKeys
-                                .studentLessonDetail_attendanceDetail.locale,
-                            style: Theme.of(context).textTheme.titleLarge,
-                            textAlign: TextAlign.center,
+                          CustomIconCreator(
+                            iconSize: width * 0.1,
+                            iconPath: 'assets/icons/accept.png',
                           ),
-                          EmptyWidget(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                          Text(
+                              LocaleKeys
+                                  .studentLessonDetail_joinAttendanceSuccess
+                                  .locale,
+                              style: Theme.of(context).textTheme.titleLarge),
+                        ],
+                      ),
+                      EmptyWidget(),
+                      SizedBox(
+                        width:  width,
+                        child: CustomCardWidget(
+                          paddingValue: 20,
+                          childWidget: Column(
                             children: [
-                              CustomIconCreator(
-                                iconPath: 'assets/icons/qr-code-new.png',
-                                iconColor:
-                                    Theme.of(context).hintColor.withValues(
-                                          alpha: 1,
-                                        ),
+                              Text(
+                                LocaleKeys
+                                    .studentLessonDetail_attendanceDetail.locale,
+                                style: Theme.of(context).textTheme.titleLarge,
+                                textAlign: TextAlign.center,
                               ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              EmptyWidget(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    '${widget.qrCodeData?.substring(0, 23)}',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
+                                  CustomIconCreator(
+                                    iconSize: width * 0.15,
+                                    iconPath: 'assets/icons/qr-code-new.png',
+                                    iconColor:
+                                        Theme.of(context).hintColor.withValues(
+                                              alpha: 1,
+                                            ),
                                   ),
-                                  Text(
-                                    widget.lessonModel.lessonName ?? ' ',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
+                                  SizedBox(
+                                    width: 20,
                                   ),
-                                  Text(
-                                    "${widget.studentModel.studentName ?? ' '} ${widget.studentModel.studentSurname ?? ' '}",
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  ),
+                                  SizedBox(
+                                    width: width * 0.5,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            '${widget.qrCodeData?.substring(0, 23)}',
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium),
+                                        Text(
+                                          widget.lessonModel.lessonName ?? ' ',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                        Text(
+                                          "${widget.studentModel.studentName ?? ' '} ${widget.studentModel.studentSurname ?? ' '}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               )
                             ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () => {
+                              navigateToNormalWidget(
+                                  context,
+                                  StudentDrawerContent(
+                                    userId: widget.studentModel.studentId,
+                                  ))
+                            },
+                            icon: CustomIconCreator(
+                              iconSize: width * 0.2,
+                              iconPath: 'assets/icons/arrow-left-two.png',
+                              iconColor: Theme.of(context)
+                                  .hintColor
+                                  .withValues(alpha: 1),
+                            ),
+                          ),
+                          Text(
+                            LocaleKeys.studentLessonDetail_backToLessons.locale,
+                            style: Theme.of(context).textTheme.titleMedium,
                           )
                         ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => {
-                            Navigator.of(context).pop(),
-                            Navigator.of(context).pop(),
-                          },
-                          icon: CustomIconCreator(
-                            iconSize: 100,
-                            iconPath: 'assets/icons/arrow-left-two.png',
-                            iconColor: Theme.of(context)
-                                .hintColor
-                                .withValues(alpha: 1),
-                          ),
-                        ),
-                        Text(
-                          LocaleKeys.studentLessonDetail_backToLessons.locale,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        )
-                      ],
-                    ),
-                  ],
-                )
+                    ],
+                  ))
               : UnSuccessfullScanScreen(
                   errorMessage: LocaleKeys
                       .studentLessonDetail_unsuccessfulAttendanceTwo.locale,

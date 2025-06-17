@@ -1,0 +1,2 @@
+C:/Users/Mstfy/Qr-Project/qr_attendance_project/android/app/.cxx/Debug/443l3263/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Mstfy/Qr-Project/qr_attendance_project/android/app/.cxx/Debug/443l3263/x86_64/CMakeFiles/rebuild_cache.dir

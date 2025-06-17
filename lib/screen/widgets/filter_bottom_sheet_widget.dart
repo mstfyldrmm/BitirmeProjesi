@@ -30,7 +30,7 @@ class FilterBottomSheetWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Talep Tipi',
+                LocaleKeys.studentRequest_requestyType.locale,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               RadioMenuButton(
@@ -40,7 +40,7 @@ class FilterBottomSheetWidget extends StatelessWidget {
                     stateChange?.call(value.toString());
                   },
                   child: Text(
-                    'Ders Kayıt Talepleri',
+                    LocaleKeys.studentRequest_requestTypeOne.locale,
                     style: Theme.of(context).textTheme.titleSmall,
                   )),
               RadioMenuButton(
@@ -50,11 +50,11 @@ class FilterBottomSheetWidget extends StatelessWidget {
                     stateChange?.call(value ?? "");
                   },
                   child: Text(
-                    'Yoklama Talepleri',
+                    LocaleKeys.studentRequest_requestTypeTwo.locale,
                     style: Theme.of(context).textTheme.titleSmall,
                   )),
               Text(
-                'Talep Durumu',
+                LocaleKeys.studentRequest_requestState.locale,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               RadioMenuButton(
@@ -64,7 +64,7 @@ class FilterBottomSheetWidget extends StatelessWidget {
                     stateChange?.call(value.toString());
                   },
                   child: Text(
-                    'Bekliyor',
+                    LocaleKeys.studentRequest_stateOne.locale,
                     style: Theme.of(context).textTheme.titleSmall,
                   )),
               RadioMenuButton(
@@ -74,7 +74,7 @@ class FilterBottomSheetWidget extends StatelessWidget {
                     stateChange?.call(value.toString());
                   },
                   child: Text(
-                    'Tamamlandı',
+                    LocaleKeys.studentRequest_stateTwo.locale,
                     style: Theme.of(context).textTheme.titleSmall,
                   )),
               IconButton(
@@ -92,7 +92,7 @@ class FilterBottomSheetWidget extends StatelessWidget {
                               )),
                       SizedBox(width: 10),
                       Text(
-                        'Filtrele',
+                        LocaleKeys.studentRequest_requestFilter.locale,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],

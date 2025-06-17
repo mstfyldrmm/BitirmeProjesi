@@ -11,7 +11,7 @@ class AttendanceHistoryWidget extends StatelessWidget {
   final String Function(String) convertDate;
   final String Function(String) convertDateTwo;
 
-  //Veriler elle olusturuldu. Daha sonra page view builder ile düzeltilecek ve components eklenecek.
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;

@@ -6,6 +6,8 @@ class StudentRequestView extends ChangeNotifier {
   ValueNotifier<bool> requestState = ValueNotifier(false);
   ValueNotifier<int> requestType = ValueNotifier(0);
   ValueNotifier<bool> dataLoading = ValueNotifier(true);
+  ValueNotifier<String> requestStateText =
+      ValueNotifier(LocaleKeys.studentRequest_allRequests.locale);
 
   Future<List<RequestModel?>> getRequestList(String userId) async {
     final data = await StudentService().fetchStudentRequests(userId);
@@ -13,6 +15,20 @@ class StudentRequestView extends ChangeNotifier {
     requestFilteredList.value = requestList.value;
     dataLoading.value = false;
     return requestList.value;
+  }
+
+  String createShowingFilterText() {
+    String typeOne = LocaleKeys.studentRequest_requestTypeOne.locale;
+    String typeTwo = LocaleKeys.studentRequest_requestTypeTwo.locale;
+    requestType.value == 0
+        ? requestStateText.value = LocaleKeys.studentRequest_allRequests.locale
+        : requestType.value == 1
+            ? requestStateText.value = typeOne
+            : requestStateText.value = typeTwo;
+    requestState.value
+        ? "${requestStateText.value} - ${LocaleKeys.studentRequest_stateOne.locale}"
+        : "${requestStateText.value} - ${LocaleKeys.studentRequest_stateTwo.locale}";
+    return requestStateText.value;
   }
 
   void changeRadioButtonValue(String value) {

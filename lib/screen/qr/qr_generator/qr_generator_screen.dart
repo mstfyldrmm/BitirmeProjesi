@@ -14,12 +14,14 @@ class _QrGeneratorScreenState extends State<QrGeneratorScreen>
   final TextEditingController dateLimitController = TextEditingController();
   final CountDownController _controller = CountDownController();
   late final TabController _tabController;
+  late Future<String> _locationFuture;
 
   @override
   void initState() {
     _vm = QrGeneratorView();
     _tabController = TabController(length: 3, vsync: this);
     super.initState();
+    _locationFuture = _vm.getTeacherLocationData();
   }
 
   @override
@@ -38,97 +40,133 @@ class _QrGeneratorScreenState extends State<QrGeneratorScreen>
         context,
         title: LocaleKeys.teacherTitle_qrGenerator.locale,
       ),
-      body: SafeArea(
+      body: PopScope(
+        onPopInvoked: (didPop) => _vm.deleteAttendance(
+          lessonModel: widget.lessonModel,
+          attendanceId: _vm.qrData.value,
+        ),
         child: SingleChildScrollView(
-          child: Padding(
-            padding: WidgetSizes.normalPadding.value,
-            child: Column(
-              children: [
-                ValueListenableBuilder(
-                  valueListenable: _vm.timerLimit,
-                  builder: (_, __, ___) {
-                    return Column(
-                      children: [
-                        ValueListenableBuilder(
-                          valueListenable: _vm.isCreatedQr,
-                          builder: (_, __, ___) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Column(
-                                children: _vm.isCreatedQr.value
-                                    ? [
-                                        /// Dynamic Qr Image
-                                        ValueListenableBuilder(
-                                          valueListenable: _vm.qrData,
-                                          builder: (_, __, ___) {
-                                            return _dynamicQrImage(
-                                              screenHeight / 3,
-                                            );
-                                          },
-                                        ),
-                                      ]
-                                    : [
-                                        noAttendanceIcon(
-                                          screenHeight / 3,
-                                        ),
-                                        ValueListenableBuilder(
-                                          valueListenable: _vm.tabCurrentIndex,
-                                          builder: (_, __, ___) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: 5,
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  /// Tab Bar: Time Type Select
-                                                  _tabBar(),
-                                                  EmptyWidget(
-                                                    height: 20,
-                                                  ),
-
-                                                  /// Text Field: Time Type Select
-                                                  CustomTextField(
-                                                    controller:
-                                                        dateLimitController,
-                                                    title:
-                                                        ' ${_vm.timerLimitType()}',
-                                                    icon: Icon(Icons.timer),
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    textInputFormatter: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly,
-                                                    ],
-                                                    onChanged: (String value) {
-                                                      final intValue =
-                                                          int.tryParse(value) ??
-                                                              0;
-                                                      _vm.timerLimit.value =
-                                                          intValue;
+            child: FutureBuilder<String>(
+                future: _locationFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return SizedBox(
+                      height:
+                          screenHeight, // Burada screenHeight senin mevcut yüksekliğin
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            LocaleKeys
+                                .teacherLessonDetail_localionWaiting.locale,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          EmptyWidget(),
+                          Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Padding(
+                      padding: WidgetSizes.normalPadding.value,
+                      child: Column(
+                        children: [
+                          ValueListenableBuilder(
+                            valueListenable: _vm.timerLimit,
+                            builder: (_, __, ___) {
+                              return Column(
+                                children: [
+                                  ValueListenableBuilder(
+                                    valueListenable: _vm.isCreatedQr,
+                                    builder: (_, __, ___) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        child: Column(
+                                          children: _vm.isCreatedQr.value
+                                              ? [
+                                                  /// Dynamic Qr Image
+                                                  ValueListenableBuilder(
+                                                    valueListenable: _vm.qrData,
+                                                    builder: (_, __, ___) {
+                                                      return _dynamicQrImage(
+                                                        screenHeight / 3,
+                                                      );
                                                     },
                                                   ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                                ]
+                                              : [
+                                                  noAttendanceIcon(
+                                                    screenHeight / 3,
+                                                  ),
+                                                  ValueListenableBuilder(
+                                                    valueListenable:
+                                                        _vm.tabCurrentIndex,
+                                                    builder: (_, __, ___) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                          vertical: 5,
+                                                        ),
+                                                        child: Column(
+                                                          children: [
+                                                            /// Tab Bar: Time Type Select
+                                                            _tabBar(),
+                                                            EmptyWidget(
+                                                              height: 20,
+                                                            ),
 
-                                        /// Create Attendance QR
-                                        startQrGeneratorButton(),
-                                      ],
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                                                            /// Text Field: Time Type Select
+                                                            CustomTextField(
+                                                              controller:
+                                                                  dateLimitController,
+                                                              title:
+                                                                  ' ${_vm.timerLimitType()}',
+                                                              icon: Icon(
+                                                                  Icons.timer),
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .number,
+                                                              textInputFormatter: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly,
+                                                              ],
+                                                              onChanged: (String
+                                                                  value) {
+                                                                final intValue =
+                                                                    int.tryParse(
+                                                                            value) ??
+                                                                        0;
+                                                                _vm.timerLimit
+                                                                        .value =
+                                                                    intValue;
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+
+                                                  /// Create Attendance QR
+                                                  startQrGeneratorButton(),
+                                                ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+                  }
+                })),
       ),
     );
   }
@@ -151,8 +189,14 @@ class _QrGeneratorScreenState extends State<QrGeneratorScreen>
             valueListenable: _vm.remainingTime,
             builder: (_, time, __) {
               return CircularTimerWidget(
-                height: size / 1.5,
+                key: ValueKey('timer_${_vm.qrData.value}'),
+                onCompleted: () => {
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    _controller.restart(duration: time);
+                  })
+                },
                 controller: _controller,
+                height: size / 1.5,
                 totalTime: _vm.remainingTime.value,
               );
             },

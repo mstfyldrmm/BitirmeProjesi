@@ -1,32 +1,32 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:qr_attendance_project/export.dart';
 
 class StudentsLessonDetailView extends ChangeNotifier {
   ValueNotifier<List<AttendanceModel?>> studentsAttendanceList =
       ValueNotifier([]);
-  ValueNotifier<double?> studentsAttendanceCount = ValueNotifier(0.0);
-  ValueNotifier<double?> lessonTotalAttendancesCount = ValueNotifier(0.0);
+  ValueNotifier<Position?> currentLocation = ValueNotifier(null);
+
   ValueNotifier<double?> studentAttendancePercent = ValueNotifier(0.0);
 
   Future<List<AttendanceModel?>> fetchStudentsAttendanceList(
       {required String lessonId, required String studentId}) async {
     final data = await AttendanceService()
         .getStudentPastAttendances(lessonId: lessonId, studentId: studentId);
+
     studentsAttendanceList.value = data;
     return studentsAttendanceList.value;
   }
 
   Future<double> fetchStudentsAttendanceState(
       {required String lessonId, required String studentId}) async {
-    final count = await AttendanceService().getStudentPastAttendancesCount(
+    final count = await AttendanceService().getStudentLessonAttendanceValue(
         lessonId: lessonId, studentId: studentId);
-    studentsAttendanceCount.value = count;
-
-    final lessonModel = await TeacherService().fetchLessonInfo(lessonId);
-    lessonTotalAttendancesCount.value =
-        lessonModel?.totalAttendanceCount!.toDouble();
-    studentAttendancePercent.value = (studentsAttendanceCount.value ?? 0.0) /
-        (lessonTotalAttendancesCount.value ?? 1.0);
-    return studentAttendancePercent.value ?? 0.0;
+    if (count != null && count > 1) {
+      studentAttendancePercent.value = 1;
+      return studentAttendancePercent.value ?? 0;
+    }
+    studentAttendancePercent.value = count;
+    return studentAttendancePercent.value ?? 0;
   }
 
   String extractTimestamp(String data) {
@@ -37,6 +37,22 @@ class StudentsLessonDetailView extends ChangeNotifier {
     }
 
     return '';
+  }
+
+  Future<Position?> getCurrentPosition() async {
+    try {
+      Position? position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+          distanceFilter: 0,
+        ),
+      );
+      currentLocation.value = position;
+      return currentLocation.value;
+    } catch (e) {
+      debugPrint('Konum alınamadı: $e');
+      return null;
+    }
   }
 
   String convertTime(String data) {

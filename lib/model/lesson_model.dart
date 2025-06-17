@@ -8,6 +8,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
   String? section;
   String? teacherName;
   String? classLevel;
+  int? lessonAttendancePercent;
   int? totalAttendanceCount;
   List<String>? students;
 
@@ -17,6 +18,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
     this.lessonCode,
     this.section,
     this.classLevel,
+    this.lessonAttendancePercent,
     this.teacherName,
     this.totalAttendanceCount,
     this.students,
@@ -29,6 +31,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
         lessonCode,
         section,
         classLevel,
+        lessonAttendancePercent,
         teacherName,
         totalAttendanceCount,
         students
@@ -50,6 +53,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       lessonCode: lessonCode ?? this.lessonCode,
       section: section ?? this.section,
       classLevel: classLevel ?? this.classLevel,
+      lessonAttendancePercent:  lessonAttendancePercent ?? this.lessonAttendancePercent,
       teacherName: teacherName ?? this.teacherName,
       totalAttendanceCount: totalAttendanceCount ?? this.totalAttendanceCount,
       students: students ?? this.students,
@@ -63,6 +67,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       'lessonCode': lessonCode,
       'section': section,
       'classLevel': classLevel,
+      'lessonAttendancePercent' : lessonAttendancePercent,
       'teacherName': teacherName,
       'totalAttendanceCount': totalAttendanceCount,
       'students': students,
@@ -78,6 +83,7 @@ class LessonModel extends BaseModel<LessonModel> with EquatableMixin {
       lessonCode: json['lessonCode'] as String?,
       section: json['section'] as String?,
       classLevel: json['classLevel'] as String?,
+      lessonAttendancePercent: json['lessonAttendancePercent'] as int?,
       teacherName: json['teacherName'] as String?,
       totalAttendanceCount: json['totalAttendanceCount'] as int?,
       students: (json['students'] as List<dynamic>?)

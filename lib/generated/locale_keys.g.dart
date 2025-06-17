@@ -15,6 +15,7 @@ abstract class  LocaleKeys {
   static const teacherTitle_studentRequests = 'teacherTitle.studentRequests';
   static const teacherTitle_qrGenerator = 'teacherTitle.qrGenerator';
   static const teacherTitle_attendanceDetail = 'teacherTitle.attendanceDetail';
+  static const teacherTitle_reportTitle = 'teacherTitle.reportTitle';
   static const teacherTitle = 'teacherTitle';
   static const login_password = 'login.password';
   static const login_login = 'login.login';
@@ -67,6 +68,7 @@ abstract class  LocaleKeys {
   static const errorCode_request_requestAddFirebaseErrorMessage = 'errorCode.request.requestAddFirebaseErrorMessage';
   static const errorCode_request_requestAddStudentErrorMessage = 'errorCode.request.requestAddStudentErrorMessage';
   static const errorCode_request_requestAddTeacherErrorMessage = 'errorCode.request.requestAddTeacherErrorMessage';
+  static const errorCode_request_attendanceRequestFailed = 'errorCode.request.attendanceRequestFailed';
   static const errorCode_request = 'errorCode.request';
   static const errorCode_teacherAddLesson_readExcel = 'errorCode.teacherAddLesson.readExcel';
   static const errorCode_teacherAddLesson_addLessonErrorMessage = 'errorCode.teacherAddLesson.addLessonErrorMessage';
@@ -88,7 +90,9 @@ abstract class  LocaleKeys {
   static const teacherLessonDetail_minute = 'teacherLessonDetail.minute';
   static const teacherLessonDetail_hour = 'teacherLessonDetail.hour';
   static const teacherLessonDetail_pastAttendance = 'teacherLessonDetail.pastAttendance';
+  static const teacherLessonDetail_bug = 'teacherLessonDetail.bug';
   static const teacherLessonDetail_createAttendance = 'teacherLessonDetail.createAttendance';
+  static const teacherLessonDetail_localionWaiting = 'teacherLessonDetail.localionWaiting';
   static const teacherLessonDetail_attendanceSuccessMessage = 'teacherLessonDetail.attendanceSuccessMessage';
   static const teacherLessonDetail_attendanceErrorMessage = 'teacherLessonDetail.attendanceErrorMessage';
   static const teacherLessonDetail_schoolNumber = 'teacherLessonDetail.schoolNumber';
@@ -98,6 +102,10 @@ abstract class  LocaleKeys {
   static const teacherLessonDetail_noAttendance = 'teacherLessonDetail.noAttendance';
   static const teacherLessonDetail_searchStudent = 'teacherLessonDetail.searchStudent';
   static const teacherLessonDetail_selectDate = 'teacherLessonDetail.selectDate';
+  static const teacherLessonDetail_exportAllAttendances = 'teacherLessonDetail.exportAllAttendances';
+  static const teacherLessonDetail_createAttendanceReport = 'teacherLessonDetail.createAttendanceReport';
+  static const teacherLessonDetail_exportAllAttendancesLoading = 'teacherLessonDetail.exportAllAttendancesLoading';
+  static const teacherLessonDetail_createAttendanceReportLoading = 'teacherLessonDetail.createAttendanceReportLoading';
   static const teacherLessonDetail = 'teacherLessonDetail';
   static const studentMain_lessonsSearch = 'studentMain.lessonsSearch';
   static const studentMain_title = 'studentMain.title';
@@ -138,6 +146,13 @@ abstract class  LocaleKeys {
   static const studentRequest_selectRequestType = 'studentRequest.selectRequestType';
   static const studentRequest_requestDescription = 'studentRequest.requestDescription';
   static const studentRequest_createRequest = 'studentRequest.createRequest';
+  static const studentRequest_showing = 'studentRequest.showing';
+  static const studentRequest_allRequests = 'studentRequest.allRequests';
+  static const studentRequest_lessonRegisterSolved = 'studentRequest.lessonRegisterSolved';
+  static const studentRequest_attendanceSolved = 'studentRequest.attendanceSolved';
+  static const studentRequest_requestyType = 'studentRequest.requestyType';
+  static const studentRequest_requestState = 'studentRequest.requestState';
+  static const studentRequest_requestFilter = 'studentRequest.requestFilter';
   static const studentRequest = 'studentRequest';
   static const account_title = 'account.title';
   static const account_changeTheme = 'account.changeTheme';
@@ -161,6 +176,8 @@ abstract class  LocaleKeys {
   static const teacherAddLesson_deleteFileData = 'teacherAddLesson.deleteFileData';
   static const teacherAddLesson_uploadExcelFile = 'teacherAddLesson.uploadExcelFile';
   static const teacherAddLesson_addLessonButton = 'teacherAddLesson.addLessonButton';
+  static const teacherAddLesson_selectClassLevel = 'teacherAddLesson.selectClassLevel';
+  static const teacherAddLesson_lessonAttendancePercent = 'teacherAddLesson.lessonAttendancePercent';
   static const teacherAddLesson_successMessage_addLessonFirebaseMessage = 'teacherAddLesson.successMessage.addLessonFirebaseMessage';
   static const teacherAddLesson_successMessage_addLessonTeacher = 'teacherAddLesson.successMessage.addLessonTeacher';
   static const teacherAddLesson_successMessage_lessonDelete = 'teacherAddLesson.successMessage.lessonDelete';

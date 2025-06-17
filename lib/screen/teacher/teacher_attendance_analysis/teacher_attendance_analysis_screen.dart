@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_attendance_project/custom/app_bar.dart';
 import 'package:qr_attendance_project/custom/widget_sizes.dart';
+import 'package:qr_attendance_project/export.dart';
+import 'package:qr_attendance_project/screen/teacher/teacher_attendance_analysis/companents/show_dialog_widget.dart';
 import 'package:qr_attendance_project/screen/teacher/teacher_attendance_analysis/teacher_attendance_analysis_view.dart';
 import 'package:qr_attendance_project/screen/widgets/custom_card_widget.dart';
 import 'package:qr_attendance_project/screen/widgets/custom_icon_creator.dart';
@@ -23,8 +25,6 @@ class _TeacherAttendanceAnalysisScreenState
     // TODO: implement initState
     super.initState();
     _view = TeacherAttendanceAnalysisView();
-    _view.createPdfFile(widget.lessonName);
-    _view.fetchLessonAllAttendances(lessonId: widget.lessonId);
   }
 
   @override
@@ -34,7 +34,7 @@ class _TeacherAttendanceAnalysisScreenState
     return Scaffold(
         appBar: CustomAppBar(
           context,
-          title: 'Yoklama Raporu',
+          title: LocaleKeys.teacherTitle_reportTitle.locale,
         ),
         body: Padding(
           padding: WidgetSizes.normalPadding.value,
@@ -50,53 +50,87 @@ class _TeacherAttendanceAnalysisScreenState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: width * 0.44,
+                    width: width * 0.43,
                     child: CustomCardWidget(
                         paddingValue: 10,
                         childWidget: Column(
                           children: [
                             ValueListenableBuilder(
-                                valueListenable: _view.attendanceList,
-                                builder: (_, __, ___) {
-                                  return IconButton(
-                                    onPressed: () async {
-                                      final createdPdf = await _view
-                                          .createPdfFile(widget.lessonName);
-                                      await _view.sharePDF(
-                                          widget.lessonName, createdPdf);
-                                    },
-                                    icon: CustomIconCreator(
-                                      iconPath: 'assets/icons/share.png',
-                                      iconColor:
-                                          Theme.of(context).primaryColorLight,
-                                    ),
-                                  );
-                                }),
+                              valueListenable: _view.attendanceList,
+                              builder: (_, __, ___) {
+                                return IconButton(
+                                  onPressed: () async {
+                                    CustomLoadingDialog.show(context,
+                                        message: LocaleKeys
+                                            .teacherLessonDetail_exportAllAttendancesLoading
+                                            .locale);
+                                    await _view.fetchLessonAllAttendances(
+                                      lessonId: widget.lessonId,
+                                    );
+
+                                    final createdPdf =
+                                        await _view.createPdfFile(
+                                      widget.lessonName,
+                                    );
+                                    await _view.sharePDF(
+                                      widget.lessonName,
+                                      createdPdf,
+                                    );
+                                    Navigator.pop(context);
+                                  },
+                                  icon: CustomIconCreator(
+                                    iconPath: 'assets/icons/share.png',
+                                    iconColor:
+                                        Theme.of(context).primaryColorLight,
+                                  ),
+                                );
+                              },
+                            ),
                             Text(
-                              'Tüm Yoklamaları Dışa Aktar',
+                              LocaleKeys
+                                  .teacherLessonDetail_exportAllAttendances
+                                  .locale,
+                              textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.titleMedium,
                             )
                           ],
                         )),
                   ),
                   SizedBox(
-                    width: width * 0.02,
+                    width: width * 0.03,
                   ),
                   SizedBox(
-                    width: width * 0.44,
+                    width: width * 0.43,
                     child: CustomCardWidget(
                         paddingValue: 10,
                         childWidget: Column(
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                CustomLoadingDialog.show(context,
+                                    message: LocaleKeys
+                                        .teacherLessonDetail_createAttendanceReportLoading
+                                        .locale);
+                                await _view.yoklamaRapor(
+                                    lessonId: widget.lessonId);
+                                _view.createAttendanceReportFile(
+                                    widget.lessonName);
+                                final createdPdf =
+                                    await _view.createAttendanceReportFile(
+                                        widget.lessonName);
+                                _view.sharePDF(widget.lessonName, createdPdf);
+                                CustomLoadingDialog.hide(context);
+                              },
                               icon: CustomIconCreator(
                                 iconPath: 'assets/icons/evaluation.png',
                                 iconColor: Theme.of(context).primaryColorLight,
                               ),
                             ),
                             Text(
-                              'Tüm Yoklamaları Dışa Aktar',
+                              LocaleKeys
+                                  .teacherLessonDetail_createAttendanceReport
+                                  .locale,
+                              textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.titleMedium,
                             )
                           ],

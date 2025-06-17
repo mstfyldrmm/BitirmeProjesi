@@ -83,6 +83,7 @@ class AttendanceInfoWidget extends StatelessWidget with IconCreater {
                   ? LocaleKeys.studentLessonDetail_lessonStateActive.locale
                   : LocaleKeys.studentLessonDetail_lessonStateInActive.locale,
               style: Theme.of(context).textTheme.titleMedium,
+              overflow: TextOverflow.ellipsis,
             ),
             CustomIconCreator(
               iconPath: attendancePercentage >= 0.6

@@ -4,26 +4,25 @@ class CircularTimerWidget extends StatefulWidget {
   const CircularTimerWidget(
       {super.key,
       required this.totalTime,
-      required this.controller,
-      required this.height});
+      required this.height,
+      required this.onCompleted,
+      required this.controller});
   final int totalTime;
-
-  final CountDownController controller;
-
   final double height;
+  final VoidCallback onCompleted;
+  final CountDownController controller;
 
   @override
   State<CircularTimerWidget> createState() => _CircularTimerWidgetState();
 }
 
 class _CircularTimerWidgetState extends State<CircularTimerWidget> {
-  final CountDownController _controller = CountDownController();
   @override
   Widget build(BuildContext context) {
     return CircularCountDownTimer(
       duration: widget.totalTime,
       initialDuration: 0,
-      controller: _controller,
+      controller: widget.controller,
       width: MediaQuery.of(context).size.width / 2,
       height: widget.height,
       fillGradient: const LinearGradient(
@@ -60,11 +59,7 @@ class _CircularTimerWidgetState extends State<CircularTimerWidget> {
       onStart: () {
         debugPrint('Countdown Started');
       },
-      onComplete: () {
-        Future.delayed(const Duration(milliseconds: 100), () {
-          _controller.restart(duration: widget.totalTime);
-        });
-      },
+      onComplete: () => widget.onCompleted.call(),
       timeFormatterFunction: (defaultFormatterFunction, duration) {
         if (duration.inSeconds == 0) {
           return "0";

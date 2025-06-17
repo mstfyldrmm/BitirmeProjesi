@@ -148,6 +148,64 @@ class AttendanceService {
     }
   }
 
+  Future<bool> solvedStudentAttendance({
+    required String lessonClass,
+    required AttendanceModel attendanceModel,
+  }) async {
+    //ogrencinin yoklama talebi cozumu icin
+    try {
+      final dateId = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+      final studentId = attendanceModel.studentId;
+      final lessonId = attendanceModel.attendanceLessonId;
+
+      if (studentId!.isNotEmpty && lessonId!.isNotEmpty) {
+        final dateDocRef = _attendancesReference.doc(dateId);
+        final studentDocRef = dateDocRef.collection(lessonId).doc(studentId);
+
+        final studentDocSnapshot = await studentDocRef.get();
+
+        if (studentDocSnapshot.exists) {
+          _logger.w('Attendance already exists for student $studentId.');
+          return false;
+        }
+
+        await dateDocRef.set({
+          'createdAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+
+        await studentDocRef.set(attendanceModel.toJson());
+
+        final pastDateRef = _studentsReference
+            .doc(studentId)
+            .collection('pastPolls')
+            .doc(dateId);
+
+        await pastDateRef.set({
+          'createdAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+
+        await increaseStudentAttendance(
+          studentId: studentId,
+          lessonId: lessonId,
+        );
+        final pastLessonRef = pastDateRef.collection(lessonId).doc(lessonId);
+
+        await pastLessonRef.set(attendanceModel.toJson());
+
+        _logger.i(
+          'Attendance data added under date $dateId and student $studentId.',
+        );
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      _logger.e('Error takeClassAttendance : $e');
+      return false;
+    }
+  }
+
   Future<Map<String, List<AttendanceModel>>> getAttendancesGroupedByDate(
       String lessonId) async {
     final Map<String, List<AttendanceModel>> groupedAttendances = {};
@@ -158,7 +216,6 @@ class AttendanceService {
       for (final dateDoc in datesSnapshot.docs) {
         final dateId = dateDoc.id;
 
-        // Bu tarihte bu derse ait yoklama alınmış mı?
         final lessonCollectionRef =
             _attendancesReference.doc(dateId).collection(lessonId);
 
@@ -181,6 +238,34 @@ class AttendanceService {
       return groupedAttendances;
     } catch (e) {
       _logger.e('Error fetching grouped attendances for lesson $lessonId: $e');
+      return {};
+    }
+  }
+
+  Future<Map<String, int>> getAttendanceCountGroupedByDate(
+      String lessonId) async {
+    final Map<String, int> groupedAttendanceCounts = {};
+
+    try {
+      final datesSnapshot = await _attendancesReference.get();
+
+      for (final dateDoc in datesSnapshot.docs) {
+        final dateId = dateDoc.id;
+
+        final lessonCollectionRef =
+            _attendancesReference.doc(dateId).collection(lessonId);
+
+        final countSnap = await lessonCollectionRef.count().get();
+
+        final count = countSnap.count;
+        if (count != null && count > 0) {
+          groupedAttendanceCounts[dateId] = count;
+        }
+      }
+
+      return groupedAttendanceCounts;
+    } catch (e) {
+      _logger.e('Error fetching attendance counts for lesson $lessonId: $e');
       return {};
     }
   }
@@ -266,7 +351,7 @@ class AttendanceService {
     }
   }
 
-  Future<double?> getStudentPastAttendancesCount(
+  Future<double?> getStudentLessonAttendanceValue(
       {required String lessonId, required String studentId}) async {
     try {
       final responseAttendance = await _studentsReference

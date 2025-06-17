@@ -12,7 +12,8 @@
         "passwordResetTitle": "Öğretmen Şifre Sıfırlama",
         "studentRequests": "Öğrenci Talepleri",
         "qrGenerator": "Qr Kod Yoklama Oluşturma Ekranı",
-        "attendanceDetail": "Yoklama Detayları"
+        "attendanceDetail": "Yoklama Detayları",
+        "reportTitle": "Yoklama Raporlama Ekranı"
     },
     "login": {
         "password": "Şifre",
@@ -81,8 +82,8 @@
         "noHaveAttendance": "Katıldığınız Yoklama Bulunmamaktadır!!",
         "startDate" : "Başlatılma Tarihi",
         "endDate" : "Katılım Tarihi",
-        "unsuccessfulAttendance": "dersinin yoklamasına katılım başarısız.Geçerli derse ait olmayan bir QR kodu taradınız!!!!",
-        "unsuccessfulAttendanceTwo" : "Yoklamaya katılım başarısız oldu. Geçmiş tarihli derse ait QR kod okutuldu.",
+        "unsuccessfulAttendance": "Geçersiz QR kodu ve/veya konum! Lütfen doğru sınıfta olduğunuzdan ve geçerli QR kodunu taradığınızdan emin olun.",
+        "unsuccessfulAttendanceTwo" : "Yoklamaya katılım başarısız. Bu QR kod, geçmişte yapılmış bir yoklamaya ait olabilir veya bu dersin yoklamasına katılım sağlanmış olabilir. Lütfen doğru derse ait güncel QR kodunu okuttuğunuzdan emin olun.",
         "noAttendanceYet" : "Bu ders için dersin öğretmeni tarafından daha önce herhangi bir yoklama oluşturulmamıştır!!."
     },
     "studentRequest": {
@@ -94,13 +95,20 @@
         "requestAddFirebaseSuccessMessage": "Talep Oluşturma İşlemi Başarılı",
         "requestAddStudentSuccessMessage": "Öğrencinin talebi başarıyla oluşturuldu.",
         "requestAddTeacherSuccessMessage": "Öğrencinin talebi başarıyla öğretmene iletildi.",
+        "lessonRegisterSolved" : "öğrencinin ders kayıt talebi doğrultusunda ders kaydı başarıyla oluşturuldu.",
+        "attendanceSolved" : "öğrencinin yoklama talebi doğrultusunda yoklama başarıyla oluşturuldu.",
         "selectLesson": "Ders Seçiniz",
         "selectTeacher": "Öğretmen Seçiniz",
         "selectRequestType": "Talep Türü Seçiniz",
         "requestTypeOne": "Ders Kayıt Talebi",
         "requestTypeTwo": "Yoklama Talebi",
         "requestDescription": "Talep Açıklaması",
-        "createRequest": "Talep Oluştur"
+        "createRequest": "Talep Oluştur",
+        "showing": "Gösteriliyor",
+        "allRequests": "Tüm Talepler",
+        "requestyType" : "Talep Tipi",
+        "requestState" : "Talep Durumu",
+        "requestFilter" : "Talepleri Filtrele"
     },
     "teacherMain": {
         "title": "Derslerim",
@@ -119,6 +127,8 @@
         "addLessonSuccessMessage": "Ders başarıyla eklendi.",
         "complete": "Ders kayıt işleminin tüm adımları başarılı bir şekilde tamamlandı",
         "addLessonErrorMessage": "Bir hata oluştu. Lütfen tekrar deneyin.",
+        "selectClassLevel" : "Dersin sınıfını seçiniz",
+        "lessonAttendancePercent" : "Ders Devam Yüzdesini Giriniz",
         "successMessage": {
             "addLessonFirebaseMessage": "Ders Oluşturma İşlemi Başarılı",
             "addLessonTeacher": "Ders kaydı öğretmene başarıyla oluşturuldu.",
@@ -137,14 +147,21 @@
         "hour": "Saat",
         "createAttendance": "Qr Kod Yoklamayı Başlat",
         "attendanceSuccessMessage": "Yoklama Başarıyla Başlatıldı",
-        "attendanceErrorMessage": "Lütfen saniye cinsinden en az 30, dakika ve saat cinsinden ise en az 1 değerini giriniz.",
+        "attendanceErrorMessage": "Lütfen saniye cinsinden en az 5, dakika ve saat cinsinden ise en az 1 değerini giriniz.",
         "schoolNumber": "Numarası",
         "studentName": "Adı",
         "studentSurname": "Soyadı",
         "studentState": "Katılım Durumu",
         "noAttendance": "tarihine ait geçmiş yoklama bulunamadı!!!",
         "searchStudent": "Öğrenci Ara",
-        "selectDate": "Yoklama Tarihini Seçin"
+        "selectDate": "Yoklama Tarihini Seçin",
+        "exportAllAttendances" : "Tüm Yoklamaları Dışa Aktar",
+        "createAttendanceReport" : "Yoklama Raporunu Oluştur",
+        "exportAllAttendancesLoading" : "Tüm Yoklamaları Dışa Aktarılıyor ",
+        "createAttendanceReportLoading" : "Yoklama Raporu Oluşturuluyor",
+        "localionWaiting": "Konum Bilgisi Alınıyor",
+        "bug" : "HATA"
+    
     },
     "errorCode": {
         "login": {
@@ -174,7 +191,8 @@
         "request": {
             "requestAddStudentErrorMessage": "Öğrencinin talebi oluşturulurken hatayla karşılaşıldı.",
             "requestAddFirebaseErrorMessage": "Talep Oluşturma İşlemi sırasında hatayla karşılaşıldı.",
-            "requestAddTeacherErrorMessage": "Öğrencinin talebi öğretmene iletilirken hatayla karşılaşıldı."
+            "requestAddTeacherErrorMessage": "Öğrencinin talebi öğretmene iletilirken hatayla karşılaşıldı.",
+            "attendanceRequestFailed" : "verilen yoklama talebi çözümü sırasında hata meydana geldi."
         },
         "teacherAddLesson": {
             "readExcel": "Excel dosyası okunurken hata oluştu. Lütfen dosya yapısını kontrol edin",

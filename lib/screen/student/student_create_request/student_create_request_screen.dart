@@ -13,6 +13,7 @@ class _StudentRequestScreenState extends State<StudentCreateRequestScreen>
     with IconCreater {
   late final StudentCreateRequestView vm;
   final TextEditingController controller = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -52,6 +53,30 @@ class _StudentRequestScreenState extends State<StudentCreateRequestScreen>
                   height: 20,
                 ),
                 ValueListenableBuilder(
+                    valueListenable: vm.requestType,
+                    builder: (_, __, ___) {
+                      return vm.requestType.value ==
+                              LocaleKeys.studentRequest_requestTypeTwo.locale
+                          ? CustomTextField(
+                              readOnly: true,
+                              controller: dateController,
+                              icon: IconButton(
+                                onPressed: () async {
+                                  dateController.text =
+                                      await vm.selectDate(context);
+                                  vm.selectedDate.value = dateController.text;
+                                },
+                                icon: Icon(
+                                  Icons.calendar_today_outlined,
+                                ),
+                              ),
+                              title: LocaleKeys
+                                  .teacherLessonDetail_selectDate.locale,
+                            )
+                          : SizedBox.shrink();
+                    }),
+                EmptyWidget(),
+                ValueListenableBuilder(
                   valueListenable: vm.teachers,
                   builder: (_, __, ___) {
                     return DropdownWidget<TeacherModel>(
@@ -74,11 +99,31 @@ class _StudentRequestScreenState extends State<StudentCreateRequestScreen>
                 ValueListenableBuilder(
                   valueListenable: vm.teacherLessons,
                   builder: (_, __, ___) {
-                    return PopupLessonSelector(
-                        validator: vm.validateTextField,
-                        selectedLesson: vm.requestLesson,
-                        lessons: vm.teacherLessons.value,
-                        onSelected: (value) => vm.requestLesson.value = value);
+                    return vm.teacherLessons.value.isNotEmpty
+                        ? PopupLessonSelector(
+                            validator: vm.validateTextField,
+                            selectedLesson: vm.requestLesson,
+                            lessons: vm.teacherLessons.value
+                                .map((e) => e['lessonName'] ?? '')
+                                .toList(),
+                            onSelected: (value) {
+                              vm.requestLesson.value = value;
+
+                              final selected =
+                                  vm.teacherLessons.value.firstWhere(
+                                (e) =>
+                                    (e['lessonName'] ?? '')
+                                        .toLowerCase()
+                                        .trim() ==
+                                    value.toLowerCase().trim(),
+                                orElse: () => <String, String>{},
+                              );
+
+                              vm.requestLessonId.value =
+                                  selected['lessonId']?.toString() ?? '';
+                            },
+                          )
+                        : SizedBox.shrink();
                   },
                 ),
                 EmptyWidget(

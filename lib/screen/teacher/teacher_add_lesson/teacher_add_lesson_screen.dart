@@ -23,6 +23,7 @@ class _TeacherAddLessonScreenState extends State<TeacherAddLessonScreen>
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    TextEditingController attendancePercentController = TextEditingController();
     return Scaffold(
       appBar: CustomAppBar(
         context,
@@ -84,12 +85,31 @@ class _TeacherAddLessonScreenState extends State<TeacherAddLessonScreen>
                     }),
                 EmptyWidget(),
                 ValueListenableBuilder(
+                    valueListenable: _vm.lessonAttendancePercent,
+                    builder: (_, __, ___) {
+                      return CustomTextField(
+                          //TODO:Dile ekle
+                          title: LocaleKeys
+                              .teacherAddLesson_lessonAttendancePercent.locale,
+                          validator: (value) => _vm.validateTextField(value),
+                          onChanged: (value) {
+                            _vm.lessonAttendancePercent.value = value;
+                          },
+                          icon: Icon(
+                            Icons.percent_outlined,
+                          ),
+                          controller: attendancePercentController);
+                    }),
+                EmptyWidget(),
+                ValueListenableBuilder(
                     valueListenable: _vm.lessonClass,
                     builder: (_, __, ___) {
                       return DropdownButtonFormField2<String>(
                         value: "1",
                         decoration: InputDecoration(
-                          labelText: 'Sınıf Seçiniz',
+                          //TODO: dile ekle
+                          labelText: LocaleKeys
+                              .teacherAddLesson_selectClassLevel.locale,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(

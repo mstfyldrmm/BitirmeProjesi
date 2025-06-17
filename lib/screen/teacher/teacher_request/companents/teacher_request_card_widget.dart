@@ -4,12 +4,11 @@ class TeacherRequestCardWidget extends StatelessWidget with IconCreater {
   const TeacherRequestCardWidget({
     super.key,
     required this.requestModel,
-    required this.studentInfo,
     required this.solveProblemFunction,
   });
   final RequestModel requestModel;
-  final String studentInfo;
   final VoidCallback solveProblemFunction;
+
   @override
   Widget build(BuildContext context) {
     final Color iconColor = Theme.of(context).hintColor.withValues(alpha: 1);

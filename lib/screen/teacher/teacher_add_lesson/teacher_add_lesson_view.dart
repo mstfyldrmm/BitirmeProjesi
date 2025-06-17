@@ -9,6 +9,7 @@ class TeacherAddLessonView extends ChangeNotifier {
   ValueNotifier<String> lessonCode = ValueNotifier('');
   ValueNotifier<String> lessonSection = ValueNotifier('');
   ValueNotifier<String> lessonClass = ValueNotifier('1');
+  ValueNotifier<int> lessonAttendancePercent = ValueNotifier(0);
   ValueNotifier<bool> fileSelected = ValueNotifier(false);
   ValueNotifier<bool> studentsFetch = ValueNotifier(false);
 
@@ -67,6 +68,7 @@ class TeacherAddLessonView extends ChangeNotifier {
           lessonCode: lessonCode.value,
           lessonName: lessonName.value,
           section: lessonSection.value,
+          lessonAttendancePercent: lessonAttendancePercent.value,
           students: students.value,
           teacherName: teacherName,
         ),
