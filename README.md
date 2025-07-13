@@ -18,7 +18,8 @@ Her yoklama başlangıcında, öğretmen tarafından sistem üzerinden yalnızca
 🔐 Mock Location & Root Tespiti:
 Sahte konum uygulamaları (mock location) ve root erişimli cihazlar tespit edilerek sistemden dışlanır. Bu sayede katılım manipülasyonları önlenir.
 
-📡 Gerçek Zamanlı Veri Altyapısı:
+📡 Gerçek Zamanlı Veri Altyapısı:<img width="1080" height="1920" alt="giris" src="https://github.com/user-attachments/assets/53b8a299-33a7-4e87-a923-917dceaca98b" />
+
 Firebase Realtime Database ile kullanıcılar, yoklamalar, dersler, talepler gibi tüm veriler senkronize edilir.
 
 📂 Excel Entegrasyonu:
